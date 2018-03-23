@@ -10,10 +10,11 @@
 
 #include "edge.h"
 
+namespace cdg {
 
-class CdgNode {
+class Node {
 public:
-  CdgNode();
+  Node() {}
 
 //   virtual void addEdge(Edge* edge) {
 //     if (edge->getHead() == this) mHeads[edge.getName()].push_back(edge);
@@ -25,5 +26,7 @@ private:
 //   unordered_map<string, list<Edge*>> mTails;
 
 };
+
+} // namespace cdg
 
 #endif

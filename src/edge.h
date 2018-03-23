@@ -20,11 +20,12 @@ private: \
   const string mName; \
 };
 
+namespace cdg {
 
 template <typename head_t, typename tail_t>
-class CdgEdge {
+class Edge {
 public:
-  CdgEdge(head_t& head, tail_t& tail): mHead(head), mTail(tail) {}
+  Edge(head_t& head, tail_t& tail): mHead(head), mTail(tail) {}
 
   head_t& getHead() { return mHead; }
   tail_t& getTail() { return mTail; }
@@ -34,5 +35,7 @@ private:
   tail_t& mTail;
 
 };
+
+} // namespace cdg
 
 #endif

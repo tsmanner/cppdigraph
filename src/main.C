@@ -21,11 +21,11 @@
 // +----+         +----+
 
 
-class NodeA: public CdgNode {
+class NodeA: public cdg::Node {
 };
 
 
-class NodeB: public CdgNode {
+class NodeB: public cdg::Node {
 };
 
 
@@ -48,5 +48,5 @@ int main() {
 //   a0.getThingOne();
 //   a0.getThingTwo();
 
-  CdgEdge<NodeA, NodeB> eAB = eAB(a0, b0);
+  cdg::Edge<NodeA, NodeB> eAB(a0, b0);
 }
