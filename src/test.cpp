@@ -101,15 +101,25 @@ ostream& operator<<(ostream& os, NodeB& b) { return b.operator<<(os); }
  *       +----+         +----+
  */
 int main() {
+  // Permanent nodes
   NodeA a0 = NodeA("a0");
-  NodeA a1 = NodeA("a1");
   NodeB b0 = NodeB("b0");
   NodeB b1 = NodeB("b1");
 
-  cdg::Edge<NodeA, NodeA> eAA(a0, a1);  // a0 -> a1
+  // Permanent edges
   cdg::Edge<NodeA, NodeB> eAB(a0, b0);  // a0 -> b0
   cdg::Edge<NodeB, NodeA> eBA(b0, a0);  // b0 -> a0
   cdg::Edge<NodeB, NodeB> eBB(b0, b1);  // b0 -> b1
+
+  {
+    // Temporary node
+    NodeA a1 = NodeA("a1");
+    // Temporary edge
+    cdg::Edge<NodeA, NodeA> eAA(a0, a1);  // a0 -> a1
+
+    b0.printAs();
+    cout << endl;
+  }
 
   b0.printAs();
   cout << endl;
