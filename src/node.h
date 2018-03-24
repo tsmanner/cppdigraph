@@ -11,6 +11,7 @@
 #ifndef CDG_NODE_H
 #define CDG_NODE_H
 
+#include <functional>
 #include <string>
 #include <set>
 
@@ -45,22 +46,29 @@ public: \
   void connectHead(cdg::Edge<__that, __this>* edge) { __heads_name.insert(edge); } \
   void destructTail(cdg::Edge<__this, __that>* edge) { __tails_name.erase(edge); } \
   void destructHead(cdg::Edge<__that, __this>* edge) { __heads_name.erase(edge); } \
+ \
+protected: \
+  void clear##__tails_name##__heads_name() { \
+    for (auto& tail : __tails_name) delete tail; \
+    for (auto& head : __heads_name) delete head; \
+    addClearEdgeFunction([this]() { this->clear##__tails_name##__heads_name(); }); \
+  } \
+ \
 private: \
   std::set<cdg::Edge<__this, __that>*> __tails_name; \
   std::set<cdg::Edge<__that, __this>*> __heads_name;
 
 
-#define CDG_DESTRUCT_RELATIONSHIP(...) \
-for (auto& collection : { __VA_ARGS__ }) { \
-  for (auto& item : collection) delete item; \
-}
-
-
 class Node {
 public:
   Node() {}
+  ~Node() { clearEdges(); }
+
+  void clearEdges() { for (auto& cfn : mClearEdgeFunctions) cfn(); }
+  void addClearEdgeFunction(std::function<void()> cfn) { mClearEdgeFunctions.push_back(cfn); }
 
 private:
+  std::list<std::function<void()>> mClearEdgeFunctions;
 
 };
 

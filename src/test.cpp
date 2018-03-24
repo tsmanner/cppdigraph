@@ -24,11 +24,6 @@ class NodeA: public cdg::Node {
 public:
   NodeA(string name): Node(), mName(name) {}
 
-  ~NodeA() {
-    CDG_DESTRUCT_RELATIONSHIP(mAATails, mAAHeads);
-    CDG_DESTRUCT_RELATIONSHIP(mABTails, mBAHeads);
-  }
-
   const string getName() const { return mName; }
 
   void printUpstreamAs() {
@@ -61,10 +56,6 @@ class NodeB: public cdg::Node {
 
 public:
   NodeB(string name): Node(), mName(name) {}
-  ~NodeB() {
-    CDG_DESTRUCT_RELATIONSHIP(mBATails, mABHeads);
-    CDG_DESTRUCT_RELATIONSHIP(mBBTails, mBBHeads);
-  }
 
   const string getName() const { return mName; }
 

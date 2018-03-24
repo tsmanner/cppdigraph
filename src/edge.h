@@ -16,22 +16,22 @@ namespace cdg {
 template <typename tail_t, typename head_t>
 class Edge {
 public:
-  Edge(tail_t& tail, head_t& head): mTail(tail), mHead(head) {
+  Edge(tail_t& tail, head_t& head): mTail(&tail), mHead(&head) {
     tail.connectTail(this);
     head.connectHead(this);
   }
 
   ~Edge() {
-    mTail.destructTail(this);
-    mHead.destructHead(this);
+    mTail->destructTail(this);
+    mHead->destructHead(this);
   }
 
-  tail_t& getTail() { return mTail; }
-  head_t& getHead() { return mHead; }
+  tail_t& getTail() { return *mTail; }
+  head_t& getHead() { return *mHead; }
 
 private:
-  tail_t& mTail;
-  head_t& mHead;
+  tail_t* mTail;
+  head_t* mHead;
 
 };
 
