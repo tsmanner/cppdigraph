@@ -117,10 +117,12 @@ int main() {
     // Temporary edge
     cdg::Edge<NodeA, NodeA> eAA(a0, a1);  // a0 -> a1
 
+    // Print the full graph A traversal ( a0 -> b0 -> a0 -> a1 )
     b0.printAs();
     cout << endl;
   }
 
+  // Print the graph traversal minus a1 ( a0 -> b0 -> a0 )
   b0.printAs();
   cout << endl;
 
