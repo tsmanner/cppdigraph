@@ -17,5 +17,5 @@ add_subdirectory (src)
 include_directories ("${PROJECT_SOURCE_DIR}/src")
  
 # add the executable
-add_executable (main src/main.C)
+add_executable (a.out src/main.C)
 # target_link_libraries (Tutorial MathFunctions)
