@@ -50,6 +50,12 @@ private: \
   std::set<cdg::Edge<__that, __this>*> __heads_name;
 
 
+#define CDG_DESTRUCT_RELATIONSHIP(...) \
+for (auto& collection : { __VA_ARGS__ }) { \
+  for (auto& item : collection) delete item; \
+}
+
+
 class Node {
 public:
   Node() {}

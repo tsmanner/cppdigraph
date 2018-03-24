@@ -1,0 +1,164 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/66b4867/
+$(VERBOSE).SILENT	Makefile	/^$(VERBOSE).SILENT:$/;"	t
+$(VERBOSE).SILENT	src/Makefile	/^$(VERBOSE).SILENT:$/;"	t
+ARCHITECTURE_ID	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define ARCHITECTURE_ID /;"	d	file:
+ARCHITECTURE_ID	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define ARCHITECTURE_ID /;"	d	file:
+CDG_DESTRUCT_RELATIONSHIP	src/node.h	/^#define CDG_DESTRUCT_RELATIONSHIP(/;"	d
+CDG_EDGE_H	src/edge.h	/^#define CDG_EDGE_H$/;"	d
+CDG_NODE_H	src/node.h	/^#define CDG_NODE_H$/;"	d
+CDG_NODE_RELATIONSHIP	src/node.h	/^#define CDG_NODE_RELATIONSHIP(/;"	d
+CMAKE_BINARY_DIR	Makefile	/^CMAKE_BINARY_DIR = \/home\/tsmanner\/cppdigraph$/;"	m
+CMAKE_BINARY_DIR	src/Makefile	/^CMAKE_BINARY_DIR = \/home\/tsmanner\/cppdigraph$/;"	m
+CMAKE_COMMAND	Makefile	/^CMAKE_COMMAND = \/usr\/bin\/cmake$/;"	m
+CMAKE_COMMAND	src/Makefile	/^CMAKE_COMMAND = \/usr\/bin\/cmake$/;"	m
+CMAKE_SOURCE_DIR	Makefile	/^CMAKE_SOURCE_DIR = \/home\/tsmanner\/cppdigraph$/;"	m
+CMAKE_SOURCE_DIR	src/Makefile	/^CMAKE_SOURCE_DIR = \/home\/tsmanner\/cppdigraph$/;"	m
+COMPILER_ID	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#   define COMPILER_ID /;"	d	file:
+COMPILER_ID	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_ID /;"	d	file:
+COMPILER_ID	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define COMPILER_ID /;"	d	file:
+COMPILER_ID	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#   define COMPILER_ID /;"	d	file:
+COMPILER_ID	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define COMPILER_ID /;"	d	file:
+COMPILER_ID	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^# define COMPILER_ID /;"	d	file:
+COMPILER_VERSION_MAJOR	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_VERSION_MAJOR /;"	d	file:
+COMPILER_VERSION_MAJOR	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define COMPILER_VERSION_MAJOR /;"	d	file:
+COMPILER_VERSION_MAJOR	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define COMPILER_VERSION_MAJOR /;"	d	file:
+COMPILER_VERSION_MAJOR	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^# define COMPILER_VERSION_MAJOR /;"	d	file:
+COMPILER_VERSION_MINOR	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_VERSION_MINOR /;"	d	file:
+COMPILER_VERSION_MINOR	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define COMPILER_VERSION_MINOR /;"	d	file:
+COMPILER_VERSION_MINOR	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define COMPILER_VERSION_MINOR /;"	d	file:
+COMPILER_VERSION_MINOR	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^# define COMPILER_VERSION_MINOR /;"	d	file:
+COMPILER_VERSION_PATCH	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#   define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_PATCH	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_PATCH	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_PATCH	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#   define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_PATCH	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_PATCH	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^# define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_TWEAK	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_VERSION_TWEAK /;"	d	file:
+COMPILER_VERSION_TWEAK	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define COMPILER_VERSION_TWEAK /;"	d	file:
+DEC	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#define DEC(/;"	d	file:
+DEC	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#define DEC(/;"	d	file:
+EQUALS	Makefile	/^EQUALS = =$/;"	m
+EQUALS	src/Makefile	/^EQUALS = =$/;"	m
+Edge	src/edge.h	/^  Edge(tail_t& tail, head_t& head): mTail(tail), mHead(head) {$/;"	f	class:cdg::Edge
+Edge	src/edge.h	/^class Edge {$/;"	c	namespace:cdg
+HEX	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#define HEX(/;"	d	file:
+HEX	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#define HEX(/;"	d	file:
+ID_VOID_MAIN	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define ID_VOID_MAIN$/;"	d	file:
+Node	src/node.h	/^  Node() {}$/;"	f	class:cdg::Node
+Node	src/node.h	/^class Node {$/;"	c	namespace:cdg
+NodeA	src/main.cpp	/^  NodeA(string name): Node(), mName(name) {}$/;"	f	class:NodeA	file:
+NodeA	src/main.cpp	/^class NodeA: public cdg::Node {$/;"	c	file:
+NodeA	src/test.cpp	/^  NodeA(string name): Node(), mName(name) {}$/;"	f	class:NodeA	file:
+NodeA	src/test.cpp	/^class NodeA: public cdg::Node {$/;"	c	file:
+NodeB	src/main.cpp	/^  NodeB(string name): Node(), mName(name) {}$/;"	f	class:NodeB	file:
+NodeB	src/main.cpp	/^class NodeB: public cdg::Node {$/;"	c	file:
+NodeB	src/test.cpp	/^  NodeB(string name): Node(), mName(name) {}$/;"	f	class:NodeB	file:
+NodeB	src/test.cpp	/^class NodeB: public cdg::Node {$/;"	c	file:
+PLATFORM_ID	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define PLATFORM_ID /;"	d	file:
+PLATFORM_ID	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^# define PLATFORM_ID /;"	d	file:
+RM	Makefile	/^RM = \/usr\/bin\/cmake -E remove -f$/;"	m
+RM	src/Makefile	/^RM = \/usr\/bin\/cmake -E remove -f$/;"	m
+SHELL	Makefile	/^SHELL = \/bin\/sh$/;"	m
+SHELL	src/Makefile	/^SHELL = \/bin\/sh$/;"	m
+SIMULATE_ID	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define SIMULATE_ID /;"	d	file:
+SIMULATE_ID	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define SIMULATE_ID /;"	d	file:
+SIMULATE_VERSION_MAJOR	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define SIMULATE_VERSION_MAJOR /;"	d	file:
+SIMULATE_VERSION_MAJOR	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define SIMULATE_VERSION_MAJOR /;"	d	file:
+SIMULATE_VERSION_MINOR	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define SIMULATE_VERSION_MINOR /;"	d	file:
+SIMULATE_VERSION_MINOR	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define SIMULATE_VERSION_MINOR /;"	d	file:
+SUFFIXES	Makefile	/^SUFFIXES =$/;"	m
+SUFFIXES	src/Makefile	/^SUFFIXES =$/;"	m
+all	Makefile	/^all: cmake_check_build_system$/;"	t
+all	src/Makefile	/^all: cmake_check_build_system$/;"	t
+cdg	src/edge.h	/^namespace cdg {$/;"	n
+cdg	src/node.h	/^namespace cdg {$/;"	n
+clean	Makefile	/^clean:$/;"	t
+clean	src/Makefile	/^clean:$/;"	t
+clean/fast	Makefile	/^clean\/fast: clean$/;"	t
+clean/fast	src/Makefile	/^clean\/fast: clean$/;"	t
+cmake_check_build_system	Makefile	/^cmake_check_build_system:$/;"	t
+cmake_check_build_system	src/Makefile	/^cmake_check_build_system:$/;"	t
+cmake_force	Makefile	/^cmake_force:$/;"	t
+cmake_force	src/Makefile	/^cmake_force:$/;"	t
+default_target	Makefile	/^default_target: all$/;"	t
+default_target	src/Makefile	/^default_target: all$/;"	t
+depend	Makefile	/^depend:$/;"	t
+depend	src/Makefile	/^depend:$/;"	t
+edit_cache	Makefile	/^edit_cache:$/;"	t
+edit_cache	src/Makefile	/^edit_cache:$/;"	t
+edit_cache/fast	Makefile	/^edit_cache\/fast: edit_cache$/;"	t
+edit_cache/fast	src/Makefile	/^edit_cache\/fast: edit_cache$/;"	t
+getHead	src/edge.h	/^  head_t& getHead() { return mHead; }$/;"	f	class:cdg::Edge	typeref:typename:head_t &
+getName	src/main.cpp	/^  const string getName() const { return mName; }$/;"	f	class:NodeA	typeref:typename:const string	file:
+getName	src/main.cpp	/^  const string getName() const { return mName; }$/;"	f	class:NodeB	typeref:typename:const string	file:
+getName	src/test.cpp	/^  const string getName() const { return mName; }$/;"	f	class:NodeA	typeref:typename:const string	file:
+getName	src/test.cpp	/^  const string getName() const { return mName; }$/;"	f	class:NodeB	typeref:typename:const string	file:
+getTail	src/edge.h	/^  tail_t& getTail() { return mTail; }$/;"	f	class:cdg::Edge	typeref:typename:tail_t &
+help	Makefile	/^help:$/;"	t
+help	src/Makefile	/^help:$/;"	t
+info_arch	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";$/;"	v	typeref:typename:char const *
+info_arch	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";$/;"	v	typeref:typename:char const *
+info_compiler	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";$/;"	v	typeref:typename:char const *
+info_compiler	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";$/;"	v	typeref:typename:char const *
+info_platform	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";$/;"	v	typeref:typename:char const *
+info_platform	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";$/;"	v	typeref:typename:char const *
+info_simulate	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_simulate = "INFO" ":" "simulate[" SIMULATE_ID "]";$/;"	v	typeref:typename:char const *
+info_simulate	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_simulate = "INFO" ":" "simulate[" SIMULATE_ID "]";$/;"	v	typeref:typename:char const *
+info_simulate_version	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const info_simulate_version[] = {$/;"	v	typeref:typename:char const[]
+info_simulate_version	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const info_simulate_version[] = {$/;"	v	typeref:typename:char const[]
+info_version	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const info_version[] = {$/;"	v	typeref:typename:char const[]
+info_version	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const info_version[] = {$/;"	v	typeref:typename:char const[]
+mHead	src/edge.h	/^  head_t& mHead;$/;"	m	class:cdg::Edge	typeref:typename:head_t &
+mName	src/main.cpp	/^  const string mName;$/;"	m	class:NodeA	typeref:typename:const string	file:
+mName	src/main.cpp	/^  const string mName;$/;"	m	class:NodeB	typeref:typename:const string	file:
+mName	src/test.cpp	/^  const string mName;$/;"	m	class:NodeA	typeref:typename:const string	file:
+mName	src/test.cpp	/^  const string mName;$/;"	m	class:NodeB	typeref:typename:const string	file:
+mTail	src/edge.h	/^  tail_t& mTail;$/;"	m	class:cdg::Edge	typeref:typename:tail_t &
+main	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^int main(int argc, char* argv[])$/;"	f	typeref:typename:int
+main	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^void main() {}$/;"	f	typeref:typename:void
+main	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^int main(int argc, char* argv[])$/;"	f	typeref:typename:int
+main	src/main.cpp	/^int main() {$/;"	f	typeref:typename:int
+main	src/test.cpp	/^int main() {$/;"	f	typeref:typename:int
+operator <<	src/main.cpp	/^  ostream& operator<<(ostream& os) { return os << getName(); }$/;"	f	class:NodeA	typeref:typename:ostream &	file:
+operator <<	src/main.cpp	/^  ostream& operator<<(ostream& os) { return os << getName(); }$/;"	f	class:NodeB	typeref:typename:ostream &	file:
+operator <<	src/main.cpp	/^ostream& operator<<(ostream& os, NodeA& a) { return a.operator<<(os); }$/;"	f	typeref:typename:ostream &
+operator <<	src/main.cpp	/^ostream& operator<<(ostream& os, NodeB& b) { return b.operator<<(os); }$/;"	f	typeref:typename:ostream &
+operator <<	src/test.cpp	/^  ostream& operator<<(ostream& os) { return os << getName(); }$/;"	f	class:NodeA	typeref:typename:ostream &	file:
+operator <<	src/test.cpp	/^  ostream& operator<<(ostream& os) { return os << getName(); }$/;"	f	class:NodeB	typeref:typename:ostream &	file:
+operator <<	src/test.cpp	/^ostream& operator<<(ostream& os, NodeA& a) { return a.operator<<(os); }$/;"	f	typeref:typename:ostream &
+operator <<	src/test.cpp	/^ostream& operator<<(ostream& os, NodeB& b) { return b.operator<<(os); }$/;"	f	typeref:typename:ostream &
+preinstall	Makefile	/^preinstall: all$/;"	t
+preinstall	src/Makefile	/^preinstall: all$/;"	t
+preinstall/fast	Makefile	/^preinstall\/fast:$/;"	t
+preinstall/fast	src/Makefile	/^preinstall\/fast:$/;"	t
+printAs	src/main.cpp	/^  void printAs() {$/;"	f	class:NodeB	typeref:typename:void	file:
+printAs	src/test.cpp	/^  void printAs() {$/;"	f	class:NodeB	typeref:typename:void	file:
+printDownstreamAs	src/main.cpp	/^  void printDownstreamAs() {$/;"	f	class:NodeA	typeref:typename:void	file:
+printDownstreamAs	src/test.cpp	/^  void printDownstreamAs() {$/;"	f	class:NodeA	typeref:typename:void	file:
+printUpstreamAs	src/main.cpp	/^  void printUpstreamAs() {$/;"	f	class:NodeA	typeref:typename:void	file:
+printUpstreamAs	src/test.cpp	/^  void printUpstreamAs() {$/;"	f	class:NodeA	typeref:typename:void	file:
+qnxnto	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* qnxnto = "INFO" ":" "qnxnto";$/;"	v	typeref:typename:char const *
+qnxnto	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* qnxnto = "INFO" ":" "qnxnto";$/;"	v	typeref:typename:char const *
+rebuild_cache	Makefile	/^rebuild_cache:$/;"	t
+rebuild_cache	src/Makefile	/^rebuild_cache:$/;"	t
+rebuild_cache/fast	Makefile	/^rebuild_cache\/fast: rebuild_cache$/;"	t
+rebuild_cache/fast	src/Makefile	/^rebuild_cache\/fast: rebuild_cache$/;"	t
+src/test.cpp.i	Makefile	/^src\/test.cpp.i:$/;"	t
+src/test.cpp.o	Makefile	/^src\/test.cpp.o:$/;"	t
+src/test.cpp.s	Makefile	/^src\/test.cpp.s:$/;"	t
+src/test.i	Makefile	/^src\/test.i: src\/test.cpp.i$/;"	t
+src/test.o	Makefile	/^src\/test.o: src\/test.cpp.o$/;"	t
+src/test.s	Makefile	/^src\/test.s: src\/test.cpp.s$/;"	t
+test.out	Makefile	/^test.out: cmake_check_build_system$/;"	t
+test.out/fast	Makefile	/^test.out\/fast:$/;"	t
+~Edge	src/edge.h	/^  ~Edge() {$/;"	f	class:cdg::Edge
+~NodeA	src/main.cpp	/^  ~NodeA() {$/;"	f	class:NodeA	file:
+~NodeA	src/test.cpp	/^  ~NodeA() {$/;"	f	class:NodeA	file:
+~NodeB	src/main.cpp	/^  ~NodeB() {$/;"	f	class:NodeB	file:
+~NodeB	src/test.cpp	/^  ~NodeB() {$/;"	f	class:NodeB	file:

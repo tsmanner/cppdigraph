@@ -17,5 +17,8 @@ add_subdirectory (src)
 include_directories ("${PROJECT_SOURCE_DIR}/src")
  
 # add the executable
-add_executable (a.out src/main.C)
+add_executable (test.out src/test.cpp)
 # target_link_libraries (Tutorial MathFunctions)
+
+# Create ctags file for simple code indexing.
+add_custom_command (TARGET test.out PRE_BUILD COMMAND ctags -f cppdigraph.ctags -R .)
