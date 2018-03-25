@@ -13,13 +13,7 @@
 
 namespace cdg {
 
-/*
- * Edge
- *   Templated type for Edges.  Used in conjuction
- *   with macros from `node.h` to provide simple,
- *   fully resolved access to arbitrary connected
- *   Node types.
- */
+
 template <typename tail_t, typename head_t>
 class Edge {
 public:
