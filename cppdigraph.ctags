@@ -49,6 +49,8 @@ Edge	src/edge.h	/^  Edge(tail_t& tail$/;"	f	class:cdg::Edge
 Edge	src/edge.h	/^class Edge {$/;"	c	namespace:cdg
 HEX	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#define HEX(/;"	d	file:
 HEX	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#define HEX(/;"	d	file:
+Head	src/edge.h	/^  Head(Edge<tail_t, head_t>* edge): mEdge(edge) {}$/;"	f	class:cdg::Head
+Head	src/edge.h	/^class Head {$/;"	c	namespace:cdg
 ID_VOID_MAIN	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define ID_VOID_MAIN$/;"	d	file:
 Node	src/node.h	/^  Node(std::string name): mName(name) {}$/;"	f	class:cdg::Node
 Node	src/node.h	/^class Node {$/;"	c	namespace:cdg
@@ -70,6 +72,8 @@ SIMULATE_VERSION_MINOR	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  defi
 SIMULATE_VERSION_MINOR	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define SIMULATE_VERSION_MINOR /;"	d	file:
 SUFFIXES	Makefile	/^SUFFIXES =$/;"	m
 SUFFIXES	src/Makefile	/^SUFFIXES =$/;"	m
+Tail	src/edge.h	/^  Tail(Edge<tail_t, head_t>* edge): mEdge(edge) {}$/;"	f	class:cdg::Tail
+Tail	src/edge.h	/^class Tail {$/;"	c	namespace:cdg
 all	Makefile	/^all: cmake_check_build_system$/;"	t
 all	src/Makefile	/^all: cmake_check_build_system$/;"	t
 cdg	src/edge.h	/^namespace cdg {$/;"	n
@@ -90,6 +94,8 @@ edit_cache	Makefile	/^edit_cache:$/;"	t
 edit_cache	src/Makefile	/^edit_cache:$/;"	t
 edit_cache/fast	Makefile	/^edit_cache\/fast: edit_cache$/;"	t
 edit_cache/fast	src/Makefile	/^edit_cache\/fast: edit_cache$/;"	t
+getEdge	src/edge.h	/^  Edge<tail_t, head_t>* getEdge() { return mEdge; }$/;"	f	class:cdg::Head	typeref:typename:Edge<tail_t,head_t> *
+getEdge	src/edge.h	/^  Edge<tail_t, head_t>* getEdge() { return mEdge; }$/;"	f	class:cdg::Tail	typeref:typename:Edge<tail_t,head_t> *
 getHead	src/edge.h	/^  head_t& getHead() { return *mHead; }$/;"	f	class:cdg::Edge	typeref:typename:head_t &
 getName	src/edge.h	/^  const std::string getName() const { return mName; }$/;"	f	class:cdg::Edge	typeref:typename:const std::string
 getName	src/node.h	/^  const std::string getName() const { return mName; }$/;"	f	class:cdg::Node	typeref:typename:const std::string
@@ -108,10 +114,14 @@ info_simulate_version	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char con
 info_simulate_version	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const info_simulate_version[] = {$/;"	v	typeref:typename:char const[]
 info_version	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const info_version[] = {$/;"	v	typeref:typename:char const[]
 info_version	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const info_version[] = {$/;"	v	typeref:typename:char const[]
+mEdge	src/edge.h	/^  Edge<tail_t, head_t>* mEdge;$/;"	m	class:cdg::Head	typeref:typename:Edge<tail_t,head_t> *
+mEdge	src/edge.h	/^  Edge<tail_t, head_t>* mEdge;$/;"	m	class:cdg::Tail	typeref:typename:Edge<tail_t,head_t> *
 mHead	src/edge.h	/^  head_t* mHead;$/;"	m	class:cdg::Edge	typeref:typename:head_t *
+mHeadHandle	src/edge.h	/^  Head<tail_t, head_t> mHeadHandle;$/;"	m	class:cdg::Edge	typeref:typename:Head<tail_t,head_t>
 mName	src/edge.h	/^  const std::string mName;$/;"	m	class:cdg::Edge	typeref:typename:const std::string
 mName	src/node.h	/^  const std::string mName;$/;"	m	class:cdg::Node	typeref:typename:const std::string
 mTail	src/edge.h	/^  tail_t* mTail;$/;"	m	class:cdg::Edge	typeref:typename:tail_t *
+mTailHandle	src/edge.h	/^  Tail<tail_t, head_t> mTailHandle;$/;"	m	class:cdg::Edge	typeref:typename:Tail<tail_t,head_t>
 main	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^int main(int argc, char* argv[])$/;"	f	typeref:typename:int
 main	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^void main() {}$/;"	f	typeref:typename:void
 main	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^int main(int argc, char* argv[])$/;"	f	typeref:typename:int
@@ -141,6 +151,8 @@ src/test.o	Makefile	/^src\/test.o: src\/test.cpp.o$/;"	t
 src/test.s	Makefile	/^src\/test.s: src\/test.cpp.s$/;"	t
 test.out	Makefile	/^test.out: cmake_check_build_system$/;"	t
 test.out/fast	Makefile	/^test.out\/fast:$/;"	t
+traverse	src/edge.h	/^  head_t& traverse() { return mEdge->getHead(); }$/;"	f	class:cdg::Tail	typeref:typename:head_t &
+traverse	src/edge.h	/^  tail_t& traverse() { return mEdge->getTail(); }$/;"	f	class:cdg::Head	typeref:typename:tail_t &
 ~Edge	src/edge.h	/^  ~Edge() {$/;"	f	class:cdg::Edge
 ~NodeA	src/test.cpp	/^  ~NodeA() {$/;"	f	class:NodeA	file:
 ~NodeB	src/test.cpp	/^  ~NodeB() {$/;"	f	class:NodeB	file:

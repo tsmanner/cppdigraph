@@ -33,8 +33,8 @@ public:
   }
 
   void printUpstreamAs() {
-    for (auto& edge : mAAHeads) {
-      edge->getTail().printUpstreamAs();
+    for (auto& head : mAAHeads) {
+      head->traverse().printUpstreamAs();
     }
     if (mAAHeads.size() > 0) cout << " -> ";
     this->operator<<(cout);
@@ -43,8 +43,8 @@ public:
   void printDownstreamAs() {
     this->operator<<(cout);
     if (mAATails.size() > 0) cout << " -> ";
-    for (auto& edge : mAATails) {
-      edge->getHead().printDownstreamAs();
+    for (auto& tail : mAATails) {
+      tail->traverse().printDownstreamAs();
     }
   }
 
@@ -68,14 +68,14 @@ public:
   }
 
   void printAs() {
-    for (auto& edge : mABHeads) {
-      edge->getTail().printUpstreamAs();
+    for (auto& head : mABHeads) {
+      head->traverse().printUpstreamAs();
     }
     if (mABHeads.size() > 0) cout << " -> ";
     this->operator<<(cout);
     if (mBATails.size() > 0) cout << " -> ";
-    for (auto& edge : mBATails) {
-      edge->getHead().printDownstreamAs();
+    for (auto& tail : mBATails) {
+      tail->traverse().printDownstreamAs();
     }
   }
 
