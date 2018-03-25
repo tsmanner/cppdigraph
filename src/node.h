@@ -39,6 +39,7 @@ public: \
 private: \
   std::set<cdg::Edge<__this, __that>*> __tails_name; \
   std::set<cdg::Edge<__that, __this>*> __heads_name;
+// end CDG_NODE_CREATE_RELATIONSHIP
 
 
 // Optional automatic edge deletion for a named collection.
@@ -46,7 +47,7 @@ private: \
 #define CDG_NODE_DESTRUCT_RELATIONSHIP(__edge_collection) \
 for (auto& edge : __edge_collection) delete edge; \
 __edge_collection.clear();
-
+// end CDG_NODE_DESTRUCT_RELATIONSHP
 
 /*
  * Node
