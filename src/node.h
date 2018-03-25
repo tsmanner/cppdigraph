@@ -45,8 +45,7 @@ private: \
 // Optional automatic edge deletion for a named collection.
 //   This macro should be placed in the User Node class destructor.
 #define CDG_NODE_DESTRUCT_RELATIONSHIP(__collection) \
-for (auto& handle : __collection) delete handle->getEdge(); \
-__collection.clear();
+while (__collection.size()) delete (*__collection.begin())->getEdge();
 // end CDG_NODE_DESTRUCT_RELATIONSHP
 
 /*
