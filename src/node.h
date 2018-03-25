@@ -31,22 +31,22 @@ namespace cdg {
 // set<Edge<B, A>*> A::mBAHeads
 #define CDG_NODE_CREATE_RELATIONSHIP(__this, __that, __tails_name, __heads_name) \
 public: \
-  void connectTail(cdg::Edge<__this, __that>* edge) { __tails_name.insert(edge); } \
-  void connectHead(cdg::Edge<__that, __this>* edge) { __heads_name.insert(edge); } \
-  void destructTail(cdg::Edge<__this, __that>* edge) { __tails_name.erase(edge); } \
-  void destructHead(cdg::Edge<__that, __this>* edge) { __heads_name.erase(edge); } \
+  void connectTail(cdg::Tail<__this, __that>* edge) { __tails_name.insert(edge); } \
+  void connectHead(cdg::Head<__that, __this>* edge) { __heads_name.insert(edge); } \
+  void destructTail(cdg::Tail<__this, __that>* edge) { __tails_name.erase(edge); } \
+  void destructHead(cdg::Head<__that, __this>* edge) { __heads_name.erase(edge); } \
  \
 private: \
-  std::set<cdg::Edge<__this, __that>*> __tails_name; \
-  std::set<cdg::Edge<__that, __this>*> __heads_name;
+  std::set<cdg::Tail<__this, __that>*> __tails_name; \
+  std::set<cdg::Head<__that, __this>*> __heads_name;
 // end CDG_NODE_CREATE_RELATIONSHIP
 
 
 // Optional automatic edge deletion for a named collection.
 //   This macro should be placed in the User Node class destructor.
-#define CDG_NODE_DESTRUCT_RELATIONSHIP(__edge_collection) \
-for (auto& edge : __edge_collection) delete edge; \
-__edge_collection.clear();
+#define CDG_NODE_DESTRUCT_RELATIONSHIP(__collection) \
+for (auto& handle : __collection) delete handle->getEdge(); \
+__collection.clear();
 // end CDG_NODE_DESTRUCT_RELATIONSHP
 
 /*
