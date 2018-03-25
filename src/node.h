@@ -4,8 +4,6 @@
  *   a common place to derive from while allowing ownership
  *   of Node instances to exist in a single entity.
  *
- *   TODO: Implement DiGraph class as a container for Node*
-+ *         instances.
  */
 
 #ifndef CDG_NODE_H
