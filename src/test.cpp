@@ -2,8 +2,9 @@
  *
  */
 
-#include <list>
 #include <iostream>
+#include <list>
+#include <map>
 #include <string>
 
 #include "node.h"
@@ -18,13 +19,18 @@ class NodeB;
 
 
 class NodeA: public cdg::Node {
-  CDG_NODE_RELATIONSHIP(NodeA, NodeA, mAATails, mAAHeads);
-  CDG_NODE_RELATIONSHIP(NodeA, NodeB, mABTails, mBAHeads);
+  CDG_NODE_CREATE_RELATIONSHIP(NodeA, NodeA, mAATails, mAAHeads);
+  CDG_NODE_CREATE_RELATIONSHIP(NodeA, NodeB, mABTails, mBAHeads);
 
 public:
-  NodeA(string name): Node(), mName(name) {}
+  NodeA(string name): Node(name) {}
 
-  const string getName() const { return mName; }
+  ~NodeA() {
+    CDG_NODE_DESTRUCT_RELATIONSHIP(mAATails);
+    CDG_NODE_DESTRUCT_RELATIONSHIP(mAAHeads);
+    CDG_NODE_DESTRUCT_RELATIONSHIP(mABTails);
+    CDG_NODE_DESTRUCT_RELATIONSHIP(mBAHeads);
+  }
 
   void printUpstreamAs() {
     for (auto& edge : mAAHeads) {
@@ -44,20 +50,22 @@ public:
 
   ostream& operator<<(ostream& os) { return os << getName(); }
 
-private:
-  const string mName;
-
 };
 
 
 class NodeB: public cdg::Node {
-  CDG_NODE_RELATIONSHIP(NodeB, NodeA, mBATails, mABHeads);
-  CDG_NODE_RELATIONSHIP(NodeB, NodeB, mBBTails, mBBHeads);
+  CDG_NODE_CREATE_RELATIONSHIP(NodeB, NodeA, mBATails, mABHeads);
+  CDG_NODE_CREATE_RELATIONSHIP(NodeB, NodeB, mBBTails, mBBHeads);
 
 public:
-  NodeB(string name): Node(), mName(name) {}
+  NodeB(string name): Node(name) {}
 
-  const string getName() const { return mName; }
+  ~NodeB() {
+    CDG_NODE_DESTRUCT_RELATIONSHIP(mBATails);
+    CDG_NODE_DESTRUCT_RELATIONSHIP(mABHeads);
+    CDG_NODE_DESTRUCT_RELATIONSHIP(mBBTails);
+    CDG_NODE_DESTRUCT_RELATIONSHIP(mBBHeads);
+  }
 
   void printAs() {
     for (auto& edge : mABHeads) {
@@ -72,9 +80,6 @@ public:
   }
 
   ostream& operator<<(ostream& os) { return os << getName(); }
-
-private:
-  const string mName;
 
 };
 
@@ -101,29 +106,38 @@ ostream& operator<<(ostream& os, NodeB& b) { return b.operator<<(os); }
  *       +----+         +----+
  */
 int main() {
+  map<string, NodeA*> as;
+  map<string, NodeB*> bs;
   // Permanent nodes
-  NodeA a0 = NodeA("a0");
-  NodeB b0 = NodeB("b0");
-  NodeB b1 = NodeB("b1");
+  as["a0"] = new NodeA("a0");
+  as["a1"] = new NodeA("a1");
+  bs["b0"] = new NodeB("b0");
+  bs["b1"] = new NodeB("b1");
 
   // Permanent edges
-  cdg::Edge<NodeA, NodeB> eAB(a0, b0);  // a0 -> b0
-  cdg::Edge<NodeB, NodeA> eBA(b0, a0);  // b0 -> a0
-  cdg::Edge<NodeB, NodeB> eBB(b0, b1);  // b0 -> b1
+  new cdg::Edge<NodeA, NodeB>(*as["a0"], *bs["b0"]);  // a0 -> b0
+  new cdg::Edge<NodeB, NodeA>(*bs["b0"], *as["a0"]);  // b0 -> a0
+  new cdg::Edge<NodeB, NodeB>(*bs["b0"], *bs["b1"]);  // b0 -> b1
+  new cdg::Edge<NodeA, NodeA>(*as["a0"], *as["a1"]);  // a0 -> a1
 
-  {
-    // Temporary node
-    NodeA a1 = NodeA("a1");
-    // Temporary edge
-    cdg::Edge<NodeA, NodeA> eAA(a0, a1);  // a0 -> a1
-
-    // Print the full graph A traversal ( a0 -> b0 -> a0 -> a1 )
-    b0.printAs();
-    cout << endl;
-  }
-
-  // Print the graph traversal minus a1 ( a0 -> b0 -> a0 )
-  b0.printAs();
+  // Print the graph traversal including `a1` ( a0 -> b0 -> a0 -> a1 )
+  bs["b0"]->printAs();
   cout << endl;
 
+  // Print the graph traversal excluding `a1` ( a0 -> b0 -> a0 )
+  delete as["a1"];  // Should automatically delete edge a0 -> a1
+  as.erase("a1");
+  bs["b0"]->printAs();
+  cout << endl;
+
+  // Print the graph traversal excluding `a0` ( b0 )
+  delete as["a0"];
+  as.erase("a0");
+  bs["b0"]->printAs();
+  cout << endl;
+
+  // Clean up the rest of our memory on the way out.
+  delete bs["b0"];
+  delete bs["b1"];
+  bs.clear();
 }

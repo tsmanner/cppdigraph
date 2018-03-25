@@ -11,7 +11,6 @@
 #ifndef CDG_NODE_H
 #define CDG_NODE_H
 
-#include <functional>
 #include <string>
 #include <set>
 
@@ -26,49 +25,45 @@ namespace cdg {
 // A -> B  -- A has Tails of Edge<A, B>
 // A <- B  -- A has Heads of Edge<B, A>
 //
-// void connectTail(Edge<A, B> edge) { mABTails.insert(edge); }
-// void connectHead(Edge<B, A> edge) { mBAHeads.insert(edge); }
-// void destructTail(Edge<A, B> edge) { mABTails.erase(edge); }
-// void destructHead(Edge<B, A> edge) { mBAHeads.erase(edge); }
-// set<Edge<A, B>> A::mABTails
-// set<Edge<B, A>> A::mBAHeads
-//
-// void connectTail(Edge<__this, __that> edge) { m__this__thatTails.insert(edge); }
-// void connectHead(Edge<__that, __this> edge) { m__that__thisHeads.insert(edge); }
-// void destructTail(Edge<__this, __that> edge) { m__this__thatTails.erase(edge); }
-// void destructHead(Edge<__that, __this> edge) { m__that__thisHeads.erase(edge); }
-// set<Edge<__this, __that>> __this::m__this__thatTails
-// set<Edge<__that, __this>> __this::m__that__thisHeads
-
-#define CDG_NODE_RELATIONSHIP(__this, __that, __tails_name, __heads_name) \
+// void connectTail(Edge<A, B>* edge) { mABTails.insert(edge); }
+// void connectHead(Edge<B, A>* edge) { mBAHeads.insert(edge); }
+// void destructTail(Edge<A, B>* edge) { mABTails.erase(edge); }
+// void destructHead(Edge<B, A>* edge) { mBAHeads.erase(edge); }
+// set<Edge<A, B>*> A::mABTails
+// set<Edge<B, A>*> A::mBAHeads
+#define CDG_NODE_CREATE_RELATIONSHIP(__this, __that, __tails_name, __heads_name) \
 public: \
   void connectTail(cdg::Edge<__this, __that>* edge) { __tails_name.insert(edge); } \
   void connectHead(cdg::Edge<__that, __this>* edge) { __heads_name.insert(edge); } \
   void destructTail(cdg::Edge<__this, __that>* edge) { __tails_name.erase(edge); } \
   void destructHead(cdg::Edge<__that, __this>* edge) { __heads_name.erase(edge); } \
  \
-protected: \
-  void clear##__tails_name##__heads_name() { \
-    for (auto& tail : __tails_name) delete tail; \
-    for (auto& head : __heads_name) delete head; \
-    addClearEdgeFunction([this]() { this->clear##__tails_name##__heads_name(); }); \
-  } \
- \
 private: \
   std::set<cdg::Edge<__this, __that>*> __tails_name; \
   std::set<cdg::Edge<__that, __this>*> __heads_name;
 
 
+// Optional automatic edge deletion for a named collection.
+//   This macro should be placed in the User Node class destructor.
+#define CDG_NODE_DESTRUCT_RELATIONSHIP(__edge_collection) \
+for (auto& edge : __edge_collection) delete edge; \
+__edge_collection.clear();
+
+
+/*
+ * Node
+ *   Common base class for Node.  Super simple, mostly just exists
+ *   to support DiGraph collections that can own a single master set
+ *   of Nodes by giving users a base to inherit from.
+ */
 class Node {
 public:
-  Node() {}
-  ~Node() { clearEdges(); }
+  Node(std::string name): mName(name) {}
 
-  void clearEdges() { for (auto& cfn : mClearEdgeFunctions) cfn(); }
-  void addClearEdgeFunction(std::function<void()> cfn) { mClearEdgeFunctions.push_back(cfn); }
+  const std::string getName() const { return mName; }
 
 private:
-  std::list<std::function<void()>> mClearEdgeFunctions;
+  const std::string mName;
 
 };
 
