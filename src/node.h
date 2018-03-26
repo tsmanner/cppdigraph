@@ -35,6 +35,7 @@ public: \
   void connectHead(cdg::Head<__that, __this>* edge) { __heads_name.insert(edge); } \
   void destructTail(cdg::Tail<__this, __that>* edge) { __tails_name.erase(edge); } \
   void destructHead(cdg::Head<__that, __this>* edge) { __heads_name.erase(edge); } \
+  void connect(__that& head) { cdg::createEdge<__this, __that>(*this, head); } \
  \
 private: \
   std::set<cdg::Tail<__this, __that>*> __tails_name; \

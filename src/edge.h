@@ -96,6 +96,17 @@ private:
 };
 
 
+/*
+ *
+ */
+template <typename tail_t, typename head_t>
+Edge<tail_t, head_t>* createEdge(tail_t& tail, head_t& head) {
+  Edge<tail_t, head_t>* edge = new Edge<tail_t, head_t>(tail, head);
+  return edge;
+}
+
+
 } // namespace cdg
+
 
 #endif

@@ -86,6 +86,7 @@ cmake_check_build_system	Makefile	/^cmake_check_build_system:$/;"	t
 cmake_check_build_system	src/Makefile	/^cmake_check_build_system:$/;"	t
 cmake_force	Makefile	/^cmake_force:$/;"	t
 cmake_force	src/Makefile	/^cmake_force:$/;"	t
+createEdge	src/edge.h	/^Edge<tail_t, head_t>* createEdge(tail_t& tail, head_t& head) {$/;"	f	namespace:cdg	typeref:typename:Edge<tail_t,head_t> *
 default_target	Makefile	/^default_target: all$/;"	t
 default_target	src/Makefile	/^default_target: all$/;"	t
 depend	Makefile	/^depend:$/;"	t

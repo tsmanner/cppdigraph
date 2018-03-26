@@ -108,17 +108,17 @@ ostream& operator<<(ostream& os, NodeB& b) { return b.operator<<(os); }
 int main() {
   map<string, NodeA*> as;
   map<string, NodeB*> bs;
-  // Permanent nodes
+  // Nodes
   as["a0"] = new NodeA("a0");
   as["a1"] = new NodeA("a1");
   bs["b0"] = new NodeB("b0");
   bs["b1"] = new NodeB("b1");
 
-  // Permanent edges
-  new cdg::Edge<NodeA, NodeB>(*as["a0"], *bs["b0"]);  // a0 -> b0
-  new cdg::Edge<NodeB, NodeA>(*bs["b0"], *as["a0"]);  // b0 -> a0
-  new cdg::Edge<NodeB, NodeB>(*bs["b0"], *bs["b1"]);  // b0 -> b1
-  new cdg::Edge<NodeA, NodeA>(*as["a0"], *as["a1"]);  // a0 -> a1
+  // Edges
+  as["a0"]->connect(*bs["b0"]);
+  bs["b0"]->connect(*as["a0"]);
+  bs["b0"]->connect(*bs["b1"]);
+  as["a0"]->connect(*as["a1"]);
 
   // Print the graph traversal including `a1` ( a0 -> b0 -> a0 -> a1 )
   bs["b0"]->printAs();
