@@ -9,9 +9,9 @@ $(VERBOSE).SILENT	Makefile	/^$(VERBOSE).SILENT:$/;"	t
 $(VERBOSE).SILENT	src/Makefile	/^$(VERBOSE).SILENT:$/;"	t
 ARCHITECTURE_ID	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define ARCHITECTURE_ID /;"	d	file:
 ARCHITECTURE_ID	CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define ARCHITECTURE_ID /;"	d	file:
+CDG_AUTO_DELETE_EDGES	src/node.h	/^#define CDG_AUTO_DELETE_EDGES(/;"	d
 CDG_EDGE_H	src/edge.h	/^#define CDG_EDGE_H$/;"	d
 CDG_NODE_CREATE_RELATIONSHIP	src/node.h	/^#define CDG_NODE_CREATE_RELATIONSHIP(/;"	d
-CDG_NODE_DESTRUCT_RELATIONSHIP	src/node.h	/^#define CDG_NODE_DESTRUCT_RELATIONSHIP(/;"	d
 CDG_NODE_H	src/node.h	/^#define CDG_NODE_H$/;"	d
 CMAKE_BINARY_DIR	Makefile	/^CMAKE_BINARY_DIR = \/home\/tsmanner\/cppdigraph$/;"	m
 CMAKE_BINARY_DIR	src/Makefile	/^CMAKE_BINARY_DIR = \/home\/tsmanner\/cppdigraph$/;"	m

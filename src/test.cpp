@@ -26,10 +26,10 @@ public:
   NodeA(string name): Node(name) {}
 
   ~NodeA() {
-    CDG_NODE_DESTRUCT_RELATIONSHIP(mAATails);
-    CDG_NODE_DESTRUCT_RELATIONSHIP(mAAHeads);
-    CDG_NODE_DESTRUCT_RELATIONSHIP(mABTails);
-    CDG_NODE_DESTRUCT_RELATIONSHIP(mBAHeads);
+    CDG_AUTO_DELETE_EDGES(mAATails);
+    CDG_AUTO_DELETE_EDGES(mAAHeads);
+    CDG_AUTO_DELETE_EDGES(mABTails);
+    CDG_AUTO_DELETE_EDGES(mBAHeads);
   }
 
   void printUpstreamAs() {
@@ -61,10 +61,10 @@ public:
   NodeB(string name): Node(name) {}
 
   ~NodeB() {
-    CDG_NODE_DESTRUCT_RELATIONSHIP(mBATails);
-    CDG_NODE_DESTRUCT_RELATIONSHIP(mABHeads);
-    CDG_NODE_DESTRUCT_RELATIONSHIP(mBBTails);
-    CDG_NODE_DESTRUCT_RELATIONSHIP(mBBHeads);
+    CDG_AUTO_DELETE_EDGES(mBATails);
+    CDG_AUTO_DELETE_EDGES(mABHeads);
+    CDG_AUTO_DELETE_EDGES(mBBTails);
+    CDG_AUTO_DELETE_EDGES(mBBHeads);
   }
 
   void printAs() {
