@@ -97,10 +97,10 @@ edit_cache/fast	Makefile	/^edit_cache\/fast: edit_cache$/;"	t
 edit_cache/fast	src/Makefile	/^edit_cache\/fast: edit_cache$/;"	t
 getEdge	src/edge.h	/^  Edge<tail_t, head_t>* getEdge() { return mEdge; }$/;"	f	class:cdg::Head	typeref:typename:Edge<tail_t,head_t> *
 getEdge	src/edge.h	/^  Edge<tail_t, head_t>* getEdge() { return mEdge; }$/;"	f	class:cdg::Tail	typeref:typename:Edge<tail_t,head_t> *
-getHead	src/edge.h	/^  head_t& getHead() { return *mHead; }$/;"	f	class:cdg::Edge	typeref:typename:head_t &
+getHead	src/edge.h	/^  head_t* getHead() { return mHead; }$/;"	f	class:cdg::Edge	typeref:typename:head_t *
 getName	src/edge.h	/^  const std::string getName() const { return mName; }$/;"	f	class:cdg::Edge	typeref:typename:const std::string
 getName	src/node.h	/^  const std::string getName() const { return mName; }$/;"	f	class:cdg::Node	typeref:typename:const std::string
-getTail	src/edge.h	/^  tail_t& getTail() { return *mTail; }$/;"	f	class:cdg::Edge	typeref:typename:tail_t &
+getTail	src/edge.h	/^  tail_t* getTail() { return mTail; }$/;"	f	class:cdg::Edge	typeref:typename:tail_t *
 help	Makefile	/^help:$/;"	t
 help	src/Makefile	/^help:$/;"	t
 info_arch	CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";$/;"	v	typeref:typename:char const *
@@ -152,8 +152,8 @@ src/test.o	Makefile	/^src\/test.o: src\/test.cpp.o$/;"	t
 src/test.s	Makefile	/^src\/test.s: src\/test.cpp.s$/;"	t
 test.out	Makefile	/^test.out: cmake_check_build_system$/;"	t
 test.out/fast	Makefile	/^test.out\/fast:$/;"	t
-traverse	src/edge.h	/^  head_t& traverse() { return mEdge->getHead(); }$/;"	f	class:cdg::Tail	typeref:typename:head_t &
-traverse	src/edge.h	/^  tail_t& traverse() { return mEdge->getTail(); }$/;"	f	class:cdg::Head	typeref:typename:tail_t &
+traverse	src/edge.h	/^  head_t* traverse() { return getEdge()->getHead(); }$/;"	f	class:cdg::Tail	typeref:typename:head_t *
+traverse	src/edge.h	/^  tail_t* traverse() { return getEdge()->getTail(); }$/;"	f	class:cdg::Head	typeref:typename:tail_t *
 ~Edge	src/edge.h	/^  ~Edge() {$/;"	f	class:cdg::Edge
 ~NodeA	src/test.cpp	/^  ~NodeA() {$/;"	f	class:NodeA	file:
 ~NodeB	src/test.cpp	/^  ~NodeB() {$/;"	f	class:NodeB	file:

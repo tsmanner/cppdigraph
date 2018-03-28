@@ -28,7 +28,7 @@ class Tail {
 public:
   Tail(Edge<tail_t, head_t>* edge): mEdge(edge) {}
 
-  head_t& traverse() { return mEdge->getHead(); }
+  head_t* traverse() { return getEdge()->getHead(); }
   Edge<tail_t, head_t>* getEdge() { return mEdge; }
 
 private:
@@ -47,7 +47,7 @@ class Head {
 public:
   Head(Edge<tail_t, head_t>* edge): mEdge(edge) {}
 
-  tail_t& traverse() { return mEdge->getTail(); }
+  tail_t* traverse() { return getEdge()->getTail(); }
   Edge<tail_t, head_t>* getEdge() { return mEdge; }
 
 private:
@@ -82,8 +82,8 @@ public:
   }
 
   const std::string getName() const { return mName; }
-  tail_t& getTail() { return *mTail; }
-  head_t& getHead() { return *mHead; }
+  tail_t* getTail() { return mTail; }
+  head_t* getHead() { return mHead; }
 
 private:
   const std::string mName;
