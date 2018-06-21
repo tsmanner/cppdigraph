@@ -1,5 +1,5 @@
 /*
- * edeg.h
+ * edge.h
  *
  * Types:
  *   Tail - Handle to tail of an edge.
