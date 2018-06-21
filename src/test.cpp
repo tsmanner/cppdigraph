@@ -1,5 +1,5 @@
 /*
- *
+ * Some library agnostic eyeball integration testing.
  */
 
 #include <iostream>

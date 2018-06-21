@@ -10,7 +10,7 @@ enable_testing()
 find_package(GTest REQUIRED)
 
 # add the executable
-add_executable(do_tests.out src/test.cpp)
+add_executable(do_tests.out src/test_node.cpp)
 
 target_link_libraries(do_tests.out GTest::GTest GTest::Main)
 
