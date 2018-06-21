@@ -41,9 +41,15 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
+*.ninja
+.ninja*
 
 # NEdit
 ~*
 
 # ctags
 *.ctags
+
+# GraphViz
+*.dependers
+*.gv

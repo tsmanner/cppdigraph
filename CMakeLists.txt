@@ -11,10 +11,10 @@ find_package(GTest REQUIRED)
 
 # add the executable
 add_executable(do_tests.out src/test_node.cpp)
-
+# link in GTest
 target_link_libraries(do_tests.out GTest::GTest GTest::Main)
 
-add_test(AllTests test)
+add_test(do_tests.out test)
 
 # Create ctags file for simple code indexing.
 add_custom_command (TARGET do_tests.out PRE_BUILD COMMAND ctags -f cppdigraph.ctags -R .)
