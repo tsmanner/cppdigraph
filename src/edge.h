@@ -15,98 +15,45 @@
 
 namespace cdg {
 
+class Node;
 
-template <typename tail_t, typename head_t> class Edge;
-
-/*
- * Tail
- *   Handle for the tail of an edge used to implement a type
- *   aware `traverse` method.
- */
-template <typename tail_t, typename head_t>
-class Tail {
+class EdgeBase {
 public:
-  Tail(Edge<tail_t, head_t>* edge): mEdge(edge) {}
-
-  head_t* traverse() { return getEdge()->getHead(); }
-  Edge<tail_t, head_t>* getEdge() { return mEdge; }
-
-private:
-  Edge<tail_t, head_t>* mEdge;
+  EdgeBase() {} //Node* tail, Node* head): mTail(tail), mHead(head) {}
+  virtual void disconnect(Node* node) = 0;
 
 };
 
 
-/*
- * Head
- *   Handle for the head of an edge used to implement a type
- *   aware `traverse` method.
- */
 template <typename tail_t, typename head_t>
-class Head {
+class Edge: public EdgeBase {
 public:
-  Head(Edge<tail_t, head_t>* edge): mEdge(edge) {}
-
-  tail_t* traverse() { return getEdge()->getTail(); }
-  Edge<tail_t, head_t>* getEdge() { return mEdge; }
-
-private:
-  Edge<tail_t, head_t>* mEdge;
-
-};
-
-
-/*
- * Edge
- *   Templated with the endpoint types so that the head and
- *   tail are fully resolved when the edge is traversed.
- */
-template <typename tail_t, typename head_t>
-class Edge {
-public:
-  Edge(tail_t& tail
-     , head_t& head
-    ): mName(tail.getName() + "->" + head.getName())
-     , mTail(&tail)
-     , mHead(&head)
-     , mTailHandle(this)
-     , mHeadHandle(this)
-  {
-    mTail->connectTail(&mTailHandle);
-    mHead->connectHead(&mHeadHandle);
+  Edge(tail_t* tail, head_t* head): EdgeBase(), mTail(tail), mHead(head) {
+    getTail()->addEdge(this);
+    getHead()->addEdge(this);
   }
-
-  ~Edge() {
-    mTail->destructTail(&mTailHandle);
-    mHead->destructHead(&mHeadHandle);
-  }
-
-  const std::string getName() const { return mName; }
+  virtual ~Edge() { } // if (getTail()) getTail()->removeEdge(this); if (getHead()) getHead()->removeEdge(this); }
   tail_t* getTail() { return mTail; }
   head_t* getHead() { return mHead; }
 
+  virtual void disconnect(Node* node) {
+    if (node == mTail) mTail = nullptr;
+    if (node == mHead) mHead = nullptr;
+  }
+
 private:
-  const std::string mName;
   tail_t* mTail;
   head_t* mHead;
-
-  Tail<tail_t, head_t> mTailHandle;
-  Head<tail_t, head_t> mHeadHandle;
 
 };
 
 
-/*
- *
- */
 template <typename tail_t, typename head_t>
-Edge<tail_t, head_t>* createEdge(tail_t& tail, head_t& head) {
-  Edge<tail_t, head_t>* edge = new Edge<tail_t, head_t>(tail, head);
-  return edge;
+Edge<tail_t, head_t>* connect(tail_t* tail, head_t* head) {
+  return new Edge<tail_t, head_t>(tail, head);
 }
 
 
 } // namespace cdg
-
 
 #endif

@@ -9,45 +9,14 @@
 #ifndef CDG_NODE_H
 #define CDG_NODE_H
 
+#include <iostream>
 #include <string>
-#include <set>
+#include <unordered_set>
 
 #include "edge.h"
 
 namespace cdg {
 
-// Consider the following
-// __this = A
-// __that = B
-// A relationship between A and B, in A, looks like
-// A -> B  -- A has Tails of Edge<A, B>
-// A <- B  -- A has Heads of Edge<B, A>
-//
-// void connectTail(Edge<A, B>* edge) { mABTails.insert(edge); }
-// void connectHead(Edge<B, A>* edge) { mBAHeads.insert(edge); }
-// void destructTail(Edge<A, B>* edge) { mABTails.erase(edge); }
-// void destructHead(Edge<B, A>* edge) { mBAHeads.erase(edge); }
-// set<Edge<A, B>*> A::mABTails
-// set<Edge<B, A>*> A::mBAHeads
-#define CDG_NODE_CREATE_RELATIONSHIP(__this, __that, __tails_name, __heads_name) \
-public: \
-  void connectTail(cdg::Tail<__this, __that>* edge) { __tails_name.insert(edge); } \
-  void connectHead(cdg::Head<__that, __this>* edge) { __heads_name.insert(edge); } \
-  void destructTail(cdg::Tail<__this, __that>* edge) { __tails_name.erase(edge); } \
-  void destructHead(cdg::Head<__that, __this>* edge) { __heads_name.erase(edge); } \
-  void connect(__that& head) { cdg::createEdge<__this, __that>(*this, head); } \
- \
-private: \
-  std::set<cdg::Tail<__this, __that>*> __tails_name; \
-  std::set<cdg::Head<__that, __this>*> __heads_name;
-// end CDG_NODE_CREATE_RELATIONSHIP
-
-
-// Optional automatic edge deletion for a named collection.
-//   This macro should be placed in the User Node class destructor.
-#define CDG_AUTO_DELETE_EDGES(__collection) \
-while (__collection.size()) delete (*__collection.begin())->getEdge();
-// end CDG_AUTO_DELETE_EDGES
 
 /*
  * Node
@@ -58,13 +27,21 @@ while (__collection.size()) delete (*__collection.begin())->getEdge();
 class Node {
 public:
   Node(std::string name): mName(name) {}
+  virtual ~Node() { for (auto edge : mEdges) edge->disconnect(this); }
+
+  virtual void addEdge(EdgeBase* edge) { mEdges.insert(edge); }
+  virtual void removeEdge(EdgeBase* edge) { mEdges.erase(edge); }
 
   const std::string getName() const { return mName; }
 
+  std::ostream& operator<<(std::ostream& os) { return os << getName(); }
+
 private:
+  std::unordered_set<EdgeBase*> mEdges;
   const std::string mName;
 
 };
+
 
 } // namespace cdg
 

@@ -1,20 +1,18 @@
 cmake_minimum_required(VERSION 3.0)
 
+project (CPPDIGRAPH CXX)
+
 set (CMAKE_CXX_STANDARD 11)
 set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -std=c++11" )
+set (CMAKE_BUILD_TYPE Debug)
 
 add_subdirectory (src)
-include_directories ("${PROJECT_SOURCE_DIR}/src")
+add_subdirectory (test)
 
 enable_testing()
-find_package(GTest REQUIRED)
-
-# add the executable
-add_executable(do_tests.out src/test_node.cpp)
-# link in GTest
-target_link_libraries(do_tests.out GTest::GTest GTest::Main)
-
-add_test(do_tests.out test)
 
 # Create ctags file for simple code indexing.
-add_custom_command (TARGET do_tests.out PRE_BUILD COMMAND ctags -f cppdigraph.ctags -R .)
+# add_custom_command (TARGET do_tests.out PRE_BUILD COMMAND ctags -f cppdigraph.ctags -R .)
+
+enable_testing ()
+add_test (NAME MyTest COMMAND Test)
