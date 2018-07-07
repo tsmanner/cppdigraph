@@ -46,13 +46,15 @@ public:
   }
 
   virtual void disconnect(MyNode* node) {
-    if (node == Edge<tail_t, head_t>::getTail()) {
-      Edge<tail_t, head_t>::getTail()->disconnect(this);
+    if (node) {
+      if (node == Edge<tail_t, head_t>::getTail()) {
+        Edge<tail_t, head_t>::getTail()->disconnect(this);
+      }
+      if (node == Edge<tail_t, head_t>::getHead()) {
+        Edge<tail_t, head_t>::getHead()->disconnect(this);
+      }
+      Edge<tail_t, head_t>::disconnect(node);
     }
-    if (node == Edge<tail_t, head_t>::getHead()) {
-      Edge<tail_t, head_t>::getHead()->disconnect(this);
-    }
-    Edge<tail_t, head_t>::disconnect(node);
   }
 
 };
@@ -64,7 +66,6 @@ public:
 class NodeA: public MyNode {
 public:
   NodeA(string name);
-  virtual ~NodeA();
 
   void connect(Edge<NodeA, NodeB>* edge);
   void disconnect(Edge<NodeA, NodeB>* edge);
@@ -83,13 +84,22 @@ private:
 class NodeB: public MyNode {
 public:
   NodeB(string name);
-  virtual ~NodeB();
 
+  // A->B Edges
   void connect(Edge<NodeA, NodeB>* edge);
   void disconnect(Edge<NodeA, NodeB>* edge);
+  // B->B Edges
+  void connect(Edge<NodeB, NodeB>* edge);
+  void disconnect(Edge<NodeB, NodeB>* edge);
+
+  void traverseB();
 
 private:
+  // A->B Edges
   Edge<NodeA, NodeB>* mIncomingA;
+  // B->B Edges
+  Edge<NodeB, NodeB>* mOutgoingB;
+  Edge<NodeB, NodeB>* mIncomingB;
 
 };
 

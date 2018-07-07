@@ -19,7 +19,7 @@ class Node;
 
 class EdgeBase {
 public:
-  EdgeBase() {} //Node* tail, Node* head): mTail(tail), mHead(head) {}
+  EdgeBase() {}
   virtual void disconnect(Node* node) = 0;
 
 };
@@ -32,13 +32,35 @@ public:
     getTail()->addEdge(this);
     getHead()->addEdge(this);
   }
-  virtual ~Edge() { } // if (getTail()) getTail()->removeEdge(this); if (getHead()) getHead()->removeEdge(this); }
-  tail_t* getTail() { return mTail; }
-  head_t* getHead() { return mHead; }
+
+  virtual ~Edge() {
+    if (getTail()) getTail()->removeEdge(this);
+    if (getHead()) getHead()->removeEdge(this);
+  }
+
+  tail_t* getTail() {
+    return mTail;
+  }
+
+  head_t* getHead() {
+    return mHead;
+  }
 
   virtual void disconnect(Node* node) {
     if (node == mTail) mTail = nullptr;
     if (node == mHead) mHead = nullptr;
+    if (mTail == nullptr && mHead == nullptr) {
+      delete this;
+    }
+  }
+
+  std::ostream& operator<<(std::ostream& os) {
+    if (getTail()) os << *getTail();
+    else os << "[nullptr]";
+    os << "->";
+    if (getHead()) os << *getHead();
+    else os << "[nullptr]";
+    return os;
   }
 
 private:
@@ -48,10 +70,19 @@ private:
 };
 
 
-template <typename tail_t, typename head_t>
-Edge<tail_t, head_t>* connect(tail_t* tail, head_t* head) {
-  return new Edge<tail_t, head_t>(tail, head);
-}
+// Connector Template
+//   This object is templated with a type that itself expects two templates
+//   Example:
+//     Node* n0 = new Node();
+//     Node* n1 = new Node();
+//     Edge<Node, Node>* edge = connector<Edge>()(n0, n1);
+template <template<typename, typename> typename edge_t>
+struct connector {
+  template <typename tail_t, typename head_t>
+  edge_t<tail_t, head_t>* operator()(tail_t* tail, head_t* head) {
+    return new edge_t<tail_t, head_t>(tail, head);
+  }
+};
 
 
 } // namespace cdg

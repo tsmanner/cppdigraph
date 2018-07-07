@@ -26,15 +26,30 @@ namespace cdg {
  */
 class Node {
 public:
-  Node(std::string name): mName(name) {}
-  virtual ~Node() { for (auto edge : mEdges) edge->disconnect(this); }
+  Node(std::string name): mName(name) {
+  }
 
-  virtual void addEdge(EdgeBase* edge) { mEdges.insert(edge); }
-  virtual void removeEdge(EdgeBase* edge) { mEdges.erase(edge); }
+  virtual ~Node() {
+    for (auto edge : mEdges) {
+      edge->disconnect(this);
+    }
+  }
 
-  const std::string getName() const { return mName; }
+  virtual void addEdge(EdgeBase* edge) {
+    mEdges.insert(edge);
+  }
 
-  std::ostream& operator<<(std::ostream& os) { return os << getName(); }
+  virtual void removeEdge(EdgeBase* edge) {
+    mEdges.erase(edge);
+  }
+
+  const std::string getName() const {
+    return mName;
+  }
+
+  std::ostream& operator<<(std::ostream& os) {
+    return os << "[" << getName() << "]";
+  }
 
 private:
   std::unordered_set<EdgeBase*> mEdges;
