@@ -1,0 +1,14 @@
+language: cpp
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - ninja-build
+
+script:
+  - cmake -G Ninja .
+  - ninja
+  - ./test/test.out
