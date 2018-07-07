@@ -1,16 +1,15 @@
 language: cpp
 
+# Install the Ninja build tool and CMake.
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      # - g++-6
       - ninja-build
-      # - libgtest-dev
-      # - google-mock
       - cmake
 
+# Install GTest and GMock from source (v1.8)
 before_install:
   - wget https://github.com/google/googletest/archive/release-1.8.0.tar.gz -O googletest.tar.gz
   - tar -zxvf googletest.tar.gz
@@ -27,6 +26,7 @@ before_install:
   - sudo cp include/gmock/ /usr/include/ -rf
   - cd -
 
+# Build and run the tests.
 script:
   - cmake -G Ninja .
   - ninja
