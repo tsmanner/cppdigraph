@@ -5,7 +5,7 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - g++-6
+      # - g++-6
       - ninja-build
       # - libgtest-dev
       # - google-mock
@@ -28,6 +28,6 @@ before_install:
   - cd -
 
 script:
-  - cmake .
-  - make
+  - cmake -G Ninja .
+  - ninja
   - ./test/test.out
