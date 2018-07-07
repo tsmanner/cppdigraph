@@ -1,4 +1,4 @@
-# cppdigraph
+# cppdigraph  [![Build Status](https://travis-ci.org/tsmanner/cppdigraph.svg?branch=master)](https://travis-ci.org/tsmanner/cppdigraph)
 Implementation of a directed graph container in C++
 
 ## Building
