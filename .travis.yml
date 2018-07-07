@@ -18,10 +18,12 @@ before_install:
   - sudo cmake .
   - sudo make
   - sudo mv libg* /usr/lib/
+  - cd -
   - cd /usr/src/gmock/
   - sudo cmake .
   - sudo make
   - sudo mv libg* /usr/lib/
+  - cd -
 
 script:
   - cmake -G Ninja .
