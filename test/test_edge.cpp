@@ -12,24 +12,95 @@
 
 // Use an anonymous namespace to isolate the tests.
 namespace {
-  using namespace cdg;
-  using namespace testing;
+
+using namespace cdg;
+using namespace testing;
+
 
 class MockNode: public Node {
 public:
   MockNode(std::string name): Node(name) {}
-  // MockNode(MockNode& mn) {}
   MOCK_METHOD1(addEdge, void(EdgeBase*));
+  MOCK_METHOD1(removeEdge, void(EdgeBase*));
 };
 
+
 TEST(TestEdge, constructor) {
+  // Setup
   MockNode* n0 = new MockNode("n0");
   MockNode* n1 = new MockNode("n1");
+  // Expect
   EXPECT_CALL(*n0, addEdge(_));
   EXPECT_CALL(*n1, addEdge(_));
-  new Edge<MockNode, MockNode>(n0, n1);
+  EXPECT_CALL(*n0, removeEdge(_));
+  EXPECT_CALL(*n1, removeEdge(_));
+  // Execute
+  auto edge = new Edge<MockNode, MockNode>(n0, n1);
+  // Cleanup
+  delete edge;
   delete n0;
   delete n1;
 }
+
+
+TEST(TestEdge, getTail) {
+  // Setup
+  MockNode* n0 = new NiceMock<MockNode>("n0");
+  MockNode* n1 = new NiceMock<MockNode>("n1");
+  auto edge = new Edge<MockNode, MockNode>(n0, n1);
+  // Execute
+  EXPECT_EQ(edge->getTail(), n0);
+  // Cleanup
+  delete edge;
+  delete n0;
+  delete n1;
+}
+
+
+TEST(TestEdge, getHead) {
+  // Setup
+  MockNode* n0 = new NiceMock<MockNode>("n0");
+  MockNode* n1 = new NiceMock<MockNode>("n1");
+  auto edge = new Edge<MockNode, MockNode>(n0, n1);
+  // Execute
+  EXPECT_EQ(edge->getHead(), n1);
+  // Cleanup
+  delete edge;
+  delete n0;
+  delete n1;
+}
+
+
+TEST(TestEdge, disconnect_tail) {
+  // Setup
+  MockNode* n0 = new NiceMock<MockNode>("n0");
+  MockNode* n1 = new NiceMock<MockNode>("n1");
+  auto edge = new Edge<MockNode, MockNode>(n0, n1);
+  // Execute
+  edge->disconnect(n0);
+  EXPECT_EQ(edge->getTail(), nullptr);
+  EXPECT_EQ(edge->getHead(), n1);
+  // Cleanup
+  delete edge;
+  delete n0;
+  delete n1;
+}
+
+
+TEST(TestEdge, disconnect_head) {
+  // Setup
+  MockNode* n0 = new NiceMock<MockNode>("n0");
+  MockNode* n1 = new NiceMock<MockNode>("n1");
+  auto edge = new Edge<MockNode, MockNode>(n0, n1);
+  // Execute
+  edge->disconnect(n1);
+  EXPECT_EQ(edge->getTail(), n0);
+  EXPECT_EQ(edge->getHead(), nullptr);
+  // Cleanup
+  delete edge;
+  delete n0;
+  delete n1;
+}
+
 
 } // namespace
