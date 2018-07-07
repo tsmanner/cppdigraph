@@ -29,11 +29,17 @@ ostream& operator<<(ostream& os, Edge<tail_t, head_t> edge) {
 MyNode::MyNode(DiGraph* digraph, string name): Node(digraph, name) {
 }
 
+MyNode::MyNode(string name): Node(name) {
+}
+
 
 /*
  * NodeA
  */
 NodeA::NodeA(DiGraph* digraph, string name): MyNode(digraph, name) {
+}
+
+NodeA::NodeA(string name): MyNode(name) {
 }
 
 GraphVizStatements NodeA::graphviz_statements() {
@@ -92,6 +98,9 @@ void NodeA::traverseB() {
  * NodeB
  */
 NodeB::NodeB(DiGraph* digraph, string name): MyNode(digraph, name) {
+}
+
+NodeB::NodeB(string name): MyNode(name) {
 }
 
 GraphVizStatements NodeB::graphviz_statements() {

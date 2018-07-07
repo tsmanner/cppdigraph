@@ -28,6 +28,9 @@ public:
     if (mDiGraph) mDiGraph->add(this);
   }
 
+  Node(std::string name): mDiGraph(nullptr), mName(name) {
+  }
+
   virtual ~Node() {
     for (auto edge : mEdges) {
       edge->disconnect(this);

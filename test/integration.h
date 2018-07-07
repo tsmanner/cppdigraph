@@ -24,6 +24,7 @@ class NodeB;
 class MyNode: public Node {
 public:
   MyNode(DiGraph* digraph, string name);
+  MyNode(string name);
 
   template <typename tail_t, typename head_t>
   void disconnect(Edge<tail_t, head_t>* edge);
@@ -66,6 +67,7 @@ public:
 class NodeA: public MyNode {
 public:
   NodeA(DiGraph* digraph, string name);
+  NodeA(string name);
 
   virtual GraphVizStatements graphviz_statements();
 
@@ -99,6 +101,7 @@ private:
 class NodeB: public MyNode {
 public:
   NodeB(DiGraph* digraph, string name);
+  NodeB(string name);
 
   virtual GraphVizStatements graphviz_statements();
 
