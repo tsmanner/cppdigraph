@@ -7,6 +7,11 @@ addons:
     packages:
       - g++-6
       - ninja-build
+      - libgtest-dev
+
+before_install:
+  - cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv libg* /usr/lib/
+  - cd /usr/src/gmock && sudo cmake . && sudo make && sudo mv libg* /usr/lib/
 
 script:
   - cmake -G Ninja .
