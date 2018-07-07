@@ -10,8 +10,14 @@ addons:
       - libgtest-dev
 
 before_install:
-  - cd /usr/src/gtest && cmake . && make && mv libg* /usr/lib/
-  - cd /usr/src/gmock && cmake . && make && mv libg* /usr/lib/
+  - cd /usr/src/gtest
+  - sudo cmake .
+  - sudo make
+  - sudo mv libg* /usr/lib/
+  - cd /usr/src/gmock
+  - sudo cmake .
+  - sudo make
+  - sudo mv libg* /usr/lib/
 
 script:
   - cmake -G Ninja .
