@@ -11,11 +11,13 @@ addons:
       - cmake
 
 before_install:
-  - cd /usr/src/gtest
+  - ls /usr/src/
+  - ls /usr/src/gtest/
+  - cd /usr/src/gtest/
   - sudo cmake .
   - sudo make
   - sudo mv libg* /usr/lib/
-  - cd /usr/src/gmock
+  - cd /usr/src/gmock/
   - sudo cmake .
   - sudo make
   - sudo mv libg* /usr/lib/
