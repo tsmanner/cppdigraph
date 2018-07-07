@@ -86,6 +86,9 @@ struct connector {
 };
 
 
+static connector<Edge> connect = connector<Edge>();
+
+
 } // namespace cdg
 
 #endif

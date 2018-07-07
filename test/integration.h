@@ -67,13 +67,26 @@ class NodeA: public MyNode {
 public:
   NodeA(string name);
 
+  // A->B Edges;
   void connect(Edge<NodeA, NodeB>* edge);
   void disconnect(Edge<NodeA, NodeB>* edge);
+  // B->A Edges;
+  void connect(Edge<NodeB, NodeA>* edge);
+  void disconnect(Edge<NodeB, NodeA>* edge);
+  // A->A Edges;
+  void connect(Edge<NodeA, NodeA>* edge);
+  void disconnect(Edge<NodeA, NodeA>* edge);
 
   void traverseB();
 
 private:
+  // A->B Edges;
   Edge<NodeA, NodeB>* mOutgoingB;
+  // B->A Edges;
+  Edge<NodeB, NodeA>* mIncomingB;
+  // A->A Edges;
+  Edge<NodeA, NodeA>* mOutgoingA;
+  Edge<NodeA, NodeA>* mIncomingA;
 
 };
 
@@ -88,6 +101,9 @@ public:
   // A->B Edges
   void connect(Edge<NodeA, NodeB>* edge);
   void disconnect(Edge<NodeA, NodeB>* edge);
+  // B->A Edges
+  void connect(Edge<NodeB, NodeA>* edge);
+  void disconnect(Edge<NodeB, NodeA>* edge);
   // B->B Edges
   void connect(Edge<NodeB, NodeB>* edge);
   void disconnect(Edge<NodeB, NodeB>* edge);
@@ -97,6 +113,8 @@ public:
 private:
   // A->B Edges
   Edge<NodeA, NodeB>* mIncomingA;
+  // B->A Edges
+  Edge<NodeB, NodeA>* mOutgoingA;
   // B->B Edges
   Edge<NodeB, NodeB>* mOutgoingB;
   Edge<NodeB, NodeB>* mIncomingB;

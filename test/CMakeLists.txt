@@ -4,15 +4,19 @@ include_directories (
 )
 
 add_executable (
-    test.out
-    do_tests.cpp
+    unittest.out
+    do_unit_tests.cpp
     test_node.cpp
     test_edge.cpp
 )
 
+add_executable (
+    integrationtest.out
+    integration.cpp
+)
+
 target_link_libraries (
-    test.out
-    #DiGraph
+    unittest.out
     gmock_main
     GTest::GTest
     GTest::Main

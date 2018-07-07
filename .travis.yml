@@ -30,4 +30,5 @@ before_install:
 script:
   - cmake -G Ninja .
   - ninja
-  - ./test/test.out
+  - ./test/unittest.out
+  - ./test/integrationtest.out 2
