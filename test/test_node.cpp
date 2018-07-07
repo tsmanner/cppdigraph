@@ -3,15 +3,27 @@
  */
 
 #include "node.h"
+#include "digraph.h"
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 
 using namespace cdg;
 
 // Use an anonymous namespace to isolate the tests.
 namespace {
 
+
+class MockDiGraph: public DiGraph {
+public:
+  MockDiGraph(std::string name): DiGraph(name) {}
+  MOCK_METHOD1(add, void(Node*));
+};
+
+
 TEST(TestNode, constructor) {
-  EXPECT_EQ("rawr", Node("rawr").getName());
+  MockDiGraph* mdg = new MockDiGraph("graph");
+  EXPECT_EQ("rawr", Node(mdg, "rawr").getName());
+  delete mdg;
 }
 
 } // namespace

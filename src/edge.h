@@ -68,6 +68,13 @@ public:
     }
   }
 
+  std::string to_graphviz() {
+    if (getTail() && getHead()) {
+      return getTail()->getName() + " -> " + getHead()->getName();
+    }
+    return "";
+  }
+
   std::string to_string() {
     std::string s = "";
     if (getTail()) s += getTail()->to_string();
