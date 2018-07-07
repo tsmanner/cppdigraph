@@ -18,11 +18,13 @@ before_install:
   - sudo cmake .
   - sudo make
   - sudo mv libg* /usr/lib/
+  - sudo cp include/gtest/ /usr/include/ -rf
   - cd -
   - cd googletest-release-1.8.0/googlemock
   - sudo cmake .
   - sudo make
   - sudo mv libg* /usr/lib/
+  - sudo cp include/gmock/ /usr/include/ -rf
   - cd -
 
 script:
