@@ -10,6 +10,7 @@
 #ifndef CDG_EDGE_H
 #define CDG_EDGE_H
 
+#include <iostream>
 #include <string>
 
 
