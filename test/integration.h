@@ -5,8 +5,9 @@
 #include <string>
 
 // CDG
-#include "node.h"
+#include "digraph.h"
 #include "edge.h"
+#include "node.h"
 
 // Namespaces
 using namespace cdg;
@@ -22,7 +23,7 @@ class NodeB;
  */
 class MyNode: public Node {
 public:
-  MyNode(string name);
+  MyNode(DiGraph* digraph, string name);
 
   template <typename tail_t, typename head_t>
   void disconnect(Edge<tail_t, head_t>* edge);
@@ -64,7 +65,9 @@ public:
  */
 class NodeA: public MyNode {
 public:
-  NodeA(string name);
+  NodeA(DiGraph* digraph, string name);
+
+  virtual GraphVizStatements graphviz_statements();
 
   // A->B Edges;
   void connect(Edge<NodeA, NodeB>* edge);
@@ -95,7 +98,9 @@ private:
  */
 class NodeB: public MyNode {
 public:
-  NodeB(string name);
+  NodeB(DiGraph* digraph, string name);
+
+  virtual GraphVizStatements graphviz_statements();
 
   // A->B Edges
   void connect(Edge<NodeA, NodeB>* edge);

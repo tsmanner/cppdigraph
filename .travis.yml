@@ -31,4 +31,4 @@ script:
   - cmake -G Ninja .
   - ninja
   - ./test/unittest.out
-  - ./test/integrationtest.out
+  - ./test/integrationtest.out 5

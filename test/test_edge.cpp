@@ -19,7 +19,7 @@ using namespace testing;
 
 class MockNode: public Node {
 public:
-  MockNode(std::string name): Node(name) {}
+  MockNode(std::string name): Node(nullptr, name) {}
   MOCK_METHOD1(addEdge, void(EdgeBase*));
   MOCK_METHOD1(removeEdge, void(EdgeBase*));
 };

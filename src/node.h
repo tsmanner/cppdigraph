@@ -12,6 +12,7 @@
 #include <string>
 #include <unordered_set>
 
+#include "digraph.h"
 #include "edge.h"
 
 namespace cdg {
@@ -23,13 +24,19 @@ namespace cdg {
  */
 class Node {
 public:
-  Node(std::string name): mName(name) {
+  Node(DiGraph* digraph, std::string name): mDiGraph(digraph), mName(name) {
+    if (mDiGraph) mDiGraph->add(this);
   }
 
   virtual ~Node() {
     for (auto edge : mEdges) {
       edge->disconnect(this);
     }
+    if (mDiGraph) mDiGraph->remove(this);
+  }
+
+  const std::string getName() const {
+    return mName;
   }
 
   virtual void addEdge(EdgeBase* edge) {
@@ -40,8 +47,10 @@ public:
     mEdges.erase(edge);
   }
 
-  const std::string getName() const {
-    return mName;
+  virtual GraphVizStatements graphviz_statements() {
+    GraphVizStatements gvs;
+    gvs.nodes.insert(getName());
+    return gvs;
   }
 
   std::string to_string() {
@@ -53,8 +62,9 @@ public:
   }
 
 private:
-  std::unordered_set<EdgeBase*> mEdges;
+  DiGraph* mDiGraph;
   const std::string mName;
+  std::unordered_set<EdgeBase*> mEdges;
 
 };
 

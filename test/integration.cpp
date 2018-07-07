@@ -26,14 +26,23 @@ ostream& operator<<(ostream& os, Edge<tail_t, head_t> edge) {
 /*
  * MyNode
  */
-MyNode::MyNode(string name): Node(name) {
+MyNode::MyNode(DiGraph* digraph, string name): Node(digraph, name) {
 }
 
 
 /*
  * NodeA
  */
-NodeA::NodeA(string name): MyNode(name) {
+NodeA::NodeA(DiGraph* digraph, string name): MyNode(digraph, name) {
+}
+
+GraphVizStatements NodeA::graphviz_statements() {
+  GraphVizStatements gvs = MyNode::graphviz_statements();
+  if (mOutgoingA) gvs.edges.insert(mOutgoingA->to_graphviz());
+  if (mIncomingA) gvs.edges.insert(mIncomingA->to_graphviz());
+  if (mOutgoingB) gvs.edges.insert(mOutgoingB->to_graphviz());
+  if (mIncomingB) gvs.edges.insert(mIncomingB->to_graphviz());
+  return gvs;
 }
 
 void NodeA::connect(Edge<NodeA, NodeB>* edge) {
@@ -82,7 +91,16 @@ void NodeA::traverseB() {
 /*
  * NodeB
  */
-NodeB::NodeB(string name): MyNode(name) {
+NodeB::NodeB(DiGraph* digraph, string name): MyNode(digraph, name) {
+}
+
+GraphVizStatements NodeB::graphviz_statements() {
+  GraphVizStatements gvs = MyNode::graphviz_statements();
+  if (mOutgoingA) gvs.edges.insert(mOutgoingA->to_graphviz());
+  if (mIncomingA) gvs.edges.insert(mIncomingA->to_graphviz());
+  if (mOutgoingB) gvs.edges.insert(mOutgoingB->to_graphviz());
+  if (mIncomingB) gvs.edges.insert(mIncomingB->to_graphviz());
+  return gvs;
 }
 
 void NodeB::connect(Edge<NodeA, NodeB>* edge) {
@@ -175,13 +193,16 @@ int main(int argc, char* argv[]) {
   TRACE("  +----+   +----+");
 
   DEBUG("Constructing nodes");
-  NodeA* a0 = new NodeA("a0");
+  DiGraph* digraph = new DiGraph("TestGraph");
+
+  DEBUG("Constructing nodes");
+  NodeA* a0 = new NodeA(digraph, "a0");
   TRACE("  " << left << std::setw(10) << *a0 << " (" << a0 << ")");
-  NodeA* a1 = new NodeA("a1");
+  NodeA* a1 = new NodeA(digraph, "a1");
   TRACE("  " << left << std::setw(10) << *a1 << " (" << a1 << ")");
-  NodeB* b0 = new NodeB("b0");
+  NodeB* b0 = new NodeB(digraph, "b0");
   TRACE("  " << left << std::setw(10) << *b0 << " (" << b0 << ")");
-  NodeB* b1 = new NodeB("b1");
+  NodeB* b1 = new NodeB(digraph, "b1");
   TRACE("  " << left << std::setw(10) << *b1 << " (" << b1 << ")");
 
   DEBUG("Constructing edges");
@@ -194,6 +215,13 @@ int main(int argc, char* argv[]) {
   auto b0b1 = connector<MyEdge>()(b0, b1);
   TRACE("  " << left << std::setw(10) << *b0b1 << " (" << b0b1 << ")");
 
+  INFO("GraphViz Representation:");
+  cout << endl;
+  cout << digraph->to_graphviz() << endl;
+  cout << endl;
+
+  INFO("Graph Manipulation and traverseB()");
+  cout << endl;
   a0->traverseB();
   cout << endl;
   delete b1;
@@ -209,6 +237,10 @@ int main(int argc, char* argv[]) {
   delete a1;
   a1 = nullptr;
 
+
+  delete digraph;
+
+  cout << endl;
   INFO("Ending Eyeball Integration Testing");
 
 }

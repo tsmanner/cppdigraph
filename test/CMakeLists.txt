@@ -10,14 +10,20 @@ add_executable (
     test_edge.cpp
 )
 
+target_link_libraries (
+    unittest.out
+    DiGraph
+    gmock_main
+    GTest::GTest
+    GTest::Main
+)
+
 add_executable (
     integrationtest.out
     integration.cpp
 )
 
 target_link_libraries (
-    unittest.out
-    gmock_main
-    GTest::GTest
-    GTest::Main
+    integrationtest.out
+    DiGraph
 )
