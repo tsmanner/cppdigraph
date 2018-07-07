@@ -7,25 +7,25 @@ addons:
     packages:
       - g++-6
       - ninja-build
-      - libgtest-dev
-      - google-mock
+      # - libgtest-dev
+      # - google-mock
       - cmake
 
 before_install:
-  - ls /usr/src/
-  - ls /usr/src/gtest/
-  - cd /usr/src/gtest/
+  - wget https://github.com/google/googletest/archive/release-1.8.0.tar.gz -O googletest.tar.gz
+  - tar -zxvf googletest.tar.gz
+  - cd googletest/googletest
   - sudo cmake .
   - sudo make
   - sudo mv libg* /usr/lib/
   - cd -
-  - cd /usr/src/gmock/
+  - cd googletest/googlemock
   - sudo cmake .
   - sudo make
   - sudo mv libg* /usr/lib/
   - cd -
 
 script:
-  - cmake -G Ninja .
-  - ninja
+  - cmake .
+  - make
   - ./test/test.out
