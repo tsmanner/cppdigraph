@@ -8,6 +8,7 @@ addons:
       - g++-6
       - ninja-build
       - libgtest-dev
+      - cmake
 
 before_install:
   - cd /usr/src/gtest
