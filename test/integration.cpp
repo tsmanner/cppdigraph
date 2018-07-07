@@ -198,4 +198,6 @@ int main(int argc, char* argv[]) {
   a0 = nullptr;
   delete a1;
   a1 = nullptr;
+
+  LOG(0, "Ending Eyeball Integration Testing");
 }
