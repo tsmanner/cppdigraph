@@ -2,7 +2,6 @@
 #define TEST_H
 
 // STL
-#include <iostream>
 #include <string>
 
 // CDG

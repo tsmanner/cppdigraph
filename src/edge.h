@@ -2,9 +2,9 @@
  * edge.h
  *
  * Types:
- *   Tail - Handle to tail of an edge.
- *   Head - Handle to head of an edge.
- *   Edge - The edge itself.
+ *   EdgeBase
+ *   Edge
+ *   connector
  */
  
 #ifndef CDG_EDGE_H
@@ -18,6 +18,12 @@ namespace cdg {
 
 class Node;
 
+
+/*
+ * EdgeBase
+ *   Common base type for `Edge`, used by `Node` to track collections
+ *   and enforce the `disconnect` api.
+ */
 class EdgeBase {
 public:
   EdgeBase() {}
@@ -26,6 +32,13 @@ public:
 };
 
 
+/* 
+ * Edge
+ *   Connects two classes that implement the `Node` api together.
+ *   When a node is disconnected, the `Edge` sets the head or tail
+ *   pointer to `nullptr`.  If both nodes disconnect, the `Edge`
+ *   deletes itself.
+ */
 template <typename tail_t, typename head_t>
 class Edge: public EdgeBase {
 public:
@@ -55,13 +68,18 @@ public:
     }
   }
 
+  std::string to_string() {
+    std::string s = "";
+    if (getTail()) s += getTail()->to_string();
+    else s += "[nullptr]";
+    s += "->";
+    if (getHead()) s += getHead()->to_string();
+    else s += "[nullptr]";
+    return s;
+  }
+
   std::ostream& operator<<(std::ostream& os) {
-    if (getTail()) os << *getTail();
-    else os << "[nullptr]";
-    os << "->";
-    if (getHead()) os << *getHead();
-    else os << "[nullptr]";
-    return os;
+    return os << to_string();
   }
 
 private:
@@ -71,12 +89,14 @@ private:
 };
 
 
-// Connector Template
-//   This object is templated with a type that itself expects two templates
-//   Example:
-//     Node* n0 = new Node();
-//     Node* n1 = new Node();
-//     Edge<Node, Node>* edge = connector<Edge>()(n0, n1);
+/*
+ * connector
+ *   This object is templated with a type that itself expects two templates
+ *   Example:
+ *     Node* n0 = new Node();
+ *     Node* n1 = new Node();
+ *     Edge<Node, Node>* edge = connector<Edge>()(n0, n1);
+ */
 template <template<typename, typename> class edge_t>
 struct connector {
   template <typename tail_t, typename head_t>
@@ -86,6 +106,13 @@ struct connector {
 };
 
 
+/*
+ * A connector object for `Edge`
+ * Example:
+ *   Node* n0 = new Node();
+ *   Node* n1 = new Node();
+ *   Edge<Node, Node>* edge = connect(n0, n1);
+ */
 static connector<Edge> connect = connector<Edge>();
 
 

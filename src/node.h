@@ -1,9 +1,8 @@
 /*
- * Node
- *   Generic base class for nodes.  Only here to give users
- *   a common place to derive from while allowing ownership
- *   of Node instances to exist in a single entity.
- *
+ * node.h
+ * 
+ * Types:
+ *   Node
  */
 
 #ifndef CDG_NODE_H
@@ -20,9 +19,7 @@ namespace cdg {
 
 /*
  * Node
- *   Common base class for Node.  Super simple, mostly just exists
- *   to support DiGraph collections that can own a single master set
- *   of Nodes by giving users a base to inherit from.
+ *   Common base class for graph nodes.
  */
 class Node {
 public:
@@ -47,8 +44,12 @@ public:
     return mName;
   }
 
+  std::string to_string() {
+    return "[" + getName() + "]";
+  }
+
   std::ostream& operator<<(std::ostream& os) {
-    return os << "[" << getName() << "]";
+    return os << to_string();
   }
 
 private:
