@@ -77,7 +77,7 @@ private:
 //     Node* n0 = new Node();
 //     Node* n1 = new Node();
 //     Edge<Node, Node>* edge = connector<Edge>()(n0, n1);
-template <template<typename, typename> typename edge_t>
+template <template<typename, typename> class edge_t>
 struct connector {
   template <typename tail_t, typename head_t>
   edge_t<tail_t, head_t>* operator()(tail_t* tail, head_t* head) {
