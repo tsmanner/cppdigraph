@@ -10,7 +10,7 @@ addons:
       - cmake
 
 # Install GTest and GMock from source (v1.8)
-before_install:
+before_script:
   - ./test/install_gtest_gmock.sh
 
 # Build and run the tests.
