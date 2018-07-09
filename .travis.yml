@@ -1,5 +1,8 @@
 language: cpp
 
+# Installing GTest + GMock requires super permissions.
+sudo: required
+
 # Install the Ninja build tool and CMake.
 addons:
   apt:
