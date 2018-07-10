@@ -1,4 +1,15 @@
-add_library (DiGraph digraph.cpp)
+cmake_minimum_required(VERSION 3.0)
+
+project (CPPDIGRAPH CXX)
+
+set (CMAKE_CXX_STANDARD 11)
+
+set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
+add_library (DiGraph SHARED digraph.cpp)
 
 # Set the linker language to C++ for the DiGraph target
 SET_TARGET_PROPERTIES(DiGraph PROPERTIES LINKER_LANGUAGE CXX)

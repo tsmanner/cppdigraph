@@ -1,7 +1,23 @@
-find_package(GTest REQUIRED)
+cmake_minimum_required(VERSION 3.0)
+
+project (CPPDIGRAPH_TEST CXX)
+
+set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_BUILD_TYPE Debug)
+
+set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
 include_directories (
-    ${CPPDIGRAPH_SOURCE_DIR}/src
+    ${CPPDIGRAPH_SOURCE_DIR}
 )
+
+find_package(GTest REQUIRED)
+
+add_test (NAME UnitTest COMMAND unittest.out --gtest_color=yes)
+add_test (NAME IntegrationTest COMMAND integrationtest.out 5)
 
 add_executable (
     unittest.out

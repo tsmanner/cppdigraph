@@ -3,12 +3,18 @@ Implementation of a directed graph container in C++
 
 ## Building
 
-### With Make
-    cmake . && make
+### As a User
+To build a single `.so` library file for `cppdigraph`:
 
-### With Ninja
-    cmake . -DCMAKE_MAKE_PROGRAM=$(which ninja) && ninja
+    mkdir build
+    cd build
+    cmake ../src
+    make
 
-### Produce Dependency Graph (With PNG Image)
-    cmake . --graphviz=dependencygraph.gv
-    dot -Tpng dependencygraph.gv -o dependencygraph.png
+### As a Developer
+To produce the entire 
+
+    mkdir build
+    cd build
+    cmake ..
+    make

@@ -44,6 +44,10 @@ CTestTestfile.cmake
 *.ninja
 .ninja*
 
+# Build Directories
+build
+buildtest
+
 # NEdit
 ~*
 
