@@ -52,8 +52,12 @@ public:
 
   virtual GraphVizStatements graphviz_statements() {
     GraphVizStatements gvs;
-    gvs.nodes.insert(getName());
+    gvs.nodes.insert(to_graphviz());
     return gvs;
+  }
+
+  virtual std::string to_graphviz() {
+    return getName();
   }
 
   std::string to_string() {
