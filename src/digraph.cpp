@@ -10,11 +10,18 @@ using namespace cdg;
 DiGraph::DiGraph(std::string name): mName(name) {
 }
 
+
 DiGraph::~DiGraph() {
   for (auto n : mNodes) {
     delete n;
   }
 }
+
+
+void DiGraph::clear() {
+  while (mNodes.size()) delete *mNodes.begin();
+}
+
 
 std::string DiGraph::to_graphviz() {
   GraphVizStatements gvs;
@@ -34,9 +41,11 @@ std::string DiGraph::to_graphviz() {
   return s;
 }
 
+
 const std::string DiGraph::getName() const {
   return mName;
 }
+
 
 std::ostream& DiGraph::operator<<(std::ostream& os) {
   return os << getName();

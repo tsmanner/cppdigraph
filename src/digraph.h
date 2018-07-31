@@ -37,6 +37,7 @@ public:
   DiGraph(std::string name);
   virtual ~DiGraph();
 
+  void clear();
   void add(Node* node) { mNodes.insert(node); }
   void remove(Node* node) { mNodes.erase(node); }
 
