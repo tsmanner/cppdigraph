@@ -28,6 +28,7 @@ class EdgeBase {
 public:
   EdgeBase() {}
   virtual void disconnect(Node* node) = 0;
+  virtual std::string to_graphviz() = 0;
 
 };
 
@@ -68,14 +69,14 @@ public:
     }
   }
 
-  std::string to_graphviz() {
+  virtual std::string to_graphviz() {
     if (getTail() && getHead()) {
-      return getTail()->getName() + " -> " + getHead()->getName();
+      return getTail()->graphviz_name() + " -> " + getHead()->graphviz_name();
     }
     return "";
   }
 
-  std::string to_string() {
+  virtual std::string to_string() {
     std::string s = "";
     if (getTail()) s += getTail()->to_string();
     else s += "[nullptr]";

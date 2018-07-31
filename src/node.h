@@ -53,6 +53,12 @@ public:
   virtual GraphVizStatements graphviz_statements() {
     GraphVizStatements gvs;
     gvs.nodes.insert(to_graphviz());
+    for (auto edge : mEdges) {
+      std::string edge_string = edge->to_graphviz();
+      if (edge_string != "") {
+        gvs.edges.insert(edge_string);
+      }
+    }
     return gvs;
   }
 
@@ -60,7 +66,11 @@ public:
     return getName();
   }
 
-  std::string to_string() {
+  virtual std::string graphviz_name() {
+    return getName();
+  }
+
+  virtual std::string to_string() {
     return "[" + getName() + "]";
   }
 
