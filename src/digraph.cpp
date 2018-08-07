@@ -24,8 +24,13 @@ void DiGraph::clear() {
 
 
 std::string DiGraph::to_graphviz() {
+  return to_graphviz(getName());
+}
+
+
+std::string DiGraph::to_graphviz(std::string graphname) {
   GraphVizStatements gvs;
-  std::string s = "digraph " + getName() + " {\n";
+  std::string s = "digraph " + graphname + " {\n";
   for (auto node : mNodes) {
     gvs.merge(node->graphviz_statements());
   }

@@ -42,6 +42,7 @@ public:
   void remove(Node* node) { mNodes.erase(node); }
 
   std::string to_graphviz();
+  std::string to_graphviz(std::string graphname);
 
   const std::string getName() const;
 
