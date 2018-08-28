@@ -8,6 +8,7 @@
 #include "digraph.h"
 #include "edge.h"
 #include "node.h"
+#include "relationship.h"
 
 // Namespaces
 using namespace cdg;
