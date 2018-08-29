@@ -52,6 +52,7 @@ public:
   }
 
   head_t* getNext() { if (mOutgoingEdge) return mOutgoingEdge->getHead(); return nullptr; }
+  tail_t* getPrev() { if (mIncomingEdge) return mIncomingEdge->getTail(); return nullptr; }
 
   /*
    * Connector overload for defined relationship
