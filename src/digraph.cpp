@@ -29,15 +29,19 @@ std::string DiGraph::to_graphviz() {
 
 
 std::string DiGraph::to_graphviz(std::string graphname) {
-  GraphVizStatements gvs;
+  std::set<std::string> nodes;
+  std::set<std::string> edges;
   std::string s = "digraph " + graphname + " {\n";
   for (auto node : mNodes) {
-    gvs.merge(node->graphviz_statements());
+    nodes.insert(node->to_graphviz());
   }
-  for (auto node_string : gvs.nodes) {
+  for (auto edge : mEdges) {
+    edges.insert(edge->to_graphviz());
+  }
+  for (auto node_string : nodes) {
     s += "  " + node_string + ";\n";
   }
-  for (auto edge_string : gvs.edges) {
+  for (auto edge_string : edges) {
     if (edge_string != "") {
       s += "  " + edge_string + ";\n";
     }

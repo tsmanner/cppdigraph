@@ -15,6 +15,7 @@
 #include "digraph.h"
 #include "edge.h"
 
+
 namespace cdg {
 
 
@@ -50,17 +51,9 @@ public:
     mEdges.erase(edge);
   }
 
-  virtual GraphVizStatements graphviz_statements() {
-    GraphVizStatements gvs;
-    gvs.nodes.insert(to_graphviz());
-    for (auto edge : mEdges) {
-      std::string edge_string = edge->to_graphviz();
-      if (edge_string != "") {
-        gvs.edges.insert(edge_string);
-      }
-    }
-    return gvs;
-  }
+  /*
+   * GraphViz
+   */
 
   virtual std::string to_graphviz() {
     return getName();
@@ -69,6 +62,10 @@ public:
   virtual std::string graphviz_name() {
     return getName();
   }
+
+  /*
+   * String and Streaming
+   */
 
   virtual std::string to_string() {
     return "[" + getName() + "]";

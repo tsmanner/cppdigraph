@@ -1,5 +1,5 @@
 /*
- * node.h
+ * digraph.h
  * 
  * Types:
  *   Node
@@ -20,18 +20,6 @@ class Node;
 class EdgeBase;
 
 
-struct GraphVizStatements {
-  std::set<std::string> nodes;
-  std::set<std::string> edges;
-
-  void merge(GraphVizStatements other) {
-    nodes.insert(other.nodes.begin(), other.nodes.end());
-    edges.insert(other.edges.begin(), other.edges.end());
-  }
-
-};
-
-
 class DiGraph {
 public:
   DiGraph(std::string name);
@@ -40,6 +28,8 @@ public:
   void clear();
   void add(Node* node) { mNodes.insert(node); }
   void remove(Node* node) { mNodes.erase(node); }
+  void add(EdgeBase* edge) { mEdges.insert(edge); }
+  void remove(EdgeBase* edge) { mEdges.erase(edge); }
 
   std::string to_graphviz();
   std::string to_graphviz(std::string graphname);
@@ -51,6 +41,7 @@ public:
 private:
   const std::string mName;
   std::set<Node*> mNodes;
+  std::set<EdgeBase*> mEdges;
 
 };
 
