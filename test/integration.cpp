@@ -36,60 +36,29 @@ MyNode::MyNode(string name): Node(name) {
 /*
  * NodeA
  */
-NodeA::NodeA(DiGraph* digraph, string name): MyNode(digraph, name) {
+NodeA::NodeA(DiGraph* digraph
+           , string name
+          ): MyNode(digraph, name)
+           , Relationship<NodeA, NodeA>()
+           , Relationship<NodeA, NodeB>()
+           , Relationship<NodeB, NodeA>()
+{
 }
 
-NodeA::NodeA(string name): MyNode(name) {
-}
-
-GraphVizStatements NodeA::graphviz_statements() {
-  GraphVizStatements gvs = MyNode::graphviz_statements();
-  if (mOutgoingA) gvs.edges.insert(mOutgoingA->to_graphviz());
-  if (mIncomingA) gvs.edges.insert(mIncomingA->to_graphviz());
-  if (mOutgoingB) gvs.edges.insert(mOutgoingB->to_graphviz());
-  if (mIncomingB) gvs.edges.insert(mIncomingB->to_graphviz());
-  return gvs;
-}
-
-void NodeA::connect(Edge<NodeA, NodeB>* edge) {
-  mOutgoingB = edge;
-}
-
-void NodeA::disconnect(Edge<NodeA, NodeB>* edge) {
-  mOutgoingB = nullptr;
-}
-
-void NodeA::connect(Edge<NodeB, NodeA>* edge) {
-  mIncomingB = edge;
-}
-
-void NodeA::disconnect(Edge<NodeB, NodeA>* edge) {
-  mIncomingB = nullptr;
-}
-
-void NodeA::connect(Edge<NodeA, NodeA>* edge) {
-  if (edge->getTail() == this) {
-    mOutgoingA = edge;
-  }
-  if (edge->getHead() == this) {
-    mIncomingA = edge;
-  }
-}
-
-void NodeA::disconnect(Edge<NodeA, NodeA>* edge) {
-  if (edge == mOutgoingA) {
-    mOutgoingA = nullptr;
-  }
-  if (edge == mOutgoingA) {
-    mIncomingA = nullptr;
-  }
+NodeA::NodeA(string name
+          ): MyNode(name)
+           , Relationship<NodeA, NodeA>()
+           , Relationship<NodeA, NodeB>()
+           , Relationship<NodeB, NodeA>()
+{
 }
 
 void NodeA::traverseB() {
   cout << *this;
-  if (mOutgoingB && mOutgoingB->getHead()) {
+  auto b = Relationship<NodeA, NodeB>::getNext();
+  if (b) {
     cout << " -> ";
-    mOutgoingB->getHead()->traverseB();
+    b->traverseB();
   }
 }
 
@@ -97,60 +66,29 @@ void NodeA::traverseB() {
 /*
  * NodeB
  */
-NodeB::NodeB(DiGraph* digraph, string name): MyNode(digraph, name) {
+NodeB::NodeB(DiGraph* digraph
+           , string name
+          ): MyNode(digraph, name)
+           , Relationship<NodeB, NodeB>()
+           , Relationship<NodeA, NodeB>()
+           , Relationship<NodeB, NodeA>()
+{
 }
 
-NodeB::NodeB(string name): MyNode(name) {
-}
-
-GraphVizStatements NodeB::graphviz_statements() {
-  GraphVizStatements gvs = MyNode::graphviz_statements();
-  if (mOutgoingA) gvs.edges.insert(mOutgoingA->to_graphviz());
-  if (mIncomingA) gvs.edges.insert(mIncomingA->to_graphviz());
-  if (mOutgoingB) gvs.edges.insert(mOutgoingB->to_graphviz());
-  if (mIncomingB) gvs.edges.insert(mIncomingB->to_graphviz());
-  return gvs;
-}
-
-void NodeB::connect(Edge<NodeA, NodeB>* edge) {
-  mIncomingA = edge;
-}
-
-void NodeB::disconnect(Edge<NodeA, NodeB>* edge) {
-  mIncomingA = nullptr;
-}
-
-void NodeB::connect(Edge<NodeB, NodeA>* edge) {
-  mOutgoingA = edge;
-}
-
-void NodeB::disconnect(Edge<NodeB, NodeA>* edge) {
-  mOutgoingA = nullptr;
-}
-
-void NodeB::connect(Edge<NodeB, NodeB>* edge) {
-  if (edge->getTail() == this) {
-    mOutgoingB = edge;
-  }
-  if (edge->getHead() == this) {
-    mIncomingB = edge;
-  }
-}
-
-void NodeB::disconnect(Edge<NodeB, NodeB>* edge) {
-  if (edge == mOutgoingB) {
-    mOutgoingB = nullptr;
-  }
-  if (edge == mOutgoingB) {
-    mIncomingB = nullptr;
-  }
+NodeB::NodeB(string name
+          ): MyNode(name)
+           , Relationship<NodeB, NodeB>()
+           , Relationship<NodeA, NodeB>()
+           , Relationship<NodeB, NodeA>()
+{
 }
 
 void NodeB::traverseB() {
   cout << *this;
-  if (mOutgoingB && mOutgoingB->getHead()) {
+  auto b = Relationship<NodeB, NodeB>::getNext();
+  if (b) {
     cout << " -> ";
-    mOutgoingB->getHead()->traverseB();
+    b->traverseB();
   }
 }
 
@@ -215,13 +153,13 @@ int main(int argc, char* argv[]) {
   TRACE("  " << left << std::setw(10) << *b1 << " (" << b1 << ")");
 
   DEBUG("Constructing edges");
-  auto a0a1 = connector<MyEdge>()(a0, a1);
+  auto a0a1 = Relationship<NodeA, NodeA>::connector<Edge>()(digraph, a0, a1);
   TRACE("  " << left << std::setw(10) << *a0a1 << " (" << a0a1 << ")");
-  auto a0b0 = connector<MyEdge>()(a0, b0);
+  auto a0b0 = Relationship<NodeA, NodeB>::connector<Edge>()(digraph, a0, b0);
   TRACE("  " << left << std::setw(10) << *a0b0 << " (" << a0b0 << ")");
-  auto b0a0 = connector<MyEdge>()(b0, a0);
+  auto b0a0 = Relationship<NodeB, NodeA>::connector<Edge>()(digraph, b0, a0);
   TRACE("  " << left << std::setw(10) << *b0a0 << " (" << b0a0 << ")");
-  auto b0b1 = connector<MyEdge>()(b0, b1);
+  auto b0b1 = Relationship<NodeB, NodeB>::connector<Edge>()(digraph, b0, b1);
   TRACE("  " << left << std::setw(10) << *b0b1 << " (" << b0b1 << ")");
 
   INFO("GraphViz Representation:");

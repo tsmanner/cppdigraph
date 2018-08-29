@@ -17,11 +17,11 @@ include_directories (
 find_package(GTest REQUIRED)
 
 add_test (NAME UnitTest COMMAND unittest.out --gtest_color=yes)
-add_test (NAME IntegrationTest COMMAND integrationtest.out 5)
 
 add_executable (
     unittest.out
     do_unit_tests.cpp
+    test_relationship.cpp
     test_node.cpp
     test_edge.cpp
 )
@@ -33,6 +33,8 @@ target_link_libraries (
     GTest::GTest
     GTest::Main
 )
+
+add_test (NAME IntegrationTest COMMAND integrationtest.out 5)
 
 add_executable (
     integrationtest.out

@@ -13,6 +13,8 @@
 #include <iostream>
 #include <string>
 
+#include "digraph.h"
+
 
 namespace cdg {
 
@@ -44,12 +46,32 @@ public:
 template <typename tail_t, typename head_t>
 class Edge: public EdgeBase {
 public:
-  Edge(tail_t* tail, head_t* head): EdgeBase(), mTail(tail), mHead(head) {
+  Edge(DiGraph* digraph
+     , tail_t* tail
+     , head_t* head
+    ): EdgeBase()
+     , mDiGraph(digraph)
+     , mTail(tail)
+     , mHead(head)
+  {
+    mDiGraph->add(this);
+    getTail()->addEdge(this);
+    getHead()->addEdge(this);
+  }
+
+  Edge(tail_t* tail
+     , head_t* head
+    ): EdgeBase()
+     , mDiGraph(nullptr)
+     , mTail(tail)
+     , mHead(head)
+  {
     getTail()->addEdge(this);
     getHead()->addEdge(this);
   }
 
   virtual ~Edge() {
+    if (mDiGraph) mDiGraph->remove(this);
     if (getTail()) getTail()->removeEdge(this);
     if (getHead()) getHead()->removeEdge(this);
   }
@@ -61,6 +83,8 @@ public:
   head_t* getHead() {
     return mHead;
   }
+
+  void setDiGraph(DiGraph* digraph) { mDiGraph = digraph; }
 
   virtual void disconnect(Node* node) {
     if (node == mTail) mTail = nullptr;
@@ -92,6 +116,7 @@ public:
   }
 
 private:
+  DiGraph* mDiGraph;
   tail_t* mTail;
   head_t* mHead;
 
@@ -111,6 +136,11 @@ struct connector {
   template <typename tail_t, typename head_t>
   edge_t<tail_t, head_t>* operator()(tail_t* tail, head_t* head) {
     return new edge_t<tail_t, head_t>(tail, head);
+  }
+
+  template <typename tail_t, typename head_t>
+  edge_t<tail_t, head_t>* operator()(DiGraph* digraph, tail_t* tail, head_t* head) {
+    return new edge_t<tail_t, head_t>(digraph, tail, head);
   }
 };
 
