@@ -54,20 +54,15 @@ public:
      , mTail(tail)
      , mHead(head)
   {
-    mDiGraph->add(this);
-    getTail()->addEdge(this);
-    getHead()->addEdge(this);
+    if (mDiGraph) mDiGraph->add(this);
+    if (getTail()) getTail()->addEdge(this);
+    if (getHead()) getHead()->addEdge(this);
   }
 
   Edge(tail_t* tail
      , head_t* head
-    ): EdgeBase()
-     , mDiGraph(nullptr)
-     , mTail(tail)
-     , mHead(head)
+    ): Edge(nullptr, tail, head)
   {
-    getTail()->addEdge(this);
-    getHead()->addEdge(this);
   }
 
   virtual ~Edge() {

@@ -29,7 +29,7 @@ public:
     if (mDiGraph) mDiGraph->add(this);
   }
 
-  Node(std::string name): mDiGraph(nullptr), mName(name) {
+  Node(std::string name): Node(nullptr, name) {
   }
 
   virtual ~Node() {

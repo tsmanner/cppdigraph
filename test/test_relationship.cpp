@@ -57,4 +57,22 @@ TEST(TestRelationship, connector) {
   delete b;
 }
 
+
+TEST(TestRelationship, disconnector) {
+  TestNodeA* a = new TestNodeA("ra");
+  TestNodeB* b = new TestNodeB("wr");
+  Relationship<TestNodeA, TestNodeB>::connector<Edge>()(a, b);
+  Relationship<TestNodeA, TestNodeB>::disconnector()(a, b);
+  auto anext = a->Relationship<TestNodeA, TestNodeB>::getNext();
+  auto aprev = a->Relationship<TestNodeA, TestNodeB>::getPrev();
+  auto bnext = b->Relationship<TestNodeA, TestNodeB>::getNext();
+  auto bprev = b->Relationship<TestNodeA, TestNodeB>::getPrev();
+  EXPECT_EQ(nullptr, anext);
+  EXPECT_EQ(nullptr, aprev);
+  EXPECT_EQ(nullptr, bnext);
+  EXPECT_EQ(nullptr, bprev);
+  delete a;
+  delete b;
+}
+
 } // namespace

@@ -53,6 +53,8 @@ public:
 
   head_t* getNext() { if (mOutgoingEdge) return mOutgoingEdge->getHead(); return nullptr; }
   tail_t* getPrev() { if (mIncomingEdge) return mIncomingEdge->getTail(); return nullptr; }
+  Edge<tail_t, head_t>* getOutgoingEdge() { return mOutgoingEdge; }
+  Edge<tail_t, head_t>* getIncomingEdge() { return mIncomingEdge; }
 
   /*
    * Connector overload for defined relationship
@@ -60,10 +62,7 @@ public:
   template <template<typename, typename> class edge_t = Edge>
   struct connector {
     edge_t<tail_t, head_t>* operator()(tail_t* tail, head_t* head) {
-      auto edge = new edge_t<tail_t, head_t>(tail, head);
-      tail->Relationship<tail_t, head_t>::connect(edge);
-      head->Relationship<tail_t, head_t>::connect(edge);
-      return edge;
+      return (*this)(nullptr, tail, head);
     }
 
     edge_t<tail_t, head_t>* operator()(DiGraph* digraph, tail_t* tail, head_t* head) {
@@ -74,7 +73,23 @@ public:
     }
   };
 
+  struct disconnector {
+    void operator()(tail_t* tail, head_t* head) {
+      (*this)(nullptr, tail, head);
+    }
 
+    void operator()(DiGraph* digraph, tail_t* tail, head_t* head) {
+      Edge<tail_t, head_t>* edge = tail->getOutgoingEdge();
+      if (edge->getHead() == head) {
+        tail->Relationship<tail_t, head_t>::disconnect(edge);
+        tail->removeEdge(edge);
+        head->Relationship<tail_t, head_t>::disconnect(edge);
+        head->removeEdge(edge);
+        edge->disconnect(tail);
+        edge->disconnect(head);
+      }
+    }
+  };
 
 private:
   Edge<tail_t, head_t>* mOutgoingEdge;
