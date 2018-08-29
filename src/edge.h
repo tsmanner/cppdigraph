@@ -131,7 +131,7 @@ private:
  *     Node* n1 = new Node();
  *     Edge<Node, Node>* edge = connector<Edge>()(n0, n1);
  */
-template <template<typename, typename> class edge_t>
+template <template<typename, typename> class edge_t = Edge>
 struct connector {
   template <typename tail_t, typename head_t>
   edge_t<tail_t, head_t>* operator()(tail_t* tail, head_t* head) {
@@ -146,13 +146,13 @@ struct connector {
 
 
 /*
- * A connector object for `Edge`
+ * A default connector object
  * Example:
  *   Node* n0 = new Node();
  *   Node* n1 = new Node();
  *   Edge<Node, Node>* edge = connect(n0, n1);
  */
-static connector<Edge> connect = connector<Edge>();
+static connector<> connect = connector<>();
 
 
 } // namespace cdg

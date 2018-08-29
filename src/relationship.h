@@ -56,7 +56,7 @@ public:
   /*
    * Connector overload for defined relationship
    */
-  template <template<typename, typename> class edge_t>
+  template <template<typename, typename> class edge_t = Edge>
   struct connector {
     edge_t<tail_t, head_t>* operator()(tail_t* tail, head_t* head) {
       auto edge = new edge_t<tail_t, head_t>(tail, head);
