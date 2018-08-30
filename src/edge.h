@@ -130,12 +130,15 @@ template <template<typename, typename> class edge_t = Edge>
 struct connector {
   template <typename tail_t, typename head_t>
   edge_t<tail_t, head_t>* operator()(tail_t* tail, head_t* head) {
-    return new edge_t<tail_t, head_t>(tail, head);
+      return (*this)(nullptr, tail, head);
   }
 
   template <typename tail_t, typename head_t>
   edge_t<tail_t, head_t>* operator()(DiGraph* digraph, tail_t* tail, head_t* head) {
-    return new edge_t<tail_t, head_t>(digraph, tail, head);
+    if (tail and head) {
+      return new edge_t<tail_t, head_t>(digraph, tail, head);
+    }
+    return nullptr;
   }
 };
 
