@@ -82,14 +82,16 @@ public:
     }
 
     void operator()(DiGraph* digraph, tail_t* tail, head_t* head) {
-      Edge<tail_t, head_t>* edge = tail->Relationship<tail_t, head_t>::getOutgoingEdge();
-      if (edge->getHead() == head) {
-        tail->Relationship<tail_t, head_t>::disconnect(edge);
-        tail->removeEdge(edge);
-        head->Relationship<tail_t, head_t>::disconnect(edge);
-        head->removeEdge(edge);
-        edge->disconnect(tail);
-        edge->disconnect(head);
+      if (tail and head) {
+        Edge<tail_t, head_t>* edge = tail->Relationship<tail_t, head_t>::getOutgoingEdge();
+        if (edge->getHead() == head) {
+          tail->Relationship<tail_t, head_t>::disconnect(edge);
+          tail->removeEdge(edge);
+          head->Relationship<tail_t, head_t>::disconnect(edge);
+          head->removeEdge(edge);
+          edge->disconnect(tail);
+          edge->disconnect(head);
+        }
       }
     }
   };
