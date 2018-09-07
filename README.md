@@ -10,6 +10,7 @@ To build a single `.so` library file for `cppdigraph`:
     cd build
     cmake ../src
     make
+    make install
 
 ### As a Developer
 To build the library and test environment for `cppdigraph`:
@@ -18,5 +19,8 @@ To build the library and test environment for `cppdigraph`:
     cd build
     cmake ..
     make
+    make install
 
-Once the test environment is compiled, you can run them with `ctest`.  Tests are registered in `test/CMakeLists.txt` using the `add_test` directive.  To see the stdout of the tests as they run, use `ctest -V`.
+Once the test environment is compiled, you can run them with `ctest`.
+  Tests are registered in `test/CMakeLists.txt` using the `add_test` directive.
+  To see the stdout of the tests as they run, use `ctest -V`.
