@@ -26,6 +26,7 @@ public:
   virtual ~DiGraph();
 
   void clear();
+  int size();
   void add(Node* node) { mNodes.insert(node); }
   void remove(Node* node) { mNodes.erase(node); }
   void add(EdgeBase* edge) { mEdges.insert(edge); }

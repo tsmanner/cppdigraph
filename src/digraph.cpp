@@ -23,12 +23,18 @@ void DiGraph::clear() {
 }
 
 
+int DiGraph::size() {
+  return mNodes.size();
+}
+
+
 std::string DiGraph::to_graphviz() {
   return to_graphviz(getName());
 }
 
 
 std::string DiGraph::to_graphviz(std::string graphname) {
+  // Iterate over all the nodes and edges, compiling the graphviz strings
   std::set<std::string> nodes;
   std::set<std::string> edges;
   std::string s = "digraph " + graphname + " {\n";
