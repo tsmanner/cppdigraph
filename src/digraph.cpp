@@ -28,12 +28,12 @@ int DiGraph::size() {
 }
 
 
-std::string DiGraph::to_graphviz(std::map<std::string, std::set<std::string>> subgraphs) {
+std::string DiGraph::to_graphviz(std::map<std::string, std::set<Node*>> subgraphs) {
   return to_graphviz(getName(), subgraphs);
 }
 
 
-std::string DiGraph::to_graphviz(std::string graphname, std::map<std::string, std::set<std::string>> subgraphs) {
+std::string DiGraph::to_graphviz(std::string graphname, std::map<std::string, std::set<Node*>> subgraphs) {
   // Iterate over all the nodes and edges, compiling the graphviz strings
   std::set<std::string> nodes;
   std::set<std::string> edges;
@@ -56,8 +56,8 @@ std::string DiGraph::to_graphviz(std::string graphname, std::map<std::string, st
     auto subgraphLabel = p.first;
     auto subgraphNodes = p.second;
     s += "  subgraph cluster_" + subgraphLabel + " {\n";
-    for (auto nodename : subgraphNodes) {
-      s += "    " + nodename + ";\n";
+    for (auto node : subgraphNodes) {
+      s += "    " + node->graphviz_name() + ";\n";
     }
     s += "  }\n";
   }

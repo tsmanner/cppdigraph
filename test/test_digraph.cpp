@@ -32,8 +32,9 @@ TEST(TestDiGraph, to_graphviz_with_subgraph) {
   DiGraph dg = DiGraph("test_digraph");
   Node n0 = Node(&dg, "n0");
   Node n1 = Node(&dg, "n1");
-  std::map<std::string, std::set<std::string>> subgraphs;
-  subgraphs["test_subgraph"] = { "n0" };
+  std::map<std::string, std::set<cdg::Node*>> subgraphs = {
+    {"test_subgraph", { &n0 } }
+  };
   std::string expected = "\
 digraph test_digraph {\n\
   n0;\n\
