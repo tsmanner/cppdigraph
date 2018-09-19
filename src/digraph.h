@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <list>
+#include <map>
 #include <set>
 #include <string>
 
@@ -32,8 +33,8 @@ public:
   void add(EdgeBase* edge) { mEdges.insert(edge); }
   void remove(EdgeBase* edge) { mEdges.erase(edge); }
 
-  std::string to_graphviz();
-  std::string to_graphviz(std::string graphname);
+  std::string to_graphviz(std::map<std::string, std::set<std::string>> subgraphs = {});
+  std::string to_graphviz(std::string graphname, std::map<std::string, std::set<std::string>> subgraphs = {});
 
   const std::string getName() const;
 

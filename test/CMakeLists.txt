@@ -24,6 +24,7 @@ add_executable (
     test_relationship.cpp
     test_node.cpp
     test_edge.cpp
+    test_digraph.cpp
 )
 
 target_link_libraries (
