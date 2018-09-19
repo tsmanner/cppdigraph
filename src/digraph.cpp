@@ -68,6 +68,7 @@ std::string DiGraph::to_graphviz(std::string graphname, std::map<std::string, st
     auto subgraphLabel = p.first;
     auto subgraphNodes = p.second;
     s += "  subgraph cluster_" + subgraphLabel + " {\n";
+    s += "    label = \"" + subgraphLabel + "\";\n";
     for (auto node : subgraphNodes) {
       if (node) {
         s += "    " + node->graphviz_name() + ";\n";
