@@ -76,7 +76,7 @@ std::string DiGraph::to_graphviz(std::string graphname, std::map<std::string, st
     }
     s += "  }\n";
   }
-  s += "}";
+  s += "}\n";
   return s;
 }
 

@@ -18,7 +18,7 @@ TEST(TestDiGraph, to_graphviz_empty) {
   DiGraph dg = DiGraph("test_digraph");
   std::string expected = "\
 digraph test_digraph {\n\
-}\
+}\n\
 ";
   EXPECT_EQ(expected, dg.to_graphviz());
 }
@@ -32,7 +32,7 @@ TEST(TestDiGraph, to_graphviz) {
 digraph test_digraph {\n\
   n0;\n\
   n1;\n\
-}\
+}\n\
 ";
   EXPECT_EQ(expected, dg.to_graphviz());
 }
@@ -53,7 +53,7 @@ digraph test_digraph {\n\
     label = \"test_subgraph\";\n\
     n0;\n\
   }\n\
-}\
+}\n\
 ";
   EXPECT_EQ(expected, dg.to_graphviz(subgraphs));
 }
@@ -74,7 +74,7 @@ digraph test_digraph {\n\
     label = \"test_subgraph\";\n\
     n0;\n\
   }\n\
-}\
+}\n\
 ";
   EXPECT_EQ(expected, dg.to_graphviz(subgraphs));
 }
