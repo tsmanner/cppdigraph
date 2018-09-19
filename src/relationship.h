@@ -67,6 +67,7 @@ public:
 
     edge_t<tail_t, head_t>* operator()(DiGraph* digraph, tail_t* tail, head_t* head) {
       if (tail and head) {
+        if (!digraph) digraph = tail->getDiGraph();
         auto edge = new edge_t<tail_t, head_t>(digraph, tail, head);
         tail->Relationship<tail_t, head_t>::connect(edge);
         head->Relationship<tail_t, head_t>::connect(edge);
@@ -76,6 +77,9 @@ public:
     }
   };
 
+  /*
+   * Disconnector
+   */
   struct disconnector {
     void operator()(tail_t* tail, head_t* head) {
       (*this)(nullptr, tail, head);

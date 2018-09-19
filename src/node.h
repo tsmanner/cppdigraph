@@ -43,6 +43,10 @@ public:
     return mName;
   }
 
+  DiGraph* getDiGraph() {
+    return mDiGraph;
+  }
+
   virtual void addEdge(EdgeBase* edge) {
     mEdges.insert(edge);
   }

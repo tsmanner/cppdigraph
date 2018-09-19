@@ -136,6 +136,7 @@ struct connector {
   template <typename tail_t, typename head_t>
   edge_t<tail_t, head_t>* operator()(DiGraph* digraph, tail_t* tail, head_t* head) {
     if (tail and head) {
+      if (!digraph) digraph = tail->getDiGraph();
       return new edge_t<tail_t, head_t>(digraph, tail, head);
     }
     return nullptr;
