@@ -33,8 +33,10 @@ public:
   void add(EdgeBase* edge) { mEdges.insert(edge); }
   void remove(EdgeBase* edge) { mEdges.erase(edge); }
 
-  std::string to_graphviz(std::map<std::string, std::set<Node*>> subgraphs = {});
-  std::string to_graphviz(std::string graphname, std::map<std::string, std::set<Node*>> subgraphs = {});
+  std::string to_graphviz();
+  std::string to_graphviz(std::map<std::string, std::set<Node*>> subgraphs);
+  std::string to_graphviz(std::string graphname);
+  std::string to_graphviz(std::string graphname, std::map<std::string, std::set<Node*>> subgraphs);
 
   const std::string getName() const;
 

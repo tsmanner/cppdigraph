@@ -28,8 +28,20 @@ int DiGraph::size() {
 }
 
 
+std::string DiGraph::to_graphviz() {
+  std::map<std::string, std::set<Node*>> subgraphs = {};
+  return to_graphviz(subgraphs);
+}
+
+
 std::string DiGraph::to_graphviz(std::map<std::string, std::set<Node*>> subgraphs) {
   return to_graphviz(getName(), subgraphs);
+}
+
+
+std::string DiGraph::to_graphviz(std::string graphname) {
+  std::map<std::string, std::set<Node*>> subgraphs = {};
+  return to_graphviz(graphname, subgraphs);
 }
 
 
