@@ -10,7 +10,7 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 add_library (DiGraph SHARED digraph.cpp graphviz.cpp)
-set_target_properties(DiGraph PROPERTIES PUBLIC_HEADER "digraph.h;edge.h;node.h;relationship.h")
+set_target_properties(DiGraph PROPERTIES PUBLIC_HEADER "digraph.h;edge.h;graphviz.h;node.h;relationship.h")
 INSTALL(
   TARGETS DiGraph
   LIBRARY       DESTINATION ${CMAKE_BINARY_DIR}/lib
