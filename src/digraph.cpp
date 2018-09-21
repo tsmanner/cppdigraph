@@ -44,7 +44,12 @@ std::ostream& operator<<(std::ostream& os, cdg::DiGraph digraph) {
 
 
 DiGraph::GraphViz DiGraph::to_graphviz() {
-  GraphViz graphViz = GraphViz(getName());
+  return to_graphviz(getName());
+}
+
+
+DiGraph::GraphViz DiGraph::to_graphviz(std::string graphname) {
+  GraphViz graphViz = GraphViz(graphname);
   for (auto node : mNodes) {
     if (node) {
       graphViz.insertNode(node->to_graphviz());

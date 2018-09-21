@@ -40,6 +40,7 @@ public:
 
   class GraphViz;
   GraphViz to_graphviz();
+  GraphViz to_graphviz(std::string graphname);
 
   class GraphViz {
   public:
