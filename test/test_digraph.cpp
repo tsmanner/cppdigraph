@@ -18,9 +18,10 @@ TEST(TestDiGraph, to_graphviz_empty) {
   DiGraph dg = DiGraph("test_digraph");
   std::string expected = "\
 digraph test_digraph {\n\
+  \"bgcolor\" = \"transparent\";\n\
 }\n\
 ";
-  EXPECT_EQ(expected, dg.to_graphviz());
+  EXPECT_EQ(expected, dg.to_graphviz().to_string());
 }
 
 
@@ -30,11 +31,12 @@ TEST(TestDiGraph, to_graphviz) {
   Node n1 = Node(&dg, "n1");
   std::string expected = "\
 digraph test_digraph {\n\
+  \"bgcolor\" = \"transparent\";\n\
   n0;\n\
   n1;\n\
 }\n\
 ";
-  EXPECT_EQ(expected, dg.to_graphviz());
+  EXPECT_EQ(expected, dg.to_graphviz().to_string());
 }
 
 
@@ -47,6 +49,7 @@ TEST(TestDiGraph, to_graphviz_with_subgraph) {
   };
   std::string expected = "\
 digraph test_digraph {\n\
+  \"bgcolor\" = \"transparent\";\n\
   n0;\n\
   n1;\n\
   subgraph cluster_test_subgraph {\n\
@@ -55,7 +58,11 @@ digraph test_digraph {\n\
   }\n\
 }\n\
 ";
-  EXPECT_EQ(expected, dg.to_graphviz(subgraphs));
+  auto graphviz = dg.to_graphviz();
+  for (auto p : subgraphs) {
+    graphviz.addSubgraph(p.first, p.second);
+  }
+  EXPECT_EQ(expected, graphviz.to_string());
 }
 
 
@@ -68,6 +75,7 @@ TEST(TestDiGraph, to_graphviz_with_subgraph_nullptr) {
   };
   std::string expected = "\
 digraph test_digraph {\n\
+  \"bgcolor\" = \"transparent\";\n\
   n0;\n\
   n1;\n\
   subgraph cluster_test_subgraph {\n\
@@ -76,7 +84,11 @@ digraph test_digraph {\n\
   }\n\
 }\n\
 ";
-  EXPECT_EQ(expected, dg.to_graphviz(subgraphs));
+  auto graphviz = dg.to_graphviz();
+  for (auto p : subgraphs) {
+    graphviz.addSubgraph(p.first, p.second);
+  }
+  EXPECT_EQ(expected, graphviz.to_string());
 }
 
 
