@@ -53,7 +53,8 @@ digraph test_digraph {\n\
   n0;\n\
   n1;\n\
   subgraph cluster_test_subgraph {\n\
-    label = \"test_subgraph\";\n\
+    \"label\" = \"test_subgraph\";\n\
+    \"rawr\" = \"rawr\";\n\
     n0;\n\
   }\n\
 }\n\
@@ -62,6 +63,7 @@ digraph test_digraph {\n\
   for (auto p : subgraphs) {
     graphviz.addSubgraph(p.first, p.second);
   }
+  graphviz.getSubgraph("test_subgraph").setAttribute("rawr", "rawr");
   EXPECT_EQ(expected, graphviz.to_string());
 }
 
