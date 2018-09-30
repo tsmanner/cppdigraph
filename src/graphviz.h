@@ -21,6 +21,7 @@ public:
   GvSubGraph() {}
   GvSubGraph(std::string name, std::set<Node*> nodes);
 
+  void add(Node* node);
   void setAttribute(std::string name, std::string value) { mAttributes[name] = value; }
   std::string getAttribute(std::string key) { return mAttributes[key]; }
 

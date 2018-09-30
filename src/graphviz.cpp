@@ -9,9 +9,17 @@ namespace cdg {
 GvSubGraph::GvSubGraph(std::string name
                      , std::set<Node*> nodes
                     ): mName(name)
-                     , mNodes(nodes)
+                     , mNodes()
 {
+  for (auto node : nodes) {
+    add(node);
+  }
   setAttribute("label", mName);
+}
+
+
+void GvSubGraph::add(Node* node) {
+  if (node) mNodes.insert(node);
 }
 
 
@@ -33,12 +41,12 @@ GvDiGraph::GvDiGraph(std::string name): mName(name) {}
 
 
 void GvDiGraph::add(Node* node) {
-  mNodes.insert(node);
+  if (node) mNodes.insert(node);
 }
 
 
 void GvDiGraph::add(EdgeBase* edge) {
-  mEdges.insert(edge);
+  if (edge) mEdges.insert(edge);
 }
 
 

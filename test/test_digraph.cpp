@@ -81,7 +81,7 @@ digraph test_digraph {\n\
   n0;\n\
   n1;\n\
   subgraph cluster_test_subgraph {\n\
-    label = \"test_subgraph\";\n\
+    \"label\" = \"test_subgraph\";\n\
     n0;\n\
   }\n\
 }\n\
