@@ -20,6 +20,7 @@ class GvSubGraph {
 public:
   GvSubGraph() {}
   GvSubGraph(std::string name, std::set<Node*> nodes);
+  virtual ~GvSubGraph();
 
   void add(Node* node);
   void setAttribute(std::string name, std::string value) { mAttributes[name] = value; }
@@ -37,6 +38,7 @@ private:
 class GvDiGraph {
 public:
   GvDiGraph(std::string name);
+  virtual ~GvDiGraph();
 
   void add(Node* node);
   void add(EdgeBase* edge);
@@ -60,6 +62,7 @@ private:
 
 } // namespace cdg
 
-std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph gvd);
+std::ostream& operator<<(std::ostream& os, cdg::GvSubGraph gvsg);
+std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph gvdg);
 
 #endif

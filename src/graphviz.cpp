@@ -18,6 +18,9 @@ GvSubGraph::GvSubGraph(std::string name
 }
 
 
+GvSubGraph::~GvSubGraph() {
+}
+
 void GvSubGraph::add(Node* node) {
   if (node) mNodes.insert(node);
 }
@@ -37,7 +40,12 @@ std::string GvSubGraph::to_string() {
 }
 
 
-GvDiGraph::GvDiGraph(std::string name): mName(name) {}
+GvDiGraph::GvDiGraph(std::string name): mName(name) {
+}
+
+
+GvDiGraph::~GvDiGraph() {
+}
 
 
 void GvDiGraph::add(Node* node) {
@@ -100,7 +108,13 @@ std::string GvDiGraph::to_string() {
 } // namespace cdg
 
 
-std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph gvd) {
-  os << gvd.to_string();
+std::ostream& operator<<(std::ostream& os, cdg::GvSubGraph gvsg) {
+  os << gvsg.to_string();
+  return os;
+}
+
+
+std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph gvdg) {
+  os << gvdg.to_string();
   return os;
 }

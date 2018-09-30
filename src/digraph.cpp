@@ -12,14 +12,13 @@ DiGraph::DiGraph(std::string name): mName(name) {
 
 
 DiGraph::~DiGraph() {
-  for (auto n : mNodes) {
-    delete n;
-  }
+  clear();
 }
 
 
 void DiGraph::clear() {
   while (mNodes.size()) delete *mNodes.begin();
+  while (mEdges.size()) delete *mEdges.begin();
 }
 
 
