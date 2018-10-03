@@ -29,16 +29,17 @@ class Node;
  */
 class EdgeBase {
 public:
-  EdgeBase(std::string name): mName(name) {}
+  EdgeBase(): mCdgId(0) {}
+  EdgeBase(int id): mCdgId(id) {}
   virtual ~EdgeBase() {}
 
-  std::string getName() { return mName; }
+  int getCdgId() { return mCdgId; }
 
   virtual void disconnect(Node* node) = 0;
   virtual std::string to_graphviz() = 0;
 
 private:
-  std::string mName;
+  int mCdgId;
 
 };
 
@@ -56,7 +57,7 @@ public:
   Edge(DiGraph* digraph
      , tail_t* tail
      , head_t* head
-    ): EdgeBase(tail->Node::getName()+"->"+head->Node::getName())
+    ): EdgeBase(digraph ? digraph->getNextCdgId() : tail->getCdgId() ^ head->getCdgId())
      , mDiGraph(digraph)
      , mTail(tail)
      , mHead(head)

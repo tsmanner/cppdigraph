@@ -43,10 +43,11 @@ compile_commands.json
 CTestTestfile.cmake
 *.ninja
 .ninja*
+*.toolchain.*
 
 # Build Directories
-build
-buildtest
+build*
+
 
 # NEdit
 ~*

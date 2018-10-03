@@ -35,6 +35,7 @@ public:
   void remove(EdgeBase* edge) { mEdges.erase(edge); }
 
   const std::string getName() const;
+  int getNextCdgId();
 
   ////// GraphViz
 
@@ -44,6 +45,7 @@ public:
 
 private:
   const std::string mName;
+  int mNextCdgId;
   std::set<Node*, NameCompare<Node>> mNodes;
   std::set<EdgeBase*, NameCompare<EdgeBase>> mEdges;
 

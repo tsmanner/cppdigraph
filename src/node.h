@@ -33,7 +33,12 @@ class NodeCopyException: public std::exception {
  */
 class Node {
 public:
-  Node(DiGraph* digraph, std::string name): mDiGraph(digraph), mName(name) {
+  Node(DiGraph* digraph
+     , std::string name
+    ): mDiGraph(digraph)
+     , mName(name)
+     , mCdgId(digraph ? digraph->getNextCdgId() : std::hash<std::string>()(name))
+  {
     if (getDiGraph()) getDiGraph()->add(this);
   }
 
@@ -49,6 +54,10 @@ public:
 
   const std::string getName() const {
     return mName;
+  }
+
+  int getCdgId() {
+    return mCdgId;
   }
 
   DiGraph* getDiGraph() {
@@ -86,6 +95,7 @@ public:
 private:
   DiGraph* mDiGraph;
   const std::string mName;
+  int mCdgId;
   std::unordered_set<EdgeBase*> mEdges;
 
   // Make the copy constructor private so that no one can make copies.

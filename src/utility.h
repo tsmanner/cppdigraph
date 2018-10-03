@@ -12,7 +12,7 @@ namespace cdg {
 template<typename T>
 struct NameCompare {
   bool operator()(T* lhs, T* rhs) {
-    return lhs->getName() < rhs->getName();
+    return lhs->getCdgId() < rhs->getCdgId();
   }
 };
 

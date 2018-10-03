@@ -8,6 +8,7 @@ namespace cdg {
 
 
 DiGraph::DiGraph(std::string name): mName(name) {
+  mNextCdgId = std::hash<std::string>()(name) + 1;
 }
 
 
@@ -29,6 +30,11 @@ int DiGraph::size() {
 
 const std::string DiGraph::getName() const {
   return mName;
+}
+
+
+int DiGraph::getNextCdgId() {
+  return mNextCdgId++;
 }
 
 
