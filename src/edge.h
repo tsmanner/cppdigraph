@@ -32,7 +32,7 @@ public:
   EdgeBase(std::string name): mName(name) {}
   virtual ~EdgeBase() {}
 
-  virtual std::string getName() { return mName; }
+  std::string getName() { return mName; }
 
   virtual void disconnect(Node* node) = 0;
   virtual std::string to_graphviz() = 0;
@@ -56,7 +56,7 @@ public:
   Edge(DiGraph* digraph
      , tail_t* tail
      , head_t* head
-    ): EdgeBase(tail->getName()+"->"+head->getName())
+    ): EdgeBase(tail->Node::getName()+"->"+head->Node::getName())
      , mDiGraph(digraph)
      , mTail(tail)
      , mHead(head)
