@@ -27,8 +27,8 @@ digraph test_digraph {\n\
 
 TEST(TestDiGraph, to_graphviz) {
   DiGraph dg = DiGraph("test_digraph");
-  Node n0 = Node(&dg, "n0");
-  Node n1 = Node(&dg, "n1");
+  Node* n0 = new Node(&dg, "n0");
+  Node* n1 = new Node(&dg, "n1");
   std::string expected = "\
 digraph test_digraph {\n\
   \"bgcolor\" = \"transparent\";\n\
@@ -37,15 +37,17 @@ digraph test_digraph {\n\
 }\n\
 ";
   EXPECT_EQ(expected, dg.to_graphviz().to_string());
+  delete n0;
+  delete n1;
 }
 
 
 TEST(TestDiGraph, to_graphviz_with_subgraph) {
   DiGraph dg = DiGraph("test_digraph");
-  Node n0 = Node(&dg, "n0");
-  Node n1 = Node(&dg, "n1");
+  Node* n0 = new Node(&dg, "n0");
+  Node* n1 = new Node(&dg, "n1");
   std::map<std::string, std::set<cdg::Node*>> subgraphs = {
-    {"test_subgraph", { &n0 } }
+    {"test_subgraph", { n0 } }
   };
   std::string expected = "\
 digraph test_digraph {\n\
@@ -65,15 +67,17 @@ digraph test_digraph {\n\
   }
   graphviz.getSubgraph("test_subgraph").setAttribute("rawr", "rawr");
   EXPECT_EQ(expected, graphviz.to_string());
+  delete n0;
+  delete n1;
 }
 
 
 TEST(TestDiGraph, to_graphviz_with_subgraph_nullptr) {
   DiGraph dg = DiGraph("test_digraph");
-  Node n0 = Node(&dg, "n0");
-  Node n1 = Node(&dg, "n1");
+  Node* n0 = new Node(&dg, "n0");
+  Node* n1 = new Node(&dg, "n1");
   std::map<std::string, std::set<cdg::Node*>> subgraphs = {
-    {"test_subgraph", { &n0, nullptr } }
+    {"test_subgraph", { n0, nullptr } }
   };
   std::string expected = "\
 digraph test_digraph {\n\
@@ -91,6 +95,8 @@ digraph test_digraph {\n\
     graphviz.addSubgraph(p.first, p.second);
   }
   EXPECT_EQ(expected, graphviz.to_string());
+  delete n0;
+  delete n1;
 }
 
 

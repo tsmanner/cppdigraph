@@ -13,7 +13,7 @@
 #include <iostream>
 #include <string>
 
-#include "digraph.h"
+#include "./digraph.h"
 
 
 namespace cdg {
@@ -29,9 +29,16 @@ class Node;
  */
 class EdgeBase {
 public:
-  EdgeBase() {}
+  EdgeBase(std::string name): mName(name) {}
+  virtual ~EdgeBase() {}
+
+  virtual std::string getName() { return mName; }
+
   virtual void disconnect(Node* node) = 0;
   virtual std::string to_graphviz() = 0;
+
+private:
+  std::string mName;
 
 };
 
@@ -49,12 +56,12 @@ public:
   Edge(DiGraph* digraph
      , tail_t* tail
      , head_t* head
-    ): EdgeBase()
+    ): EdgeBase(tail->getName()+"->"+head->getName())
      , mDiGraph(digraph)
      , mTail(tail)
      , mHead(head)
   {
-    if (mDiGraph) mDiGraph->add(this);
+    if (getDiGraph()) getDiGraph()->add(this);
     if (getTail()) getTail()->addEdge(this);
     if (getHead()) getHead()->addEdge(this);
   }
@@ -66,7 +73,7 @@ public:
   }
 
   virtual ~Edge() {
-    if (mDiGraph) mDiGraph->remove(this);
+    if (getDiGraph()) getDiGraph()->remove(this);
     if (getTail()) getTail()->removeEdge(this);
     if (getHead()) getHead()->removeEdge(this);
   }
@@ -78,6 +85,8 @@ public:
   head_t* getHead() {
     return mHead;
   }
+
+  DiGraph* getDiGraph() { return mDiGraph; }
 
   void setDiGraph(DiGraph* digraph) { mDiGraph = digraph; }
 

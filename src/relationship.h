@@ -9,7 +9,7 @@
 #define CDG_RELATIONSHIP_H
 
 
-#include "edge.h"
+#include "./edge.h"
 
 
 namespace cdg {
@@ -29,8 +29,22 @@ public:
   }
 
   virtual ~Relationship() {
-    disconnect(mOutgoingEdge);
-    disconnect(mIncomingEdge);
+    if (mOutgoingEdge) {
+      head_t* next = getNext();
+      if (next) {
+        next->Relationship<tail_t, head_t>::disconnect(mOutgoingEdge);
+      }
+      delete mOutgoingEdge;
+      mOutgoingEdge = nullptr;
+    }
+    if (mIncomingEdge) {
+      tail_t* prev = getPrev();
+      if (prev) {
+        prev->Relationship<tail_t, head_t>::disconnect(mIncomingEdge);
+      }
+      delete mIncomingEdge;
+      mIncomingEdge = nullptr;
+    }
   }
 
   void connect(Edge<tail_t, head_t>* edge) {
@@ -90,11 +104,8 @@ public:
         Edge<tail_t, head_t>* edge = tail->Relationship<tail_t, head_t>::getOutgoingEdge();
         if (edge and edge->getHead() == head) {
           tail->Relationship<tail_t, head_t>::disconnect(edge);
-          tail->removeEdge(edge);
           head->Relationship<tail_t, head_t>::disconnect(edge);
-          head->removeEdge(edge);
-          edge->disconnect(tail);
-          edge->disconnect(head);
+          delete edge;
         }
       }
     }
@@ -102,8 +113,6 @@ public:
 
 private:
   Edge<tail_t, head_t>* mOutgoingEdge;
-  // This should only be used when it's a relationship to the same type
-  //   i.e. Relationship<NodeA, NodeA>
   Edge<tail_t, head_t>* mIncomingEdge;
 
 };

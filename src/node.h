@@ -12,11 +12,19 @@
 #include <string>
 #include <unordered_set>
 
-#include "digraph.h"
-#include "edge.h"
+#include "./digraph.h"
+#include "./edge.h"
 
 
 namespace cdg {
+
+
+class NodeCopyException: public std::exception {
+  virtual const char* what() const throw()
+  {
+    return "Attempt to make copy of Node";
+  }
+};
 
 
 /*
@@ -26,17 +34,17 @@ namespace cdg {
 class Node {
 public:
   Node(DiGraph* digraph, std::string name): mDiGraph(digraph), mName(name) {
-    if (mDiGraph) mDiGraph->add(this);
+    if (getDiGraph()) getDiGraph()->add(this);
   }
 
   Node(std::string name): Node(nullptr, name) {
   }
 
   virtual ~Node() {
-    for (auto edge : mEdges) {
-      edge->disconnect(this);
+    while (mEdges.size()) {
+      delete *mEdges.begin();
     }
-    if (mDiGraph) mDiGraph->remove(this);
+    if (getDiGraph()) getDiGraph()->remove(this);
   }
 
   const std::string getName() const {
@@ -75,18 +83,22 @@ public:
     return "[" + getName() + "]";
   }
 
-  std::ostream& operator<<(std::ostream& os) {
-    return os << to_string();
-  }
-
 private:
   DiGraph* mDiGraph;
   const std::string mName;
   std::unordered_set<EdgeBase*> mEdges;
 
+  // Make the copy constructor private so that no one can make copies.
+  //   Copying a Node instance will result in corruption of the edge
+  //   pointers because the destructor calls delete on them.
+  Node(const Node& other) {
+    throw NodeCopyException();
+  }
+
 };
 
 
 } // namespace cdg
+
 
 #endif

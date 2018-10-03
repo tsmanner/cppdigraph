@@ -12,8 +12,8 @@
 /*
  * Stream operators
  */
-ostream& operator<<(ostream& os, Node node) {
-  return node.operator<<(os);
+ostream& operator<<(ostream& os, Node& node) {
+  return os << node.to_string();
 }
 
 

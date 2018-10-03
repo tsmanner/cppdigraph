@@ -12,7 +12,8 @@
 #include <sstream>
 #include <string>
 
-#include "graphviz.h"
+#include "./graphviz.h"
+#include "./utility.h"
 
 namespace cdg {
 
@@ -43,8 +44,8 @@ public:
 
 private:
   const std::string mName;
-  std::set<Node*> mNodes;
-  std::set<EdgeBase*> mEdges;
+  std::set<Node*, NameCompare<Node>> mNodes;
+  std::set<EdgeBase*, NameCompare<EdgeBase>> mEdges;
 
 };
 

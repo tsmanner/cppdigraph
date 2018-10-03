@@ -1,6 +1,6 @@
-#include "graphviz.h"
-#include "edge.h"
-#include "node.h"
+#include "./graphviz.h"
+#include "./edge.h"
+#include "./node.h"
 
 
 namespace cdg {

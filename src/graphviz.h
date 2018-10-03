@@ -9,10 +9,13 @@
 #include <set>
 #include <string>
 
+#include "./utility.h"
+
 
 namespace cdg {
 
 class Node;
+struct NodeSetCompare;
 class EdgeBase;
 
 
@@ -55,8 +58,8 @@ private:
   const std::string mName;
   std::map<std::string, std::string> mAttributes;
   std::map<std::string, GvSubGraph> mSubgraphs;
-  std::set<Node*> mNodes;
-  std::set<EdgeBase*> mEdges;
+  std::set<Node*, NameCompare<Node>> mNodes;
+  std::set<EdgeBase*, NameCompare<EdgeBase>> mEdges;
 };
 
 

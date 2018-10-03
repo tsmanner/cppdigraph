@@ -26,9 +26,12 @@ class MyNode: public Node {
 public:
   MyNode(DiGraph* digraph, string name);
   MyNode(string name);
+  virtual ~MyNode() {}
 
   // template <typename tail_t, typename head_t>
   // void disconnect(Edge<tail_t, head_t>* edge);
+private:
+
 };
 
 
@@ -74,6 +77,7 @@ class NodeA:
 public:
   NodeA(DiGraph* digraph, string name);
   NodeA(string name);
+  virtual ~NodeA() {}
 
   void traverseB();
 
@@ -94,6 +98,7 @@ class NodeB:
 public:
   NodeB(DiGraph* digraph, string name);
   NodeB(string name);
+  virtual ~NodeB() {}
 
   void traverseB();
 
