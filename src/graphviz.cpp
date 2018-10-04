@@ -33,7 +33,7 @@ std::string GvSubGraph::to_string() {
     graphStream << "    \"" << p.first << "\" = \"" << p.second << "\";" << std::endl;
   }
   for (auto node : mNodes) {
-    graphStream << "    " << node->to_graphviz() << ";" << std::endl;
+    graphStream << "    " << node->graphviz_name() << ";" << std::endl;
   }
   graphStream << "  }" << std::endl;
   return graphStream.str();
