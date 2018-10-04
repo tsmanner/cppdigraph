@@ -22,7 +22,7 @@ class EdgeBase;
 class GvSubGraph {
 public:
   GvSubGraph() {}
-  GvSubGraph(std::string name, std::set<Node*> nodes);
+  GvSubGraph(std::string name, NodeSet nodes);
   virtual ~GvSubGraph();
 
   void add(Node* node);
@@ -46,7 +46,7 @@ public:
   void add(Node* node);
   void add(EdgeBase* edge);
 
-  GvSubGraph& addSubgraph(std::string subgraphName, std::set<Node*> subgraph);
+  GvSubGraph& addSubgraph(std::string subgraphName, NodeSet subgraph);
   GvSubGraph& getSubgraph(std::string subgraphName);
   void addAttributes(std::map<std::string, std::string> attributes);
   void setAttribute(std::string name, std::string value);

@@ -7,7 +7,7 @@ namespace cdg {
 
 
 GvSubGraph::GvSubGraph(std::string name
-                     , std::set<Node*> nodes
+                     , NodeSet nodes
                     ): mName(name)
                      , mNodes()
 {
@@ -58,7 +58,7 @@ void GvDiGraph::add(EdgeBase* edge) {
 }
 
 
-GvSubGraph& GvDiGraph::addSubgraph(std::string subgraphName, std::set<Node*> subgraph) {
+GvSubGraph& GvDiGraph::addSubgraph(std::string subgraphName, NodeSet subgraph) {
   mSubgraphs.insert(std::make_pair(subgraphName, GvSubGraph(subgraphName, subgraph)));
   return getSubgraph(subgraphName);
 }
