@@ -16,7 +16,13 @@ class EdgeBase;
 template<typename T>
 struct NameCompare {
   bool operator()(T* lhs, T* rhs) {
-    return lhs->getCdgId() < rhs->getCdgId();
+    if (lhs and rhs) {
+      return lhs->getCdgId() < rhs->getCdgId();
+    }
+    else if (rhs) {
+      return true;
+    }
+    return false;
   }
 };
 

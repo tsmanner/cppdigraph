@@ -28,7 +28,7 @@ void GvSubGraph::add(Node* node) {
 
 std::string GvSubGraph::to_string() {
   std::ostringstream graphStream;
-  graphStream << "  subgraph cluster_" << mName << " {" << std::endl;
+  graphStream << "  subgraph \"cluster_" << mName << "\" {" << std::endl;
   for (auto p : mAttributes) {
     graphStream << "    \"" << p.first << "\" = \"" << p.second << "\";" << std::endl;
   }
@@ -83,7 +83,7 @@ void GvDiGraph::setAttribute(std::string name, std::string value) {
 
 std::string GvDiGraph::to_string() {
   std::ostringstream graphStream;
-  graphStream << "digraph " << mName << " {" << std::endl;
+  graphStream << "digraph \"" << mName << "\" {" << std::endl;
   for (auto p : mAttributes) {
     graphStream << "  \"" << p.first << "\" = \"" << p.second << "\";" << std::endl;
   }
