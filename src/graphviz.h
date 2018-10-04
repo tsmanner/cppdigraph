@@ -58,8 +58,8 @@ private:
   const std::string mName;
   std::map<std::string, std::string> mAttributes;
   std::map<std::string, GvSubGraph> mSubgraphs;
-  std::set<Node*, NameCompare<Node>> mNodes;
-  std::set<EdgeBase*, NameCompare<EdgeBase>> mEdges;
+  NodeSet mNodes;
+  EdgeSet mEdges;
 };
 
 

@@ -46,8 +46,8 @@ public:
 private:
   const std::string mName;
   int mNextCdgId;
-  std::set<Node*, NameCompare<Node>> mNodes;
-  std::set<EdgeBase*, NameCompare<EdgeBase>> mEdges;
+  NodeSet mNodes;
+  EdgeSet mEdges;
 
 };
 
