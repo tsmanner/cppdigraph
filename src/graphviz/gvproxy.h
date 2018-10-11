@@ -11,15 +11,9 @@
 #include <string>
 
 #include "./gvtable.h"
-
+#include "../utility.h"
 
 namespace cdg {
-
-
-static const std::vector<std::string> cGraphvizSpecialCharacters = {
-  ".",
-  "-"
-};
 
 
 template <typename T>
@@ -81,13 +75,12 @@ public:
     render();
     std::stringstream ss;
     if (getObject()) {
-      ss << "\"" << getObjectName() << "\"";
+      ss << "\"" << graphviz_sanitize(getObjectName()) << "\"";
       if (mObjectAttributes.size()) {
         ss << " [ ";
         for (auto p : mObjectAttributes) {
-          std::string key = p.first;
-          std::string value = p.second;
-          ss << key << "=\"" << value << "\" ";
+          ss << graphviz_sanitize(p.first) << "=\""
+             << graphviz_sanitize(p.second) << "\" ";
         }
         ss << "]";
       }
