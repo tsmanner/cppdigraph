@@ -53,7 +53,6 @@ static const std::vector<std::string> cGraphvizSpecialCharacters = {
 
 static std::string graphviz_sanitize(std::string str) {
   for (auto specialCharacter : cGraphvizSpecialCharacters) {
-    int count = 0;
     for (int pos = str.find(specialCharacter); pos != std::string::npos; pos = str.find(specialCharacter, pos+2)) {
       str.replace(pos, 1, "\\" + specialCharacter);
     }
