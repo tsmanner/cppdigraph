@@ -12,6 +12,15 @@ using namespace cdg;
 namespace {
 
 
+TEST(TestGvTable, setCell) {
+  GvTable table = GvTable();
+  std::string expected = "rawr";
+  table.setCell(1, 1, expected);
+  EXPECT_EQ("", table.getCell(1, 0).getContent());
+  EXPECT_EQ(expected, table.getCell(1, 1).getContent());
+}
+
+
 TEST(TestGvTable, to_string_no_rows_no_attributes) {
   GvTable table = GvTable();
   std::string expected = "<<TABLE></TABLE>>";

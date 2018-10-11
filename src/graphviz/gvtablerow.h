@@ -19,8 +19,30 @@ namespace cdg {
 class GvTableRow {
 public:
 
+  void setCell(int col, std::string content) {
+    while (mCells.size() <= col) {
+      addCell(GvTableCell());
+    }
+    getCell(col).setContent(content);
+  }
+
+  void setCell(int col, GvTableCell cell) {
+    while (mCells.size() < col) {
+      addCell(GvTableCell());
+    }
+    addCell(cell);
+  }
+
   void addCell(GvTableCell cell) {
     mCells.push_back(cell);
+  }
+
+  GvTableCell& getCell(int col) {
+    return mCells.at(col);
+  }
+
+  GvTableCell& operator[](int row) {
+    return getCell(row);
   }
 
   std::vector<GvTableCell> getCells() {

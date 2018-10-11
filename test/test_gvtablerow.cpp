@@ -12,6 +12,26 @@ using namespace cdg;
 namespace {
 
 
+TEST(TestGvTableRow, setCell_string) {
+  GvTableRow row = GvTableRow();
+  std::string expected = "rawr";
+  row.setCell(1, expected);
+  EXPECT_EQ(expected, row.getCell(1).getContent());
+  EXPECT_EQ("", row.getCell(0).getContent());
+}
+
+
+TEST(TestGvTableRow, setCell_GvTableCell) {
+  GvTableRow row = GvTableRow();
+  std::string expected = "rawr";
+  GvTableCell cell = GvTableCell();
+  cell.setContent(expected);
+  row.setCell(1, cell);
+  EXPECT_EQ(expected, row.getCell(1).getContent());
+  EXPECT_EQ("", row.getCell(0).getContent());
+}
+
+
 TEST(TestGvTableRow, to_string_no_cell_no_attribute) {
   GvTableRow row = GvTableRow();
   std::string expected = "<TR></TR>";

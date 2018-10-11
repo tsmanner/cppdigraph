@@ -17,7 +17,7 @@ namespace cdg {
 template <typename T>
 class GvProxy {
 public:
-  GvProxy(T* object): mObject(object) {}
+  GvProxy(T* object): mObject(object) { reset(); }
 
   ~GvProxy() {}
 
@@ -26,27 +26,57 @@ public:
   }
 
   void setAttribute(std::string name, std::string value) {
-    mAttributes[name] = value;
+    mObjectAttributes[name] = value;
+    render();
   }
 
   std::string getAttribute(std::string key) {
-    return mAttributes[key];
+    return mObjectAttributes[key];
+  }
+
+  void setObjectName(std::string name) {
+    mObjectName = name;
+  }
+
+  std::string getObjectName() {
+    return mObjectName;
+  }
+
+  void setTableCell(int row, int col, std::string value) {
+    mObjectTable[row][col].setContent(value);
+    render();
+  }
+
+  std::string getTableCell(int row, int col) {
+    return mObjectTable[row][col];
+  }
+
+  void reset() {
+    if (getObject()) {
+      mObjectAttributes = getObject()->graphviz_attributes();
+      mObjectName = getObject()->graphviz_name();
+      mObjectTable = getObject()->graphviz_table();
+    }
+  }
+
+  void render() {
+    if (getObject()) {
+      if (mObjectTable.size()) {
+        mObjectAttributes["shape"] = "none";
+        mObjectAttributes["margin"] = "0";
+        mObjectAttributes["label"] = mObjectTable.to_string();
+      }
+    }
   }
 
   std::string to_string() {
+    render();
     std::stringstream ss;
     if (getObject()) {
-      ss << "\"" << getObject()->graphviz_name() << "\"";
-      std::map<std::string, std::string> attributes = getObject()->graphviz_attributes();
-      GvTable gvtable = getObject()->graphviz_table();
-      if (gvtable.size()) {
-        attributes["shape"] = "none";
-        attributes["margin"] = "0";
-        attributes["label"] = gvtable.to_string();
-      }
-      if (attributes.size()) {
+      ss << "\"" << getObjectName() << "\"";
+      if (mObjectAttributes.size()) {
         ss << " [ ";
-        for (auto p : attributes) {
+        for (auto p : mObjectAttributes) {
           std::string key = p.first;
           std::string value = p.second;
           ss << key << "=\"" << value << "\" ";
@@ -65,9 +95,11 @@ public:
   }
 
 private:
-  std::map<std::string, std::string> mAttributes;
-
   T* mObject;
+  std::map<std::string, std::string> mObjectAttributes;
+  std::string mObjectName;
+  GvTable mObjectTable;
+
 
 };
 
