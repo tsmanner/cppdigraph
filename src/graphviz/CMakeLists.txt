@@ -3,11 +3,12 @@ add_library(Graphviz_o OBJECT
   gvdigraph.cpp
 )
 
-list(APPEND CDG_HEADERS
-  gvproxy.h
-  gvsubgraph.h
-  gvdigraph.h
-  gvtable.h
-  gvtablerow.h
-  gvtablecell.h
+set (CDG_GRAPHVIZ_HEADERS
+  "${CMAKE_CURRENT_SOURCE_DIR}/gvproxy.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/gvsubgraph.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/gvdigraph.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/gvtable.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/gvtablerow.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/gvtablecell.h"
+  PARENT_SCOPE
 )
