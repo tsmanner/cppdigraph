@@ -87,7 +87,7 @@ std::string GvDiGraph::getAttribute(std::string key) {
 
 
 std::string GvDiGraph::to_string() {
-  std::ostringstream graphStream;
+  std::stringstream graphStream;
   graphStream << "digraph \"" << mName << "\" {" << std::endl;
   for (auto p : mAttributes) {
     graphStream << "  " << p.first << " = \"" << p.second << "\"" << std::endl;
@@ -105,7 +105,15 @@ std::string GvDiGraph::to_string() {
     graphStream << p.second.to_string();
   }
   graphStream << "}" << std::endl;
-  return graphStream.str();
+  // Go backslash escape anything that graphviz interprets as a special character
+  std::string str = graphStream.str();
+  for (auto specialCharacter : cGraphvizSpecialCharacters) {
+    int count = 0;
+    for (int pos = str.find(specialCharacter); pos != std::string::npos; pos = str.find(specialCharacter, pos+2)) {
+      str.replace(pos, 1, "\\" + specialCharacter);
+    }
+  }
+  return str;
 }
 
 

@@ -14,7 +14,7 @@ using namespace cdg;
 namespace {
 
 
-TEST(TestGvDiGraph, to_graphviz_empty) {
+TEST(TestGvDiGraph, to_string_empty) {
   DiGraph dg = DiGraph("test_digraph");
   std::string expected = "\
 digraph \"test_digraph\" {\n\
@@ -42,7 +42,7 @@ digraph \"test_digraph\" {\n\
 }
 
 
-TEST(TestGvDiGraph, to_graphviz_with_subgraph) {
+TEST(TestGvDiGraph, to_string_with_subgraph) {
   DiGraph dg = DiGraph("test_digraph");
   Node* n0 = new Node(&dg, "n0");
   Node* n1 = new Node(&dg, "n1");
@@ -72,7 +72,7 @@ digraph \"test_digraph\" {\n\
 }
 
 
-TEST(TestGvDiGraph, to_graphviz_with_subgraph_nullptr) {
+TEST(TestGvDiGraph, to_string_with_subgraph_nullptr) {
   DiGraph dg = DiGraph("test_digraph");
   Node* n0 = new Node(&dg, "n0");
   Node* n1 = new Node(&dg, "n1");
@@ -97,6 +97,17 @@ digraph \"test_digraph\" {\n\
   EXPECT_EQ(expected, graphviz.to_string());
   delete n0;
   delete n1;
+}
+
+
+TEST(TestGvDiGraph, to_string_special_characters) {
+  DiGraph dg = DiGraph("test.digraph");
+  std::string expected = "\
+digraph \"test\\.digraph\" {\n\
+  bgcolor = \"transparent\"\n\
+}\n\
+";
+  EXPECT_EQ(expected, dg.to_graphviz().to_string());
 }
 
 

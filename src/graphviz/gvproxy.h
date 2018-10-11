@@ -4,6 +4,8 @@
 #ifndef CDG_GRAPHVIZ_PROXY_H
 #define CDG_GRAPHVIZ_PROXY_H
 
+#include <iostream>
+
 #include <map>
 #include <sstream>
 #include <string>
@@ -12,6 +14,12 @@
 
 
 namespace cdg {
+
+
+static const std::vector<std::string> cGraphvizSpecialCharacters = {
+  ".",
+  "-"
+};
 
 
 template <typename T>
