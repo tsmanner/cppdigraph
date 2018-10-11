@@ -14,6 +14,7 @@
 
 #include "./digraph.h"
 #include "./edge.h"
+#include "./graphviz/gvtable.h"
 
 
 namespace cdg {
@@ -76,13 +77,9 @@ public:
    * GraphViz
    */
 
-  virtual std::string to_graphviz() {
-    return getName();
-  }
-
-  virtual std::string graphviz_name() {
-    return getName();
-  }
+  virtual std::map<std::string, std::string> graphviz_attributes() { return std::map<std::string, std::string>(); }
+  virtual std::string graphviz_name() { return getName(); }
+  virtual GvTable graphviz_table() { return GvTable(); }
 
   /*
    * String and Streaming

@@ -12,7 +12,7 @@
 #include <sstream>
 #include <string>
 
-#include "./graphviz.h"
+#include "./graphviz/gvdigraph.h"
 #include "./utility.h"
 
 namespace cdg {
@@ -29,10 +29,10 @@ public:
 
   void clear();
   int size();
-  void add(Node* node) { mNodes.insert(node); }
-  void remove(Node* node) { mNodes.erase(node); }
-  void add(EdgeBase* edge) { mEdges.insert(edge); }
-  void remove(EdgeBase* edge) { mEdges.erase(edge); }
+  void add(Node* node);
+  void remove(Node* node);
+  void add(EdgeBase* edge);
+  void remove(EdgeBase* edge);
 
   const std::string getName() const;
   int getNextCdgId();

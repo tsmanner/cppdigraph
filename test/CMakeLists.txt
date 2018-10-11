@@ -25,6 +25,11 @@ add_executable (
     test_node.cpp
     test_edge.cpp
     test_digraph.cpp
+    test_gvdigraph.cpp
+    test_gvproxy.cpp
+    test_gvtablecell.cpp
+    test_gvtablerow.cpp
+    test_gvtable.cpp
 )
 
 target_link_libraries (

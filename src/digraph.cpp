@@ -28,6 +28,26 @@ int DiGraph::size() {
 }
 
 
+void DiGraph::add(Node* node) {
+  mNodes.insert(node);
+}
+
+
+void DiGraph::remove(Node* node) {
+  mNodes.erase(node);
+}
+
+
+void DiGraph::add(EdgeBase* edge) {
+  mEdges.insert(edge);
+}
+
+
+void DiGraph::remove(EdgeBase* edge) {
+  mEdges.erase(edge);
+}
+
+
 const std::string DiGraph::getName() const {
   return mName;
 }

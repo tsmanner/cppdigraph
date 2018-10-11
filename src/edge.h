@@ -14,6 +14,7 @@
 #include <string>
 
 #include "./digraph.h"
+#include "./graphviz/gvtable.h"
 
 
 namespace cdg {
@@ -36,7 +37,10 @@ public:
   int getCdgId() { return mCdgId; }
 
   virtual void disconnect(Node* node) = 0;
-  virtual std::string to_graphviz() = 0;
+
+  virtual std::map<std::string, std::string> graphviz_attributes() { return std::map<std::string, std::string>(); }
+  virtual std::string graphviz_name() = 0;
+  virtual GvTable graphviz_table() { return GvTable(); }
 
 private:
   int mCdgId;
@@ -99,7 +103,7 @@ public:
     }
   }
 
-  virtual std::string to_graphviz() {
+  virtual std::string graphviz_name() {
     if (getTail() && getHead()) {
       return getTail()->graphviz_name() + " -> " + getHead()->graphviz_name();
     }

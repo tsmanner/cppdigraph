@@ -9,12 +9,8 @@
 namespace cdg {
 
 
-class Node;
-class EdgeBase;
-
-
 template<typename T>
-struct NameCompare {
+struct CdgIdCompare {
   bool operator()(T* lhs, T* rhs) {
     if (lhs and rhs) {
       return lhs->getCdgId() < rhs->getCdgId();
@@ -27,8 +23,16 @@ struct NameCompare {
 };
 
 
-typedef std::set<Node*, NameCompare<Node>> NodeSet;
-typedef std::set<EdgeBase*, NameCompare<EdgeBase>> EdgeSet;
+class Node;
+class EdgeBase;
+typedef std::set<Node*, CdgIdCompare<Node>> NodeSet;
+typedef std::set<EdgeBase*, CdgIdCompare<EdgeBase>> EdgeSet;
+
+template <typename T> class GvProxy;
+typedef GvProxy<Node> GvNode;
+typedef GvProxy<EdgeBase> GvEdge;
+typedef std::set<GvNode*, CdgIdCompare<GvNode>> GvNodeSet;
+typedef std::set<GvEdge*, CdgIdCompare<GvEdge>> GvEdgeSet;
 
 
 } // namespace cdg
