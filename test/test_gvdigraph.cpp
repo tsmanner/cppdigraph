@@ -121,7 +121,7 @@ TEST(TestGvDiGraph, graphviz_dot) {
 
   std::ofstream gvStream;
   gvStream.open("integration.dot");
-  gvStream << gvdg.to_string();
+  gvStream << gvdg;
   gvStream.close();
 
   int rc = std::system("dot -Tpng -O integration.dot");

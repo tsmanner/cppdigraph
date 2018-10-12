@@ -165,7 +165,7 @@ int main(int argc, char* argv[]) {
 
   INFO("GraphViz Representation:");
   cout << endl;
-  cout << digraph->to_graphviz() << endl;
+  cout << digraph->to_graphviz().to_string() << endl;
   cout << endl;
 
   INFO("Graph Manipulation and traverseB()");

@@ -60,7 +60,6 @@ private:
 
 
 std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph& gvdg);
-std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph gvdg);
 
 
 #endif

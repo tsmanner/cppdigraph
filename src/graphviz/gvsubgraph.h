@@ -44,7 +44,6 @@ private:
 
 
 std::ostream& operator<<(std::ostream& os, cdg::GvSubGraph& gvsg);
-std::ostream& operator<<(std::ostream& os, cdg::GvSubGraph gvsg);
 
 
 #endif
