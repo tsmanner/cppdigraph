@@ -43,7 +43,7 @@ public:
     }
     ss << ">";
     if (mContent.size()) {
-      ss << "\"" << mContent << "\"";
+      ss << mContent;
     }
     ss << "</TD>";
     return ss.str();

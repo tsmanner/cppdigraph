@@ -5,6 +5,7 @@
 
 #include "integration.h"
 
+#include <fstream>
 #include <iostream>
 #include <iomanip>
 

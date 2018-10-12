@@ -44,7 +44,7 @@ TEST(TestGvTableRow, to_string_with_cell_no_attribute) {
   GvTableCell cell = GvTableCell();
   cell.setContent("rawr");
   row.addCell(cell);
-  std::string expected = "<TR><TD>\"rawr\"</TD></TR>";
+  std::string expected = "<TR><TD>rawr</TD></TR>";
   EXPECT_EQ(expected, row.to_string());
 }
 
@@ -63,7 +63,7 @@ TEST(TestGvTableRow, to_string_with_cell_with_attribute) {
   GvTableCell cell = GvTableCell();
   cell.setContent("rawr");
   row.addCell(cell);
-  std::string expected = "<TR attr=\"test\"><TD>\"rawr\"</TD></TR>";
+  std::string expected = "<TR attr=\"test\"><TD>rawr</TD></TR>";
   EXPECT_EQ(expected, row.to_string());
 }
 

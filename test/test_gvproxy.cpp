@@ -42,10 +42,11 @@ TEST(TestGvProxy, to_string_with_table_no_attributes) {
   ProxyObject* proxyobject = new ProxyObject("ProxyObject");
   GvTableRow row = GvTableRow();
   GvTableCell cell = GvTableCell();
+  cell.setContent("test");
   row.addCell(cell);
   proxyobject->mTable.addRow(row);
   TestProxy proxy = TestProxy(proxyobject);
-  std::string expected = "\"ProxyObject\" [ label=\"<<TABLE><TR><TD></TD></TR></TABLE>>\" margin=\"0\" shape=\"none\" ]";
+  std::string expected = "\"ProxyObject\" [ label=<<TABLE><TR><TD>test</TD></TR></TABLE>> margin=\"0\" shape=\"none\" ]";
   EXPECT_EQ(expected, proxy.to_string());
   delete proxyobject;
 }
@@ -69,10 +70,10 @@ TEST(TestGvProxy, to_string_with_table_with_attributes) {
   proxyobject->mTable.addRow(row);
   proxyobject->mAttributes["attr"] = "test";
   TestProxy proxy = TestProxy(proxyobject);
-  std::string expected = "\"ProxyObject\" [ attr=\"test\" label=\"<<TABLE><TR><TD></TD></TR></TABLE>>\" margin=\"0\" shape=\"none\" ]";
+  std::string expected = "\"ProxyObject\" [ attr=\"test\" label=<<TABLE><TR><TD></TD></TR></TABLE>> margin=\"0\" shape=\"none\" ]";
   EXPECT_EQ(expected, proxy.to_string());
   delete proxyobject;
 }
 
 
-}
+ }

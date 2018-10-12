@@ -15,7 +15,7 @@ namespace {
 TEST(TestGvTableCell, to_string_no_attribute) {
   GvTableCell cell = GvTableCell();
   cell.setContent("rawr");
-  std::string expected = "<TD>\"rawr\"</TD>";
+  std::string expected = "<TD>rawr</TD>";
   EXPECT_EQ(expected, cell.to_string());
 }
 
@@ -24,7 +24,7 @@ TEST(TestGvTableCell, to_string_with_attribute) {
   GvTableCell cell = GvTableCell();
   cell.setContent("rawr");
   cell.setAttribute("attr", "test");
-  std::string expected = "<TD attr=\"test\">\"rawr\"</TD>";
+  std::string expected = "<TD attr=\"test\">rawr</TD>";
   EXPECT_EQ(expected, cell.to_string());
 }
 

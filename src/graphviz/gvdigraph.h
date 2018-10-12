@@ -8,6 +8,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <unordered_map>
 
 #include "../utility.h"
 // #include "./gvnode.h"
@@ -31,6 +32,9 @@ public:
   GvNode* add(Node* node);
   GvEdge* add(EdgeBase* edge);
 
+  GvNode* get(Node* node);
+  GvEdge* get(EdgeBase* edge);
+
   GvSubGraph& addSubgraph(std::string subgraphName);
   GvSubGraph& addSubgraph(std::string subgraphName, NodeSet subgraph);
   GvSubGraph& getSubgraph(std::string subgraphName);
@@ -46,6 +50,8 @@ private:
   std::map<std::string, GvSubGraph> mSubgraphs;
   GvNodeSet mNodes;
   GvEdgeSet mEdges;
+  std::unordered_map<Node*, GvNode*> mNodeProxyLookupMap;
+  std::unordered_map<EdgeBase*, GvEdge*> mEdgeProxyLookupMap;
 
 };
 

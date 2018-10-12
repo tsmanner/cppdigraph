@@ -34,6 +34,7 @@ GvNode* GvDiGraph::add(Node* node) {
   if (node) {
     GvNode* gvNode = new GvNode(node);
     mNodes.insert(gvNode);
+    mNodeProxyLookupMap[node] = gvNode;
     return gvNode;
   }
   return nullptr;
@@ -44,9 +45,20 @@ GvEdge* GvDiGraph::add(EdgeBase* edge) {
   if (edge) {
     GvEdge* gvEdge = new GvEdge(edge);
     mEdges.insert(gvEdge);
+    mEdgeProxyLookupMap[edge] = gvEdge;
     return gvEdge;
   }
   return nullptr;
+}
+
+
+GvNode* GvDiGraph::get(Node* node) {
+  return mNodeProxyLookupMap[node];
+}
+
+
+GvEdge* GvDiGraph::get(EdgeBase* edge) {
+  return mEdgeProxyLookupMap[edge];
 }
 
 

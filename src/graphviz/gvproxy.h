@@ -45,7 +45,12 @@ public:
   }
 
   void setTableCell(int row, int col, std::string value) {
-    mObjectTable[row][col].setContent(value);
+    mObjectTable.setCell(row, col, value);
+    render();
+  }
+
+  void setTableCell(int row, int col, GvTableCell value) {
+    mObjectTable.setCell(row, col, value);
     render();
   }
 
@@ -79,8 +84,15 @@ public:
       if (mObjectAttributes.size()) {
         ss << " [ ";
         for (auto p : mObjectAttributes) {
-          ss << graphviz_sanitize(p.first) << "=\""
-             << graphviz_sanitize(p.second) << "\" ";
+          // Quotes around <<TABLE></TABLE>> renders it as a literal string...
+          if (p.first == "label" and mObjectTable.size()) {
+            ss << graphviz_sanitize(p.first) << "="
+               << graphviz_sanitize(p.second) << " ";
+          }
+          else {
+            ss << graphviz_sanitize(p.first) << "=\""
+               << graphviz_sanitize(p.second) << "\" ";
+          }
         }
         ss << "]";
       }

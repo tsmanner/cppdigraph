@@ -8,6 +8,9 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
+#include <cstdlib>
+#include <fstream>
+
 using namespace cdg;
 
 
@@ -18,7 +21,6 @@ TEST(TestGvDiGraph, to_string_empty) {
   DiGraph dg = DiGraph("test_digraph");
   std::string expected = "\
 digraph \"test_digraph\" {\n\
-  bgcolor = \"transparent\"\n\
 }\n\
 ";
   EXPECT_EQ(expected, dg.to_graphviz().to_string());
@@ -31,7 +33,6 @@ TEST(TestGvDiGraph, to_graphviz) {
   Node* n1 = new Node(&dg, "n1");
   std::string expected = "\
 digraph \"test_digraph\" {\n\
-  bgcolor = \"transparent\"\n\
   \"n0\"\n\
   \"n1\"\n\
 }\n\
@@ -51,7 +52,6 @@ TEST(TestGvDiGraph, to_string_with_subgraph) {
   };
   std::string expected = "\
 digraph \"test_digraph\" {\n\
-  bgcolor = \"transparent\"\n\
   \"n0\"\n\
   \"n1\"\n\
   subgraph \"cluster_test_subgraph\" {\n\
@@ -81,7 +81,6 @@ TEST(TestGvDiGraph, to_string_with_subgraph_nullptr) {
   };
   std::string expected = "\
 digraph \"test_digraph\" {\n\
-  bgcolor = \"transparent\"\n\
   \"n0\"\n\
   \"n1\"\n\
   subgraph \"cluster_test_subgraph\" {\n\
@@ -103,11 +102,30 @@ digraph \"test_digraph\" {\n\
 TEST(TestGvDiGraph, to_string_special_characters) {
   DiGraph dg = DiGraph("test.digraph");
   std::string expected = "\
-digraph \"test\\.digraph\" {\n\
-  bgcolor = \"transparent\"\n\
+digraph \"test.digraph\" {\n\
 }\n\
 ";
   EXPECT_EQ(expected, dg.to_graphviz().to_string());
+}
+
+
+TEST(TestGvDiGraph, graphviz_dot) {
+  DiGraph dg = DiGraph("test.digraph");
+  Node* n0 = new Node(&dg, "n=1.2-3");
+  GvDiGraph gvdg = dg.to_graphviz();
+  GvNode* gvn0 = gvdg.get(n0);
+  gvn0->setTableCell(0, 0, n0->getName());
+  gvn0->setTableCell(1, 0, "id=1.2-3");
+
+  std::ofstream gvStream;
+  gvStream.open("integration.dot");
+  gvStream << gvdg.to_string();
+  gvStream.close();
+
+  int rc = std::system("dot -Tpng -O integration.dot");
+  EXPECT_EQ(0, rc);
+
+  delete n0;
 }
 
 

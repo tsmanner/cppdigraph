@@ -46,9 +46,10 @@ typedef std::set<GvNode*, CdgIdCompare<GvNode>> GvNodeSet;
 typedef std::set<GvEdge*, CdgIdCompare<GvEdge>> GvEdgeSet;
 
 static const std::vector<std::string> cGraphvizSpecialCharacters = {
-  ".",
-  "-",
-  "="
+  // ".",
+  // "-",
+  // "=",
+  // "\""
 };
 
 static std::string graphviz_sanitize(std::string str) {

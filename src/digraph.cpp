@@ -83,7 +83,6 @@ GvDiGraph DiGraph::to_graphviz(std::string graphname) {
   for (auto edge : mEdges) {
     graphViz.add(edge);
   }
-  graphViz.setAttribute("bgcolor", "transparent");
   return graphViz;
 }
 
