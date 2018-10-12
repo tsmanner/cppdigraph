@@ -61,7 +61,7 @@ public:
   void reset() {
     if (getObject()) {
       mObjectAttributes = getObject()->graphviz_attributes();
-      mObjectName = getObject()->graphviz_name();
+      mObjectName = getObject()->_graphviz_name();
       mObjectTable = getObject()->graphviz_table();
     }
   }

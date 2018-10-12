@@ -40,6 +40,8 @@ public:
 
   virtual std::map<std::string, std::string> graphviz_attributes() { return std::map<std::string, std::string>(); }
   virtual std::string graphviz_name() = 0;
+  std::string _graphviz_name() { return graphviz_name(); }
+
   virtual GvTable graphviz_table() { return GvTable(); }
 
 private:
@@ -105,7 +107,7 @@ public:
 
   virtual std::string graphviz_name() {
     if (getTail() && getHead()) {
-      return getTail()->graphviz_name() + " -> " + getHead()->graphviz_name();
+      return getTail()->_graphviz_name() + " -> " + getHead()->_graphviz_name();
     }
     return "";
   }

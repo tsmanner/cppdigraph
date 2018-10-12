@@ -14,7 +14,8 @@ class ProxyObject {
 public:
   ProxyObject(std::string name): mName(name) {}
   std::map<std::string, std::string> graphviz_attributes() { return mAttributes; }
-  std::string graphviz_name() { return "\"" + mName + "\""; }
+  std::string graphviz_name() { return mName; }
+  std::string _graphviz_name() { return "\"" + graphviz_name() + "\""; }
   GvTable graphviz_table() { return mTable; };
 
   std::map<std::string, std::string> mAttributes;
