@@ -54,7 +54,7 @@ public:
     render();
   }
 
-  std::string getTableCell(int row, int col) {
+  GvTableCell& getTableCell(int row, int col) {
     return mObjectTable[row][col];
   }
 
