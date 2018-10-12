@@ -29,6 +29,8 @@ public:
   void setAttribute(std::string name, std::string value);
   std::string getAttribute(std::string key);
 
+  GvNodeSet getNodes();
+
   std::string to_string();
 
 private:

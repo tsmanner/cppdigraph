@@ -35,6 +35,9 @@ public:
   GvNode* get(Node* node);
   GvEdge* get(EdgeBase* edge);
 
+  GvNodeSet getNodes();
+  GvEdgeSet getEdges();
+
   GvSubGraph& addSubgraph(std::string subgraphName);
   GvSubGraph& addSubgraph(std::string subgraphName, NodeSet subgraph);
   GvSubGraph& getSubgraph(std::string subgraphName);

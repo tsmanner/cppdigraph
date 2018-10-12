@@ -75,6 +75,16 @@ GvEdge* GvDiGraph::get(EdgeBase* edge) {
 }
 
 
+GvNodeSet GvDiGraph::getNodes() {
+  return mNodes;
+}
+
+
+GvEdgeSet GvDiGraph::getEdges() {
+  return mEdges;
+}
+
+
 GvSubGraph& GvDiGraph::addSubgraph(std::string subgraphName) {
   return getSubgraph(subgraphName);
 }

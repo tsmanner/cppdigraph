@@ -61,6 +61,11 @@ std::string GvSubGraph::getAttribute(std::string key) {
 }
 
 
+GvNodeSet GvSubGraph::getNodes() {
+  return mNodes;
+}
+
+
 std::string GvSubGraph::to_string() {
   std::stringstream graphStream;
   graphStream << "  subgraph \"cluster_" << graphviz_sanitize(mName) << "\" {" << std::endl;
