@@ -1,5 +1,5 @@
 /*
- * graphviz.h
+ * gvdigraph.h
  */
 
 #ifndef CDG_GRAPHVIZ_H
@@ -59,7 +59,8 @@ private:
 } // namespace cdg
 
 
-std::ostream& operator<<(std::ostream& os, cdg::GvSubGraph gvsg);
+std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph& gvdg);
 std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph gvdg);
+
 
 #endif

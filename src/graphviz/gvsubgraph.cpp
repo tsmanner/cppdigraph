@@ -80,4 +80,16 @@ std::string GvSubGraph::to_string() {
 } // namespace cdg
 
 
+std::ostream& operator<<(std::ostream& os, cdg::GvSubGraph& gvsg) {
+  os << gvsg.to_string();
+  return os;
+}
+
+
+std::ostream& operator<<(std::ostream& os, cdg::GvSubGraph gvsg) {
+  os << gvsg.to_string();
+  return os;
+}
+
+
 #endif

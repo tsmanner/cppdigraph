@@ -1,6 +1,9 @@
 /*
- * graphviz.cpp
+ * gvdigraph.cpp
  */
+
+#ifndef CDG_GVDIGRAPH_C
+#define CDG_GVDIGRAPH_C
 
 #include "./gvdigraph.h"
 #include "./gvproxy.h"
@@ -128,8 +131,8 @@ std::string GvDiGraph::to_string() {
 } // namespace cdg
 
 
-std::ostream& operator<<(std::ostream& os, cdg::GvSubGraph gvsg) {
-  os << gvsg.to_string();
+std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph& gvdg) {
+  os << gvdg.to_string();
   return os;
 }
 
@@ -138,3 +141,6 @@ std::ostream& operator<<(std::ostream& os, cdg::GvDiGraph gvdg) {
   os << gvdg.to_string();
   return os;
 }
+
+
+#endif
