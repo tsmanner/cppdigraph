@@ -80,12 +80,12 @@ public:
     render();
     std::stringstream ss;
     if (getObject()) {
-      ss << "\"" << graphviz_sanitize(getObjectName()) << "\"";
+      ss << graphviz_sanitize(getObjectName());
       if (mObjectAttributes.size()) {
         ss << " [ ";
         for (auto p : mObjectAttributes) {
           // Quotes around <<TABLE></TABLE>> renders it as a literal string...
-          if (p.first == "label" and mObjectTable.size()) {
+          if (mObjectTable.size() and p.first == "label") {
             ss << graphviz_sanitize(p.first) << "="
                << graphviz_sanitize(p.second) << " ";
           }

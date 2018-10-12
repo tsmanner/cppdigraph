@@ -112,6 +112,8 @@ digraph \"test.digraph\" {\n\
 TEST(TestGvDiGraph, graphviz_dot) {
   DiGraph dg = DiGraph("test.digraph");
   Node* n0 = new Node(&dg, "n=1.2-3");
+  Node* n1 = new Node(&dg, "n1");
+  connect(n0, n1);
   GvDiGraph gvdg = dg.to_graphviz();
   GvNode* gvn0 = gvdg.get(n0);
   gvn0->setTableCell(0, 0, n0->getName());

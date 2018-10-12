@@ -70,7 +70,7 @@ std::string GvSubGraph::to_string() {
                 << std::endl;
   }
   for (auto node : mNodes) {
-    graphStream << "    \"" << graphviz_sanitize(node->getObject()->graphviz_name()) << "\"" << std::endl;
+    graphStream << "    " << graphviz_sanitize(node->getObject()->graphviz_name()) << std::endl;
   }
   graphStream << "  }" << std::endl;
   return graphStream.str();
