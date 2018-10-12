@@ -58,6 +58,10 @@ public:
     return mObjectTable[row][col];
   }
 
+  GvTable& getTable() {
+    return mObjectTable;
+  }
+
   void reset() {
     if (getObject()) {
       mObjectAttributes = getObject()->graphviz_attributes();
