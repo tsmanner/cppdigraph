@@ -58,15 +58,18 @@ public:
   }
 
   std::string to_string() {
+    expandCells();
     std::stringstream ss;
     ss << "<<TABLE";
     for (auto p : mAttributes) {
       std::string key = p.first;
       std::string value = p.second;
-      ss << " " << key << "=\"" << value << "\"";
+      if (value != "") {
+        ss << " " << key << "=\"" << value << "\"";
+      }
     }
     ss << ">";
-    for (auto row : mRows) {
+    for (auto& row : mRows) {
       ss << row.to_string();
     }
     ss << "</TABLE>>";
@@ -91,6 +94,24 @@ public:
       cols = std::max(cols, row.size());
     }
     return cols;
+  }
+
+  void expandCells() {
+    for (auto& row : mRows) {
+      auto& cells = row.getCells();
+      for (auto cell_it = cells.begin(); cell_it != cells.end();) {
+        auto& cell = *cell_it;
+        ++cell_it;  // Increment early so we can tell if the one we captured is the last one
+        if (cell.getAttribute("colspan") == "0") {
+          if (cell_it == cells.end()) {
+            cell.setAttribute("colspan", std::to_string(cols() - row.size() + 1));
+          }
+          else {
+            cell.setAttribute("colspan", "1");
+          }
+        }
+      }
+    }
   }
 
 private:

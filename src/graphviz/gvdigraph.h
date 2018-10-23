@@ -11,8 +11,6 @@
 #include <unordered_map>
 
 #include "../utility.h"
-// #include "./gvnode.h"
-// #include "./gvedge.h"
 #include "./gvsubgraph.h"
 
 

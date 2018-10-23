@@ -39,7 +39,9 @@ public:
     for (auto p : mAttributes) {
       std::string key = p.first;
       std::string value = p.second;
-      ss << " " << key << "=\"" << value << "\"";
+      if (value != "") {
+        ss << " " << key << "=\"" << value << "\"";
+      }
     }
     ss << ">";
     if (mContent.size()) {

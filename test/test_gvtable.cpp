@@ -135,4 +135,36 @@ TEST(TestGvTable, cols_mismatched_row_length) {
 }
 
 
+TEST(TestGvTable, expandCells_colspan0) {
+  GvTable table = GvTable();
+  GvTableCell cell = GvTableCell();
+  GvTableRow row0 = GvTableRow();
+  cell.setContent("rawr");
+  row0.addCell(cell);
+  table.addRow(row0);
+  table[0][0].setAttribute("colspan", "0");
+  table.expandCells();
+  std::string expected = "1";
+  EXPECT_EQ(expected, table[0][0].getAttribute("colspan"));
+}
+
+
+TEST(TestGvTable, expandCells_mismatched_row_length_colspan0) {
+  GvTable table = GvTable();
+  GvTableCell cell = GvTableCell();
+  GvTableRow row0 = GvTableRow();
+  GvTableRow row1 = GvTableRow();
+  cell.setContent("rawr");
+  row0.addCell(cell);
+  row1.addCell(cell);
+  row1.addCell(cell);
+  table.addRow(row0);
+  table.addRow(row1);
+  table[0][0].setAttribute("colspan", "0");
+  table.expandCells();
+  std::string expected = "2";
+  EXPECT_EQ(expected, table[0][0].getAttribute("colspan"));
+}
+
+
 }

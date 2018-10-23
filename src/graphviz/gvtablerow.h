@@ -45,7 +45,7 @@ public:
     return getCell(row);
   }
 
-  std::vector<GvTableCell> getCells() {
+  std::vector<GvTableCell>& getCells() {
     return mCells;
   }
 
@@ -63,7 +63,9 @@ public:
     for (auto p : mAttributes) {
       std::string key = p.first;
       std::string value = p.second;
-      ss << " " << key << "=\"" << value << "\"";
+      if (value != "") {
+        ss << " " << key << "=\"" << value << "\"";
+      }
     }
     ss << ">";
     for (auto& cell : mCells) {
