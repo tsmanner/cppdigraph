@@ -121,6 +121,12 @@ std::string GvDiGraph::getAttribute(std::string key) {
 }
 
 
+// template <typename FilterType>
+// void GvDiGraph::filter(FilterType& filter) {
+//   // Do filtration
+// }
+
+
 std::string GvDiGraph::to_string() {
   std::stringstream graphStream;
   graphStream << "digraph \"" << graphviz_sanitize(mName) << "\" {" << std::endl;

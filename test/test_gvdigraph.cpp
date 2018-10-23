@@ -14,6 +14,14 @@
 using namespace cdg;
 
 
+class TestFilter {};
+
+template <typename TestFilter>
+void cdg::GvDiGraph::filter(TestFilter& filter) {
+  
+}
+
+
 namespace {
 
 
@@ -128,6 +136,14 @@ TEST(TestGvDiGraph, graphviz_dot) {
   EXPECT_EQ(0, rc);
 
   delete n0;
+}
+
+
+TEST(TestGvDiGraph, filter) {
+  DiGraph dg = DiGraph("test.digraph");
+  GvDiGraph gvdg = dg.to_graphviz();
+  TestFilter filter;
+  gvdg.filter(filter);
 }
 
 

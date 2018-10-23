@@ -45,6 +45,9 @@ public:
   void setAttribute(std::string name, std::string value);
   std::string getAttribute(std::string key);
 
+  template <typename FilterType>
+  inline void filter(FilterType& filter);
+
   std::string to_string();
 
 private:
