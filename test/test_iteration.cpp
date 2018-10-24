@@ -43,7 +43,10 @@ TEST(TestIteration, PreIncrement) {
   a->setNext(b);
   Traversal t = Traversal(a);
   Traversal::chain_iterator it = t.begin();
+  EXPECT_EQ(*it, a);
   EXPECT_EQ(*(++it), b);
+  delete a;
+  delete b;
 }
 
 
@@ -54,6 +57,9 @@ TEST(TestIteration, PostIncrement) {
   Traversal t = Traversal(a);
   Traversal::chain_iterator it = t.begin();
   EXPECT_EQ(*(it++), a);
+  EXPECT_EQ(*it, b);
+  delete a;
+  delete b;
 }
 
 
@@ -69,6 +75,8 @@ TEST(TestIteration, ForTwo) {
   EXPECT_EQ(2, traversal.size());
   EXPECT_EQ(a, traversal.front());
   EXPECT_EQ(b, traversal.back());
+  delete a;
+  delete b;
 }
 
 
@@ -82,6 +90,7 @@ TEST(TestIteration, ForOne) {
   EXPECT_EQ(1, traversal.size());
   EXPECT_EQ(a, traversal.front());
   EXPECT_EQ(a, traversal.back());
+  delete a;
 }
 
 
@@ -106,6 +115,8 @@ TEST(TestIteration, RangeTwo) {
   EXPECT_EQ(2, traversal.size());
   EXPECT_EQ(a, traversal.front());
   EXPECT_EQ(b, traversal.back());
+  delete a;
+  delete b;
 }
 
 
@@ -118,6 +129,7 @@ TEST(TestIteration, RangeOne) {
   EXPECT_EQ(1, traversal.size());
   EXPECT_EQ(a, traversal.front());
   EXPECT_EQ(a, traversal.back());
+  delete a;
 }
 
 
