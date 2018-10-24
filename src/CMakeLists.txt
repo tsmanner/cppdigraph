@@ -18,6 +18,7 @@ set (CDG_HEADERS
   node.h
   relationship.h
   utility.h
+  iteration.h
 )
 
 add_subdirectory (graphviz)
