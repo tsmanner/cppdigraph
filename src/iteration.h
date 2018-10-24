@@ -6,13 +6,10 @@
 #define CDG_ITERATION_H
 
 
-#include <functional>
 #include <list>
 
 
 namespace cdg {
-
-// Template user defined iterator with aa
 
 
 template <typename NodeType>
