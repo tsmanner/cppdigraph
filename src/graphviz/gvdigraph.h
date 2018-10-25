@@ -12,6 +12,7 @@
 
 #include "../utility.h"
 #include "./gvsubgraph.h"
+#include "./gvfilter.h"
 
 
 namespace cdg {
@@ -42,6 +43,8 @@ public:
   void addAttributes(std::map<std::string, std::string> attributes);
   void setAttribute(std::string name, std::string value);
   std::string getAttribute(std::string key);
+
+  void filter(GvFilter& filter);
 
   std::string to_string();
 

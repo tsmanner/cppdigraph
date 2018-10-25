@@ -44,6 +44,8 @@ public:
 
   virtual GvTable graphviz_table() { return GvTable(); }
 
+  virtual void applyFilter(GvFilter* filter, GvEdge* gvEdge) {}
+
 private:
   int mCdgId;
 

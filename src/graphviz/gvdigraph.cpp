@@ -121,6 +121,16 @@ std::string GvDiGraph::getAttribute(std::string key) {
 }
 
 
+void GvDiGraph::filter(GvFilter& filter) {
+  for (auto gvNode : getNodes()) {
+    filter.filter(gvNode);
+  }
+  for (auto gvEdge : getEdges()) {
+    filter.filter(gvEdge);
+  }
+}
+
+
 std::string GvDiGraph::to_string() {
   std::stringstream graphStream;
   graphStream << "digraph \"" << graphviz_sanitize(mName) << "\" {" << std::endl;
@@ -142,8 +152,6 @@ std::string GvDiGraph::to_string() {
     graphStream << p.second.to_string();
   }
   graphStream << "}" << std::endl;
-  // Go backslash escape anything that graphviz interprets as a special character
-  // std::string str = graphviz_sanitize(graphStream.str());
   return graphStream.str();
 }
 

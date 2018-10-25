@@ -31,6 +31,7 @@ add_executable (
     test_gvtablerow.cpp
     test_gvtable.cpp
     test_iteration.cpp
+    test_gvfilter.cpp
 )
 
 target_link_libraries (

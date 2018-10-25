@@ -80,10 +80,13 @@ public:
   virtual std::map<std::string, std::string> graphviz_attributes() { return std::map<std::string, std::string>(); }
   virtual std::string graphviz_name() { return getName(); }
   std::string _graphviz_name() { return "\"" + graphviz_name() + "\""; }
+
   virtual GvTable graphviz_table() { return GvTable(); }
 
+  virtual void applyFilter(GvFilter* filter, GvNode* gvNode) {}
+
   /*
-   * String and Streaming
+   * String
    */
 
   virtual std::string to_string() {
