@@ -20,4 +20,4 @@ before_script:
 script:
   - cmake -G Ninja .
   - ninja
-  - ctest
+  - ctest -V
