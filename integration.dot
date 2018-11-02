@@ -1,5 +1,0 @@
-digraph "test.digraph" {
-  "n=1.2-3" [ label=<<TABLE><TR><TD>n=1.2-3</TD></TR><TR><TD>id=1.2-3</TD></TR></TABLE>> margin="0" shape="none" ]
-  "n1"
-  "n=1.2-3" -> "n1"
-}
