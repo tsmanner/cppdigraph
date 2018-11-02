@@ -12,9 +12,11 @@ addons:
       - ninja-build
       - cmake
 
-# Install GTest and GMock from source (v1.8)
 before_script:
+  # Install GTest and GMock from source (v1.8)
   - ./test/install_gtest_gmock.sh
+  # Install graphviz `dot` utility
+  - sudo apt-get install graphviz
 
 # Build and run the tests.
 script:
