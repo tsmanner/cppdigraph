@@ -3,7 +3,7 @@ language: cpp
 # Installing GTest + GMock requires super permissions.
 sudo: required
 
-# Install the Ninja build tool and CMake.
+# Install the Ninja build tool, CMake, and graphviz
 addons:
   apt:
     sources:
@@ -11,13 +11,14 @@ addons:
     packages:
       - ninja-build
       - cmake
+      - graphviz
 
-# Install GTest and GMock from source (v1.8)
 before_script:
+  # Install GTest and GMock from source (v1.8)
   - ./test/install_gtest_gmock.sh
 
 # Build and run the tests.
 script:
   - cmake -G Ninja .
   - ninja
-  - ctest
+  - ctest -V
