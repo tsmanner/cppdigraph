@@ -37,7 +37,7 @@ public:
   }
 
   MockNode* getPrev(MockNode* node) {
-    return node->getNext();
+    return node->getPrev();
   }
 
 private:
