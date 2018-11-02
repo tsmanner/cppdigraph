@@ -14,7 +14,7 @@
 using namespace cdg;
 
 
-namespace {
+namespace test_gvdigraph {
 
 
 TEST(TestGvDiGraph, to_string_empty) {

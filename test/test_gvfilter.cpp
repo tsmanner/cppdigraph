@@ -15,7 +15,7 @@ using namespace cdg;
 using namespace testing;
 
 
-namespace {
+namespace test_gvfilter {
 
 
 class MockNode: public Node {
@@ -48,7 +48,7 @@ TEST(TestGvFilter, applyFilter) {
 
   delete a;
   delete b;
-  delete e;
+  // delete e;
 }
 
 

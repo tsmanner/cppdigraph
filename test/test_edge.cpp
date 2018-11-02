@@ -11,7 +11,7 @@
 
 
 // Use an anonymous namespace to isolate the tests.
-namespace {
+namespace test_edge {
 
 using namespace cdg;
 using namespace testing;
