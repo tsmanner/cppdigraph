@@ -10,7 +10,7 @@ using namespace cdg;
 
 
 // Use an anonymous namespace to isolate the tests.
-namespace {
+namespace test_digraph {
 
 
 }

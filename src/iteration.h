@@ -18,36 +18,36 @@ public:
   /*
    * Iterator
    */
-  class chain_iterator {
+  class iterator {
   public:
-    chain_iterator(Chain* chain, NodeType* node): mChain(chain), mNode(node) {}
+    iterator(Chain* chain, NodeType* node): mChain(chain), mNode(node) {}
 
     NodeType* operator*() {
       return mNode;
     }
 
     // Pre-increment
-    chain_iterator operator++() {
+    iterator operator++() {
       mNode = mChain->getNext(mNode);
       return *this;
     }
 
     // Post-increment
-    chain_iterator operator++(int) {
-      chain_iterator newIterator = chain_iterator(mChain, mNode);
+    iterator operator++(int) {
+      iterator newIterator = iterator(mChain, mNode);
       mNode = mChain->getNext(mNode);
       return newIterator;
     }
 
-    bool operator==(chain_iterator other) {
+    bool operator==(iterator other) {
       return (**this) == (*other);
     }
 
-    bool operator!=(chain_iterator other) {
+    bool operator!=(iterator other) {
       return ! ((*this) == other);
     }
 
-  private:
+  protected:
     Chain* mChain;
     NodeType* mNode;
 
@@ -58,22 +58,77 @@ public:
    */
   Chain(NodeType* front
      ): mFront(front)
-      , mBegin(chain_iterator(this, front))
-      , mEnd(chain_iterator(this, nullptr))
+      , mBegin(iterator(this, front))
+      , mEnd(iterator(this, nullptr))
   {
   }
 
   virtual NodeType* getNext(NodeType* node) = 0;
-  chain_iterator begin() { return mBegin; }
-  chain_iterator end() { return mEnd; }
+  iterator begin() { return mBegin; }
+  iterator end() { return mEnd; }
 
 private:
   NodeType* mFront;
-  const chain_iterator mBegin;
-  const chain_iterator mEnd;
+  const iterator mBegin;
+  const iterator mEnd;
 
 };
 
+
+template <typename NodeType>
+class BidirectionalChain: public Chain<NodeType> {
+public:
+  /*
+   * Iterator
+   */
+  class iterator: public Chain<NodeType>::iterator {
+  public:
+    iterator(BidirectionalChain* chain, NodeType* node): Chain<NodeType>::iterator(chain, node), mBidirectionalChain(chain) {}
+
+    // Pre-decrement
+    iterator operator--() {
+      this->mNode = mBidirectionalChain->getPrev(this->mNode);
+      return *this;
+    }
+
+    // Post-decrement
+    iterator operator--(int) {
+      iterator newIterator = iterator(mBidirectionalChain, this->mNode);
+      this->mNode = mBidirectionalChain->getPrev(this->mNode);
+      return newIterator;
+    }
+
+    bool operator==(iterator other) {
+      return (**this) == (*other);
+    }
+
+    bool operator!=(iterator other) {
+      return ! ((*this) == other);
+    }
+
+  protected:
+    BidirectionalChain* mBidirectionalChain;
+  };
+
+  /*
+   * BidirectionalChain Definition
+   */
+  BidirectionalChain(NodeType* front
+                   ): Chain<NodeType>(front)
+                    , mBegin(iterator(this, front))
+                    , mEnd(iterator(this, nullptr))
+  {
+  }
+
+  virtual NodeType* getPrev(NodeType* node) = 0;
+  iterator begin() { return mBegin; }
+  iterator end() { return mEnd; }
+
+private:
+  const iterator mBegin;
+  const iterator mEnd;
+
+};
 
 }
 

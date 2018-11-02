@@ -26,8 +26,8 @@ public:
 
 typedef GvProxy<ProxyObject> TestProxy;
 
-// Use an anonymous namespace to isolate the tests.
-namespace {
+// Use an namespace to isolate the tests.
+namespace test_gvproxy {
 
 
 TEST(TestGvProxy, to_string_no_table_no_attributes) {

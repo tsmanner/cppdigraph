@@ -1,5 +1,5 @@
 /*
- * Unit Tests for cdg::traverse
+ * Unit Tests for cdg::Chain
  */
 
 #include "gtest/gtest.h"
@@ -12,7 +12,7 @@
 using namespace cdg;
 
 
-namespace {
+namespace test_chain {
 
 class MockNode {
 public:
@@ -24,9 +24,9 @@ private:
 };
 
 
-class Traversal: public Chain<MockNode> {
+class ChainTraversal: public Chain<MockNode> {
 public:
-  Traversal(MockNode* node): Chain<MockNode>(node) {}
+  ChainTraversal(MockNode* node): Chain<MockNode>(node) {}
 
   MockNode* getNext(MockNode* node) {
     return node->getNext();
@@ -37,12 +37,12 @@ private:
 };
 
 
-TEST(TestIteration, PreIncrement) {
+TEST(TestChain, PreIncrement) {
   MockNode* a = new MockNode();
   MockNode* b = new MockNode();
   a->setNext(b);
-  Traversal t = Traversal(a);
-  Traversal::chain_iterator it = t.begin();
+  ChainTraversal t = ChainTraversal(a);
+  ChainTraversal::iterator it = t.begin();
   EXPECT_EQ(*it, a);
   EXPECT_EQ(*(++it), b);
   delete a;
@@ -50,12 +50,12 @@ TEST(TestIteration, PreIncrement) {
 }
 
 
-TEST(TestIteration, PostIncrement) {
+TEST(TestChain, PostIncrement) {
   MockNode* a = new MockNode();
   MockNode* b = new MockNode();
   a->setNext(b);
-  Traversal t = Traversal(a);
-  Traversal::chain_iterator it = t.begin();
+  ChainTraversal t = ChainTraversal(a);
+  ChainTraversal::iterator it = t.begin();
   EXPECT_EQ(*(it++), a);
   EXPECT_EQ(*it, b);
   delete a;
@@ -63,13 +63,13 @@ TEST(TestIteration, PostIncrement) {
 }
 
 
-TEST(TestIteration, ForTwo) {
+TEST(TestChain, ForTwo) {
   MockNode* a = new MockNode();
   MockNode* b = new MockNode();
   a->setNext(b);
   std::list<MockNode*> traversal;
-  Traversal t = Traversal(a);
-  for (Traversal::chain_iterator it = t.begin(); it != t.end(); ++it) {
+  ChainTraversal t = ChainTraversal(a);
+  for (ChainTraversal::iterator it = t.begin(); it != t.end(); ++it) {
     traversal.push_back(*it);
   }
   EXPECT_EQ(2, traversal.size());
@@ -80,11 +80,11 @@ TEST(TestIteration, ForTwo) {
 }
 
 
-TEST(TestIteration, ForOne) {
+TEST(TestChain, ForOne) {
   MockNode* a = new MockNode();
   std::list<MockNode*> traversal;
-  Traversal t = Traversal(a);
-  for (Traversal::chain_iterator it = t.begin(); it != t.end(); ++it) {
+  ChainTraversal t = ChainTraversal(a);
+  for (ChainTraversal::iterator it = t.begin(); it != t.end(); ++it) {
     traversal.push_back(*it);
   }
   EXPECT_EQ(1, traversal.size());
@@ -94,22 +94,22 @@ TEST(TestIteration, ForOne) {
 }
 
 
-TEST(TestIteration, ForNone) {
+TEST(TestChain, ForNone) {
   std::list<MockNode*> traversal;
-  Traversal t = Traversal(nullptr);
-  for (Traversal::chain_iterator it = t.begin(); it != t.end(); ++it) {
+  ChainTraversal t = ChainTraversal(nullptr);
+  for (ChainTraversal::iterator it = t.begin(); it != t.end(); ++it) {
     traversal.push_back(*it);
   }
   EXPECT_EQ(0, traversal.size());
 }
 
 
-TEST(TestIteration, RangeTwo) {
+TEST(TestChain, RangeTwo) {
   MockNode* a = new MockNode();
   MockNode* b = new MockNode();
   a->setNext(b);
   std::list<MockNode*> traversal;
-  for (auto node : Traversal(a)) {
+  for (auto node : ChainTraversal(a)) {
     traversal.push_back(node);
   }
   EXPECT_EQ(2, traversal.size());
@@ -120,10 +120,10 @@ TEST(TestIteration, RangeTwo) {
 }
 
 
-TEST(TestIteration, RangeOne) {
+TEST(TestChain, RangeOne) {
   MockNode* a = new MockNode();
   std::list<MockNode*> traversal;
-  for (auto node : Traversal(a)) {
+  for (auto node : ChainTraversal(a)) {
     traversal.push_back(node);
   }
   EXPECT_EQ(1, traversal.size());
@@ -133,9 +133,9 @@ TEST(TestIteration, RangeOne) {
 }
 
 
-TEST(TestIteration, RangeNone) {
+TEST(TestChain, RangeNone) {
   std::list<MockNode*> traversal;
-  for (auto node : Traversal(nullptr)) {
+  for (auto node : ChainTraversal(nullptr)) {
     traversal.push_back(node);
   }
   EXPECT_EQ(0, traversal.size());

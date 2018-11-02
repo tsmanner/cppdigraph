@@ -13,8 +13,8 @@
 
 using namespace cdg;
 
-// Use an anonymous namespace to isolate the tests.
-namespace {
+// Use an namespace to isolate the tests.
+namespace test_relationship {
 
 
 class TestNodeB;

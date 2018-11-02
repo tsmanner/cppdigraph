@@ -8,8 +8,8 @@
 using namespace cdg;
 
 
-// Use an anonymous namespace to isolate the tests.
-namespace {
+// Use an namespace to isolate the tests.
+namespace test_gvtablecell {
 
 
 TEST(TestGvTableCell, to_string_no_attribute) {
