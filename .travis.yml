@@ -3,7 +3,7 @@ language: cpp
 # Installing GTest + GMock requires super permissions.
 sudo: required
 
-# Install the Ninja build tool and CMake.
+# Install the Ninja build tool, CMake, and graphviz
 addons:
   apt:
     sources:
@@ -11,12 +11,11 @@ addons:
     packages:
       - ninja-build
       - cmake
+      - graphviz
 
 before_script:
   # Install GTest and GMock from source (v1.8)
   - ./test/install_gtest_gmock.sh
-  # Install graphviz `dot` utility
-  - sudo apt-get install graphviz
 
 # Build and run the tests.
 script:
