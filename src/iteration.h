@@ -12,6 +12,9 @@
 namespace cdg {
 
 
+enum eIterationDirection { cForward, cReverse };
+
+
 template <typename NodeType>
 class Chain {
 public:
@@ -85,17 +88,52 @@ public:
   public:
     iterator(BidirectionalChain* chain, NodeType* node): Chain<NodeType>::iterator(chain, node), mBidirectionalChain(chain) {}
 
+    // Pre-increment
+    iterator operator++() {
+      if (mBidirectionalChain->getDirection() == cForward) {
+        this->mNode = mBidirectionalChain->getNext(this->mNode);
+        return *this;
+      } else {
+        this->mNode = mBidirectionalChain->getPrev(this->mNode);
+        return *this;
+      }
+    }
+
+    // Post-increment
+    iterator operator++(int) {
+      if (mBidirectionalChain->getDirection() == cForward) {
+        iterator newIterator = iterator(mBidirectionalChain, this->mNode);
+        this->mNode = mBidirectionalChain->getNext(this->mNode);
+        return newIterator;
+      } else {
+        iterator newIterator = iterator(mBidirectionalChain, this->mNode);
+        this->mNode = mBidirectionalChain->getPrev(this->mNode);
+        return newIterator;
+      }
+    }
+
     // Pre-decrement
     iterator operator--() {
-      this->mNode = mBidirectionalChain->getPrev(this->mNode);
-      return *this;
+      if (mBidirectionalChain->getDirection() == cReverse) {
+        this->mNode = mBidirectionalChain->getNext(this->mNode);
+        return *this;
+      } else {
+        this->mNode = mBidirectionalChain->getPrev(this->mNode);
+        return *this;
+      }
     }
 
     // Post-decrement
     iterator operator--(int) {
-      iterator newIterator = iterator(mBidirectionalChain, this->mNode);
-      this->mNode = mBidirectionalChain->getPrev(this->mNode);
-      return newIterator;
+      if (mBidirectionalChain->getDirection() == cReverse) {
+        iterator newIterator = iterator(mBidirectionalChain, this->mNode);
+        this->mNode = mBidirectionalChain->getNext(this->mNode);
+        return newIterator;
+      } else {
+        iterator newIterator = iterator(mBidirectionalChain, this->mNode);
+        this->mNode = mBidirectionalChain->getPrev(this->mNode);
+        return newIterator;
+      }
     }
 
     bool operator==(iterator other) {
@@ -114,23 +152,28 @@ public:
    * BidirectionalChain Definition
    */
   BidirectionalChain(NodeType* front
+                    , eIterationDirection direction = cForward 
                    ): Chain<NodeType>(front)
                     , mBegin(iterator(this, front))
                     , mEnd(iterator(this, nullptr))
+                    , mDirection(direction)
   {
   }
 
   virtual NodeType* getPrev(NodeType* node) = 0;
   iterator begin() { return mBegin; }
   iterator end() { return mEnd; }
+  eIterationDirection getDirection() { return mDirection; }
 
 private:
   const iterator mBegin;
   const iterator mEnd;
+  const eIterationDirection mDirection;
 
 };
 
-}
+
+} // namespace cdg
 
 
 #endif
