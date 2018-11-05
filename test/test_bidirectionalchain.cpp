@@ -30,7 +30,9 @@ private:
 
 class BidirectionalChainTraversal: public BidirectionalChain<MockNode> {
 public:
-  BidirectionalChainTraversal(MockNode* node): BidirectionalChain<MockNode>(node) {}
+  BidirectionalChainTraversal(MockNode* node
+                            , cdg::eIterationDirection direction = cdg::cForward
+                           ): BidirectionalChain<MockNode>(node,direction) {}
 
   MockNode* getNext(MockNode* node) {
     return node->getNext();
@@ -226,5 +228,184 @@ TEST(TestBidirectionalChain, RangeNone) {
   EXPECT_EQ(0, traversal.size());
 }
 
+
+TEST(TestBidirectionalChain, PreIncrementReversed) {
+  MockNode* a = new MockNode();
+  MockNode* b = new MockNode();
+  a->setNext(b);
+  b->setPrev(a);
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(b, cdg::cReverse);
+  BidirectionalChainTraversal::iterator it = t.begin();
+  EXPECT_EQ(*it, b);
+  EXPECT_EQ(*(++it), a);
+  delete a;
+  delete b;
+}
+
+
+TEST(TestBidirectionalChain, PostIncrementReverse) {
+  MockNode* a = new MockNode();
+  MockNode* b = new MockNode();
+  a->setNext(b);
+  b->setPrev(a);
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(b, cdg::cReverse);
+  BidirectionalChainTraversal::iterator it = t.begin();
+  EXPECT_EQ(*(it++), b);
+  EXPECT_EQ(*it, a);
+  delete a;
+  delete b;
+}
+
+
+TEST(TestBidirectionalChain, PreDecrementReverse) {
+  MockNode* a = new MockNode();
+  MockNode* b = new MockNode();
+  a->setNext(b);
+  b->setPrev(a);
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(a, cdg::cReverse);
+  BidirectionalChainTraversal::iterator it = t.begin();
+  EXPECT_EQ(*it, a);
+  EXPECT_EQ(*(--it), b);
+  delete a;
+  delete b;
+}
+
+
+TEST(TestBidirectionalChain, PostDecrementReverse) {
+  MockNode* a = new MockNode();
+  MockNode* b = new MockNode();
+  a->setNext(b);
+  b->setPrev(a);
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(a, cdg::cReverse);
+  BidirectionalChainTraversal::iterator it = t.begin();
+  EXPECT_EQ(*(it--), a);
+  EXPECT_EQ(*it, b);
+  delete a;
+  delete b;
+}
+
+
+TEST(TestBidirectionalChain, ForTwoReversed) {
+  MockNode* a = new MockNode();
+  MockNode* b = new MockNode();
+  a->setNext(b);
+  b->setPrev(a);
+  std::list<MockNode*> traversal;
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(b, cdg::cReverse);
+  for (BidirectionalChainTraversal::iterator it = t.begin(); it != t.end(); ++it) {
+    traversal.push_back(*it);
+  }
+  EXPECT_EQ(2, traversal.size());
+  EXPECT_EQ(b, traversal.front());
+  EXPECT_EQ(a, traversal.back());
+  delete a;
+  delete b;
+}
+
+
+TEST(TestBidirectionalChain, ForOneReversed) {
+  MockNode* a = new MockNode();
+  std::list<MockNode*> traversal;
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(a, cdg::cReverse);
+  for (BidirectionalChainTraversal::iterator it = t.begin(); it != t.end(); ++it) {
+    traversal.push_back(*it);
+  }
+  EXPECT_EQ(1, traversal.size());
+  EXPECT_EQ(a, traversal.front());
+  EXPECT_EQ(a, traversal.back());
+  delete a;
+}
+
+
+TEST(TestBidirectionalChain, ForNoneReversed) {
+  std::list<MockNode*> traversal;
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(nullptr, cdg::cReverse);
+  for (BidirectionalChainTraversal::iterator it = t.begin(); it != t.end(); ++it) {
+    traversal.push_back(*it);
+  }
+  EXPECT_EQ(0, traversal.size());
+}
+
+
+TEST(TestBidirectionalChain, ForTwoDecrReversed) {
+  MockNode* a = new MockNode();
+  MockNode* b = new MockNode();
+  a->setNext(b);
+  b->setPrev(a);
+  std::list<MockNode*> traversal;
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(a, cdg::cReverse);
+  for (BidirectionalChainTraversal::iterator it = t.begin(); it != t.end(); --it) {
+    traversal.push_back(*it);
+  }
+  EXPECT_EQ(2, traversal.size());
+  EXPECT_EQ(a, traversal.front());
+  EXPECT_EQ(b, traversal.back());
+  delete a;
+  delete b;
+}
+
+
+TEST(TestBidirectionalChain, ForOneDecrReversed) {
+  MockNode* a = new MockNode();
+  std::list<MockNode*> traversal;
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(a, cdg::cReverse);
+  for (BidirectionalChainTraversal::iterator it = t.begin(); it != t.end(); --it) {
+    traversal.push_back(*it);
+  }
+  EXPECT_EQ(1, traversal.size());
+  EXPECT_EQ(a, traversal.front());
+  EXPECT_EQ(a, traversal.back());
+  delete a;
+}
+
+
+TEST(TestBidirectionalChain, ForNoneDecrReversed) {
+  std::list<MockNode*> traversal;
+  BidirectionalChainTraversal t = BidirectionalChainTraversal(nullptr, cdg::cReverse);
+  for (BidirectionalChainTraversal::iterator it = t.begin(); it != t.end(); --it) {
+    traversal.push_back(*it);
+  }
+  EXPECT_EQ(0, traversal.size());
+}
+
+
+
+TEST(TestBidirectionalChain, RangeTwoReversed) {
+  MockNode* a = new MockNode();
+  MockNode* b = new MockNode();
+  a->setNext(b);
+  b->setPrev(a);
+  std::list<MockNode*> traversal;
+  for (auto node : BidirectionalChainTraversal(b, cdg::cReverse)) {
+    traversal.push_back(node);
+  }
+  EXPECT_EQ(2, traversal.size());
+  EXPECT_EQ(b, traversal.front());
+  EXPECT_EQ(a, traversal.back());
+  delete a;
+  delete b;
+}
+
+
+TEST(TestBidirectionalChain, RangeOneReversed) {
+  MockNode* a = new MockNode();
+  std::list<MockNode*> traversal;
+  for (auto node : BidirectionalChainTraversal(a, cdg::cReverse)) {
+    traversal.push_back(node);
+  }
+  EXPECT_EQ(1, traversal.size());
+  EXPECT_EQ(a, traversal.front());
+  EXPECT_EQ(a, traversal.back());
+  delete a;
+}
+
+
+TEST(TestBidirectionalChain, RangeNoneReversed) {
+  std::list<MockNode*> traversal;
+  for (auto node : BidirectionalChainTraversal(nullptr, cdg::cReverse)) {
+    traversal.push_back(node);
+  }
+  EXPECT_EQ(0, traversal.size());
+}
 
 }
