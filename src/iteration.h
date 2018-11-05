@@ -11,8 +11,8 @@
 
 namespace cdg {
 
-enum eIterationDirection { cForward, cReverse };
 
+enum eIterationDirection { cForward, cReverse };
 
 
 template <typename NodeType>
@@ -88,7 +88,6 @@ public:
   public:
     iterator(BidirectionalChain* chain, NodeType* node): Chain<NodeType>::iterator(chain, node), mBidirectionalChain(chain) {}
 
-
     // Pre-increment
     iterator operator++() {
       if (mBidirectionalChain->getDirection() == cForward) {
@@ -98,7 +97,6 @@ public:
         this->mNode = mBidirectionalChain->getPrev(this->mNode);
         return *this;
       }
-
     }
 
     // Post-increment
@@ -172,10 +170,10 @@ private:
   const iterator mEnd;
   const eIterationDirection mDirection;
 
-
 };
 
-}
+
+} // namespace cdg
 
 
 #endif
