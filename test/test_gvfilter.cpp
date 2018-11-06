@@ -44,11 +44,10 @@ TEST(TestGvFilter, applyFilter) {
 
   GvDiGraph gvdg = digraph.to_graphviz();
   GvFilter filter = GvFilter();
-  gvdg.filter(filter);
+  gvdg.filter(&filter);
 
   delete a;
   delete b;
-  // delete e;
 }
 
 
