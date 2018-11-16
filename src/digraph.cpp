@@ -7,8 +7,13 @@
 namespace cdg {
 
 
+int getNextCdgId() {
+  static int nextCdgId(0);
+  return nextCdgId++;
+}
+
+
 DiGraph::DiGraph(std::string name): mName(name) {
-  mNextCdgId = std::hash<std::string>()(name) + 1;
 }
 
 
@@ -50,11 +55,6 @@ void DiGraph::remove(EdgeBase* edge) {
 
 const std::string DiGraph::getName() const {
   return mName;
-}
-
-
-int DiGraph::getNextCdgId() {
-  return mNextCdgId++;
 }
 
 

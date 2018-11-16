@@ -93,7 +93,8 @@ public:
       if (mBidirectionalChain->getDirection() == cForward) {
         this->mNode = mBidirectionalChain->getNext(this->mNode);
         return *this;
-      } else {
+      }
+      else {
         this->mNode = mBidirectionalChain->getPrev(this->mNode);
         return *this;
       }
@@ -105,7 +106,8 @@ public:
         iterator newIterator = iterator(mBidirectionalChain, this->mNode);
         this->mNode = mBidirectionalChain->getNext(this->mNode);
         return newIterator;
-      } else {
+      }
+      else {
         iterator newIterator = iterator(mBidirectionalChain, this->mNode);
         this->mNode = mBidirectionalChain->getPrev(this->mNode);
         return newIterator;
@@ -117,7 +119,8 @@ public:
       if (mBidirectionalChain->getDirection() == cReverse) {
         this->mNode = mBidirectionalChain->getNext(this->mNode);
         return *this;
-      } else {
+      }
+      else {
         this->mNode = mBidirectionalChain->getPrev(this->mNode);
         return *this;
       }
@@ -129,7 +132,8 @@ public:
         iterator newIterator = iterator(mBidirectionalChain, this->mNode);
         this->mNode = mBidirectionalChain->getNext(this->mNode);
         return newIterator;
-      } else {
+      }
+      else {
         iterator newIterator = iterator(mBidirectionalChain, this->mNode);
         this->mNode = mBidirectionalChain->getPrev(this->mNode);
         return newIterator;

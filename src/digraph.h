@@ -18,6 +18,9 @@
 namespace cdg {
 
 
+int getNextCdgId();
+
+
 class Node;
 class EdgeBase;
 
@@ -35,7 +38,6 @@ public:
   void remove(EdgeBase* edge);
 
   const std::string getName() const;
-  int getNextCdgId();
 
   ////// GraphViz
 
@@ -45,7 +47,6 @@ public:
 
 private:
   const std::string mName;
-  int mNextCdgId;
   NodeSet mNodes;
   EdgeSet mEdges;
 
