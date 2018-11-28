@@ -44,7 +44,7 @@ public:
   void setAttribute(std::string name, std::string value);
   std::string getAttribute(std::string key);
 
-  void filter(GvFilter& filter);
+  void filter(GvFilter* filter);
 
   std::string to_string();
 

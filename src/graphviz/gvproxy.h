@@ -21,7 +21,7 @@ class GvProxy {
 public:
   GvProxy(T* object): mObject(object) { reset(); }
 
-  ~GvProxy() {}
+  virtual ~GvProxy() {}
 
   T* getObject() {
     return mObject;

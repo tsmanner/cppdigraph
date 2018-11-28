@@ -30,13 +30,10 @@ class Node;
  */
 class EdgeBase {
 public:
-  EdgeBase(): mCdgId(0) {}
-  EdgeBase(int id): mCdgId(id) {}
+  EdgeBase(): mCdgId(getNextCdgId()) {}
   virtual ~EdgeBase() {}
 
   int getCdgId() { return mCdgId; }
-
-  virtual void disconnect(Node* node) = 0;
 
   virtual std::map<std::string, std::string> graphviz_attributes() { return std::map<std::string, std::string>(); }
   virtual std::string graphviz_name() = 0;
@@ -65,7 +62,7 @@ public:
   Edge(DiGraph* digraph
      , tail_t* tail
      , head_t* head
-    ): EdgeBase(digraph ? digraph->getNextCdgId() : tail->getCdgId() ^ head->getCdgId())
+    ): EdgeBase()
      , mDiGraph(digraph)
      , mTail(tail)
      , mHead(head)
@@ -83,8 +80,12 @@ public:
 
   virtual ~Edge() {
     if (getDiGraph()) getDiGraph()->remove(this);
-    if (getTail()) getTail()->removeEdge(this);
-    if (getHead()) getHead()->removeEdge(this);
+    if (getTail()) {
+      getTail()->removeEdge(this);
+    }
+    if (getHead()) {
+      getHead()->removeEdge(this);
+    }
   }
 
   tail_t* getTail() {
@@ -98,14 +99,6 @@ public:
   DiGraph* getDiGraph() { return mDiGraph; }
 
   void setDiGraph(DiGraph* digraph) { mDiGraph = digraph; }
-
-  virtual void disconnect(Node* node) {
-    if (node == mTail) mTail = nullptr;
-    if (node == mHead) mHead = nullptr;
-    if (mTail == nullptr && mHead == nullptr) {
-      delete this;
-    }
-  }
 
   virtual std::string graphviz_name() {
     if (getTail() && getHead()) {

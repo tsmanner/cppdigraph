@@ -121,12 +121,12 @@ std::string GvDiGraph::getAttribute(std::string key) {
 }
 
 
-void GvDiGraph::filter(GvFilter& filter) {
+void GvDiGraph::filter(GvFilter* filter) {
   for (auto gvNode : getNodes()) {
-    filter.filter(gvNode);
+    filter->filter(gvNode);
   }
   for (auto gvEdge : getEdges()) {
-    filter.filter(gvEdge);
+    filter->filter(gvEdge);
   }
 }
 

@@ -71,36 +71,4 @@ TEST(TestEdge, getHead) {
 }
 
 
-TEST(TestEdge, disconnect_tail) {
-  // Setup
-  MockNode* n0 = new NiceMock<MockNode>("n0");
-  MockNode* n1 = new NiceMock<MockNode>("n1");
-  auto edge = new Edge<MockNode, MockNode>(n0, n1);
-  // Execute
-  edge->disconnect(n0);
-  EXPECT_EQ(edge->getTail(), nullptr);
-  EXPECT_EQ(edge->getHead(), n1);
-  // Cleanup
-  delete edge;
-  delete n0;
-  delete n1;
-}
-
-
-TEST(TestEdge, disconnect_head) {
-  // Setup
-  MockNode* n0 = new NiceMock<MockNode>("n0");
-  MockNode* n1 = new NiceMock<MockNode>("n1");
-  auto edge = new Edge<MockNode, MockNode>(n0, n1);
-  // Execute
-  edge->disconnect(n1);
-  EXPECT_EQ(edge->getTail(), n0);
-  EXPECT_EQ(edge->getHead(), nullptr);
-  // Cleanup
-  delete edge;
-  delete n0;
-  delete n1;
-}
-
-
 } // namespace

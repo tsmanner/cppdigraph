@@ -38,7 +38,7 @@ public:
      , std::string name
     ): mDiGraph(digraph)
      , mName(name)
-     , mCdgId(digraph ? digraph->getNextCdgId() : std::hash<std::string>()(name))
+     , mCdgId(getNextCdgId())
   {
     if (getDiGraph()) getDiGraph()->add(this);
   }
