@@ -1,15 +1,19 @@
 /*
- * node.h
+ * relationship.h
  * 
  * Types:
- *   Node
+ *   Relationship
+ *   Relationship::connector
+ *   Relationship::disconnector
  */
 
 #ifndef CDG_RELATIONSHIP_H
 #define CDG_RELATIONSHIP_H
 
+#include <iostream>
 
 #include "./edge.h"
+#include "./node.h"
 
 
 namespace cdg {
@@ -19,22 +23,30 @@ namespace cdg {
  * Relationship
  *   Templated mixin class that adds an edge from `tail_t* this` to a `head_t*`
  */
-template <typename tail_t, typename head_t>
+template <typename tail_t, typename head_t, typename node_t = Node>
 class Relationship {
 public:
-  Relationship(
-            ): mOutgoingEdge(nullptr)
+  Relationship(node_t* node
+            ): mNode(node)
+             , mOutgoingEdge(nullptr)
              , mIncomingEdge(nullptr)
   {
   }
 
   virtual ~Relationship() {
+    preDestruct();
+  }
+
+  void preDestruct() {
     if (mOutgoingEdge) {
       head_t* next = getNext();
       if (next) {
         next->Relationship<tail_t, head_t>::disconnect(mOutgoingEdge);
       }
-      delete mOutgoingEdge;
+      // Make sure we delete each edge exactly once
+      if (mNode->hasEdge(mOutgoingEdge)) {
+        delete mOutgoingEdge;
+      }
       mOutgoingEdge = nullptr;
     }
     if (mIncomingEdge) {
@@ -42,7 +54,10 @@ public:
       if (prev) {
         prev->Relationship<tail_t, head_t>::disconnect(mIncomingEdge);
       }
-      delete mIncomingEdge;
+      // Make sure we delete each edge exactly once
+      if (mNode->hasEdge(mIncomingEdge)) {
+        delete mIncomingEdge;
+      }
       mIncomingEdge = nullptr;
     }
   }
@@ -112,9 +127,9 @@ public:
   };
 
 private:
+  node_t* mNode;
   Edge<tail_t, head_t>* mOutgoingEdge;
   Edge<tail_t, head_t>* mIncomingEdge;
-
 };
 
 

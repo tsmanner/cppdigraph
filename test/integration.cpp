@@ -40,17 +40,17 @@ MyNode::MyNode(string name): Node(name) {
 NodeA::NodeA(DiGraph* digraph
            , string name
           ): MyNode(digraph, name)
-           , Relationship<NodeA, NodeA>()
-           , Relationship<NodeA, NodeB>()
-           , Relationship<NodeB, NodeA>()
+           , Relationship<NodeA, NodeA>(this)
+           , Relationship<NodeA, NodeB>(this)
+           , Relationship<NodeB, NodeA>(this)
 {
 }
 
 NodeA::NodeA(string name
           ): MyNode(name)
-           , Relationship<NodeA, NodeA>()
-           , Relationship<NodeA, NodeB>()
-           , Relationship<NodeB, NodeA>()
+           , Relationship<NodeA, NodeA>(this)
+           , Relationship<NodeA, NodeB>(this)
+           , Relationship<NodeB, NodeA>(this)
 {
 }
 
@@ -70,17 +70,17 @@ void NodeA::traverseB() {
 NodeB::NodeB(DiGraph* digraph
            , string name
           ): MyNode(digraph, name)
-           , Relationship<NodeB, NodeB>()
-           , Relationship<NodeA, NodeB>()
-           , Relationship<NodeB, NodeA>()
+           , Relationship<NodeB, NodeB>(this)
+           , Relationship<NodeA, NodeB>(this)
+           , Relationship<NodeB, NodeA>(this)
 {
 }
 
 NodeB::NodeB(string name
           ): MyNode(name)
-           , Relationship<NodeB, NodeB>()
-           , Relationship<NodeA, NodeB>()
-           , Relationship<NodeB, NodeA>()
+           , Relationship<NodeB, NodeB>(this)
+           , Relationship<NodeA, NodeB>(this)
+           , Relationship<NodeB, NodeA>(this)
 {
 }
 

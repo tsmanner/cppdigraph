@@ -73,6 +73,10 @@ public:
     mEdges.erase(edge);
   }
 
+  bool hasEdge(EdgeBase* edge) {
+    return mEdges.find(edge) != mEdges.end();
+  }
+
   /*
    * GraphViz
    */

@@ -26,9 +26,12 @@ class TestNodeA: public Node
 public:
   TestNodeA(std::string name
          ): Node(name)
-          , Relationship<TestNodeA, TestNodeA>()
-          , Relationship<TestNodeA, TestNodeB>()
+          , Relationship<TestNodeA, TestNodeA>(this)
+          , Relationship<TestNodeA, TestNodeB>(this)
   {
+  }
+
+  virtual ~TestNodeA() {
   }
 
 private:
@@ -43,9 +46,12 @@ class TestNodeB: public Node
 public:
   TestNodeB(std::string name
          ): Node(name)
-          , Relationship<TestNodeA, TestNodeB>()
-          , Relationship<TestNodeB, TestNodeB>()
+          , Relationship<TestNodeA, TestNodeB>(this)
+          , Relationship<TestNodeB, TestNodeB>(this)
   {
+  }
+
+  virtual ~TestNodeB() {
   }
 
 private:
