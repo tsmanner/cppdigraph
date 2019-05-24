@@ -39,7 +39,7 @@ set_target_properties (DiGraph PROPERTIES PUBLIC_HEADER "${CDG_HEADERS}")
 INSTALL (
   TARGETS DiGraph
   LIBRARY       DESTINATION ${CMAKE_BINARY_DIR}/lib
-  PUBLIC_HEADER DESTINATION ${CMAKE_BINARY_DIR}/include/cdg
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cdg
 )
 
 # Install second with the src/graphviz/ headers
@@ -47,7 +47,7 @@ set_target_properties (DiGraph PROPERTIES PUBLIC_HEADER "${CDG_GRAPHVIZ_HEADERS}
 INSTALL (
   TARGETS DiGraph
   LIBRARY       DESTINATION ${CMAKE_BINARY_DIR}/lib
-  PUBLIC_HEADER DESTINATION ${CMAKE_BINARY_DIR}/include/cdg/graphviz
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cdg/graphviz
 )
 
 # Set the linker language to C++ for the DiGraph target
