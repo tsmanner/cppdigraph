@@ -23,8 +23,10 @@ DiGraph::~DiGraph() {
 
 
 void DiGraph::clear() {
-  while (mEdges.size()) delete *mEdges.begin();
+  // Delete nodes first since they will likely delete their edges
   while (mNodes.size()) delete *mNodes.begin();
+  // Just in case, delete any orphaned edges
+  while (mEdges.size()) delete *mEdges.begin();
 }
 
 
